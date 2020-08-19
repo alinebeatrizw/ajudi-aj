@@ -37,7 +37,7 @@ function updateSigninStatus(isSignedIn) {
 		$("#drive-box").show();
 		$("#drive-box").css("display","inline-block");
         $("#login-box").hide();
-        showLoading();
+        MostraGifCarregando();
         getDriveFiles();
 	} else {
 		$("#login-box").show();
@@ -53,8 +53,8 @@ function handleAuthClick(event) {
 /******************** PAGE LOAD ********************/
 $(function(){
 	$("#button-reload").click(function () {
-        showLoading();
-        showStatus("Loading Google Drive files...");
+        MostraGifCarregando();
+        MostraStatus("Carregando arquivos");
         getDriveFiles();
     });
 	
@@ -64,8 +64,8 @@ $(function(){
 	
 	 $("#fUpload").bind("change", function () {
         var uploadObj = $("[id$=fUpload]");
-        showLoading();
-        showStatus("Uploading file in progress...");
+        MostraGifCarregando();
+        MostraStatus("Fazendo upload");
         var file = uploadObj.prop("files")[0];
 		var metadata = {
 			'title': file.name,
@@ -83,7 +83,7 @@ $(function(){
 			file = new Blob([emptyContent], {type: file.type || 'application/octet-stream'});
 		}
 		
-		showProgressPercentage(0);
+		PorcentagemCarregamento(0);
 
 		try{
 			var uploader =new MediaUploader({
@@ -92,26 +92,26 @@ $(function(){
 				metadata: metadata,
 				onError: function(response){
 					var errorResponse = JSON.parse(response);
-					showErrorMessage("Error: " + errorResponse.error.message);
+					MensagemErro("Erro: " + errorResponse.error.message);
 					$("#fUpload").val("");
 					$("#upload-percentage").hide(1000);
 					getDriveFiles();
 				},
 				onComplete: function(response){
-					hideStatus();
+					EscondeStatus();
 					$("#upload-percentage").hide(1000);
 					var errorResponse = JSON.parse(response);
 					if(errorResponse.message != null){
-						showErrorMessage("Error: " + errorResponse.error.message);
+						MensagemErro("Erro: " + errorResponse.error.message);
 						$("#fUpload").val("");
 						getDriveFiles();
 					}else{
-						showStatus("Loading Google Drive files...");
+						MostraStatus("Carregando arquivos");
 						getDriveFiles();
 					}
 				},
 				onProgress: function(event) {
-					showProgressPercentage(Math.round(((event.loaded/event.total)*100), 0));
+					PorcentagemCarregamento(Math.round(((event.loaded/event.total)*100), 0));
 				},
 				params: {
 					convert:false,
@@ -120,43 +120,27 @@ $(function(){
 			});
 			uploader.upload();
 		}catch(exc){
-			showErrorMessage("Error: " + exc);
+			MensagemErro("Erro: " + exc);
 			$("#fUpload").val("");
 			getDriveFiles();
 		}
     });
 	
-	$("#button-share").click(function () {
-        FOLDER_NAME = "";
-        FOLDER_ID = "root";
-        FOLDER_LEVEL = 0;
-        FOLDER_ARRAY = [];
-        $("#span-navigation").html("");
-        $(this).toggleClass("flash");
-		if($(this).attr("class").indexOf("flash") >= 0){
-			$("#span-sharemode").html("ON");
-		}else{
-			$("#span-sharemode").html("OFF");
-		}
-        showLoading();
-        showStatus("Loading Google Drive files...");
-        getDriveFiles();
-    });
 	
 	$("#button-addfolder").click(function () {
         $("#transparent-wrapper").show();
         $("#float-box").show();
-        $("#txtFolder").val("");
+        $("#nome_pasta").val("");
     });
 	
-	$("#btnAddFolder").click(function () {
-        if ($("#txtFolder").val() == "") {
+	$("#btn_CriarPasta").click(function () {
+        if ($("#nome_pasta").val() == "") {
             alert("Please enter the folder name");
         } else {
             $("#transparent-wrapper").hide();
             $("#float-box").hide();
-            showLoading();
-            showStatus("Creating folder in progress...");
+            MostraGifCarregando();
+            MostraStatus("Criando pasta");
 			var access_token =  gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
 			var request = gapi.client.request({
 			   'path': '/drive/v2/files/',
@@ -166,7 +150,7 @@ $(function(){
 				   'Authorization': 'Bearer ' + access_token,             
 			   },
 			   'body':{
-				   "title" : $("#txtFolder").val(),
+				   "title" : $("#nome_pasta").val(),
 				   "mimeType" : "application/vnd.google-apps.folder",
 				   "parents": [{
 						"kind": "drive#file",
@@ -177,18 +161,18 @@ $(function(){
 
 			request.execute(function(resp) { 
 			   if (!resp.error) {
-					showStatus("Loading Google Drive files...");
+					MostraStatus("Carregando arquivos");
 					getDriveFiles();
 			   }else{
-					hideStatus();
-					hideLoading();
-					showErrorMessage("Error: " + resp.error.message);
+					EscondeStatus();
+					EscondeGifCarregando();
+					MensagemErro("Erro: " + resp.error.message);
 			   }
 			});
         }
     });
 	
-	$(".btnClose, .imgClose").click(function () {
+	$(".btn_fechar, .imgClose").click(function () {
         $("#transparent-wrapper").hide();
         $(".float-box").hide();
     });
@@ -198,22 +182,14 @@ $(function(){
 
 /******************** DRIVER API ********************/
 function getDriveFiles(){
-	showStatus("Loading Google Drive files...");
+	MostraStatus("Carregando arquivos");
     gapi.client.load('drive', 'v2', getFiles);
 }
 
 function getFiles(){
 	var query = "";
-	if (ifShowSharedFiles()) {
-		$(".button-opt").hide();
-		query = (FOLDER_ID == "root") ? "trashed=false and sharedWithMe" : "trashed=false and '" + FOLDER_ID + "' in parents";
-		if (FOLDER_ID != "root" && FOLDER_PERMISSION == "true") {
-			$(".button-opt").show();
-		}
-	}else{
 		$(".button-opt").show();
 		query = "trashed=false and '" + FOLDER_ID + "' in parents";
-	}
     var request = gapi.client.drive.files.list({
         'maxResults': NO_OF_FILES,
         'q': query
@@ -224,7 +200,7 @@ function getFiles(){
             DRIVE_FILES = resp.items;
             ConstroiPagArquivos();
        }else{
-            showErrorMessage("Erro: " + resp.error.message);
+            MensagemErro("Erro: " + resp.error.message);
        }
     });
 }
@@ -310,10 +286,10 @@ function ConstroiPagArquivos(){
     } else {
         fText = 'Nenhum arquivo encontrado';
     }
-    hideStatus();
+    EscondeStatus();
     $("#drive-content").html(fText);
     IniciaBotoes();
-    hideLoading();
+    EscondeGifCarregando();
 }
 
 //inicia botoes de delete, download, clicar em uma pasta e navegação no breadcrumb
@@ -324,15 +300,15 @@ function IniciaBotoes(){
     $(".button-delete").click(function () {
         var confirma = confirm("Tem certeza que deseja excluir?");
         if (confirma) {
-            showLoading();
-            showStatus("Excluindo");
+            MostraGifCarregando();
+            MostraStatus("Excluindo");
 			var request = gapi.client.drive.files.delete({
 				'fileId': $(this).attr("data-id")
 			});
 			request.execute(function(resp) { 
-			   hideStatus();
+			   EscondeStatus();
 			   if (resp.error) {
-					showErrorMessage("Erro: " + resp.error.message);
+					MensagemErro("Erro: " + resp.error.message);
 			   }
 			   getDriveFiles();
 			});
@@ -342,16 +318,16 @@ function IniciaBotoes(){
 	//botao de downlaod
 	$(".button-download").unbind("click");
     $(".button-download").click(function () {
-        showLoading();
-        showStatus("Baixando arquivo");
+        MostraGifCarregando();
+        MostraStatus("Baixando arquivo");
 		FILE_COUNTER = $(this).attr("data-file-counter");
 		
         setTimeout(function () {
 
 			window.open(DRIVE_FILES[FILE_COUNTER].webContentLink); //webContentLink propriedade para fazer o download 
 
-			hideLoading();
-			hideStatus();
+			EscondeGifCarregando();
+			EscondeStatus();
 		}, 1000);
     });
 
@@ -406,6 +382,7 @@ function browseFolder(obj) {
         }
     }
 
+	//add a pasta no breadcrumb
     var sbNav = "";
     for (var i = 0; i < FOLDER_ARRAY.length; i++) {
         sbNav +="<span class='breadcrumb-arrow'></span>";
@@ -413,8 +390,8 @@ function browseFolder(obj) {
     }
     $("#span-navigation").html(sbNav.toString());
 
-    showLoading();
-    showStatus("Carregando arquivos");
+    MostraGifCarregando();
+    MostraStatus("Carregando arquivos");
     getDriveFiles();
 }
 
@@ -430,43 +407,32 @@ function cloneObject(obj) {
     }
     return temp;
 }
-//show whether the display mode is share files or not
-function ifShowSharedFiles() {
-    return ($("#button-share.flash").length > 0) ? true : false;
-}
 
 
+//funções de notificações 
 
-
-
-
-//show loading animation
-function showLoading() {
+function MostraGifCarregando() {
     if ($("#drive-box-loading").length === 0) {
         $("#drive-box").prepend("<div id='drive-box-loading'></div>");
     }
     $("#drive-box-loading").html("<div id='loading-wrapper'><div id='loading'><img src='images/loading-bubble.gif'></div></div>");
 }
 
-//hide loading animation
-function hideLoading() {
+function EscondeGifCarregando() {
     $("#drive-box-loading").html("");
 }
 
-//show status message
-function showStatus(text) {
+function MostraStatus(text) {
     $("#status-message").show();
     $("#status-message").html(text);
 }
 
-//hide status message
-function hideStatus() {
+function EscondeStatus() {
     $("#status-message").hide();
     $("#status-message").html("");
 }
 
-//show upload progress
-function showProgressPercentage(percentageValue) {
+function PorcentagemCarregamento(percentageValue) {
     if ($("#upload-percentage").length == 0) {
         $("#drive-box").prepend("<div id='upload-percentage' class='flash'></div>");
     }
@@ -476,8 +442,7 @@ function showProgressPercentage(percentageValue) {
     $("#upload-percentage").html(percentageValue.toString() + "%");
 }
 
-//show error message
-function showErrorMessage(errorMessage) {
+function MensagemErro(errorMessage) {
     $("#error-message").html(errorMessage);
     $("#error-message").show(100);
     setTimeout(function () {
@@ -485,4 +450,3 @@ function showErrorMessage(errorMessage) {
     }, 3000);
 }
 
-/******************** END NOTIFICATION ********************/

@@ -5,14 +5,14 @@
 <title>Arquivos</title>
 <link href="lightbox.css" rel="stylesheet" />
 <link href="google-drive.css" rel="stylesheet" type="text/css"/>
+<script src="https://apis.google.com/js/platform.js" async defer></script><!--este é para o botao personalizado para login com o google-->
 </head>
 <body>
-
 
 <div id="transparent-wrapper"></div>
 <div id="login-box" class="hide">
 	<p>Entre com sua conta do Google!</p>
-	<button id="btnLogin" onclick="handleAuthClick()" class="button">Entrar</button>
+    <div class="g-signin2" onclick="handleAuthClick()" data-onsuccess="onSignIn"></div>
 </div>
 
 <div id="drive-box" class="hide">
@@ -33,13 +33,16 @@
 </div>
 
 <input type="file" id="fUpload" class="hide"/>
+
 <div class="float-box" id="float-box">
+    <!--form pra criar pasta-->
     <div class="folder-form">
-        <div class="close-x"><img id="imgClose" class="imgClose" src="images/button_close.png" alt="close" /></div>
         <h3 class="clear">Criar nova pasta</h3>
-        <div><input type="text" id="txtFolder" class="text-input" /></div>
-		<button id="btnAddFolder" value="Save" class="button">Criar</button>
-		<button id="btnClose" value="Close" class="button btnClose">Fechar</button>
+        <div>
+            <input type="text" id="nome_pasta" class="text-input" />
+        </div>
+		<button id="btn_CriarPasta" value="Save" class="button">Criar</button>
+		<button id="btn_fechar" value="Close" class="button btn_fechar">Fechar</button>
     </div>
 </div>
 
