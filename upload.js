@@ -1,52 +1,4 @@
 ﻿
-class TentativaDeUpoload {
-    constructor() {
-        this.interval = 1000; // Start at one second
-        this.maxInterval = 60 * 1000; // Don't wait longer than a minute 
-    }
-    /**
-    *
-    Chame a função depois de esperar
-    *
-    * @param {function} fn Função para invocar
-    */
-    retry(fn) {
-        setTimeout(fn, this.interval);
-        this.interval = this.nextInterval_();
-    }
-    /**
-    * Reinicie o contador (por exemplo, após uma solicitação bem-sucedida).
-    */
-    reset() {
-        this.interval = 1000;
-    }
-    /**
-    * Calcule o próximo tempo de espera.
-    * @return {number} Próximo intervalo de espera, em milissegundos
-    *
-    * @private
-    */
-    nextInterval_() {
-        var interval = this.interval * 2 + this.getRandomInt_(0, 1000);
-        return Math.min(interval, this.maxInterval);
-    }
-    /**
-    * Obtenha um int aleatório no intervalo de mín. A máx. Usado para adicionar jitter aos tempos de espera.
-    *
-    * @param {number} min Lower bounds
-    * @param {number} max Upper bounds
-    * @private
-    */
-    getRandomInt_(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-}
-
-
-
-
-
-
 /***
 *
 * @constructor
@@ -87,37 +39,37 @@ class MediaUploader {
         this.httpMethod = options.fileId ? 'PUT' : 'POST';
     }
     /**
-    * Inicie o upload.
+    * Inicia o upload.
     */
     upload() {
         var self = this;
-        var xhr = new XMLHttpRequest();
+        var requisicao_http = new XMLHttpRequest();
 
-        xhr.open(this.httpMethod, this.url, true);
-        xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-Upload-Content-Length', this.file.size);
-        xhr.setRequestHeader('X-Upload-Content-Type', this.contentType);
+        requisicao_http.open(this.httpMethod, this.url, true);
+        requisicao_http.setRequestHeader('Authorization', 'Bearer ' + this.token);
+        requisicao_http.setRequestHeader('Content-Type', 'application/json');
+        requisicao_http.setRequestHeader('X-Upload-Content-Length', this.file.size);
+        requisicao_http.setRequestHeader('X-Upload-Content-Type', this.contentType);
 
-        xhr.onload = function (e) {
+        requisicao_http.onload = function (e) {
             if (e.target.status < 400) {
                 var location = e.target.getResponseHeader('Location');
                 this.url = location;
-                this.sendFile_();
+                this.enviaArquivo();
             }
             else {
-                this.onUploadError_(e);
+                this.erroNoUpload(e);
             }
         }.bind(this);
-        xhr.onerror = this.onUploadError_.bind(this);
-        xhr.send(JSON.stringify(this.metadata)); //converte para string para poder ser enviada para o servidor
+        requisicao_http.onerror = this.erroNoUpload.bind(this);
+        requisicao_http.send(JSON.stringify(this.metadata)); //converte para string para poder ser enviada para o servidor
     }
     /**
     * Envie o conteúdo do arquivo real.
     *
     * @private
     */
-    sendFile_() {
+    enviaArquivo() {
         var content = this.file;
         var end = this.file.size;
 
@@ -129,17 +81,17 @@ class MediaUploader {
             content = content.slice(this.offset, end);
         }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('PUT', this.url, true);
-        xhr.setRequestHeader('Content-Type', this.contentType);
-        xhr.setRequestHeader('Content-Range', "bytes " + this.offset + "-" + (end - 1) + "/" + this.file.size);
-        xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
-        if (xhr.upload) {
-            xhr.upload.addEventListener('progress', this.onProgress);
+        var requisicao_http = new XMLHttpRequest();
+        requisicao_http.open('PUT', this.url, true);
+        requisicao_http.setRequestHeader('Content-Type', this.contentType);
+        requisicao_http.setRequestHeader('Content-Range', "bytes " + this.offset + "-" + (end - 1) + "/" + this.file.size);
+        requisicao_http.setRequestHeader('X-Upload-Content-Type', this.file.type);
+        if (requisicao_http.upload) {
+            requisicao_http.upload.addEventListener('progress', this.onProgress);
         }
-        xhr.onload = this.onContentUploadSuccess_.bind(this);
-        xhr.onerror = this.onContentUploadError_.bind(this);
-        xhr.send(content);
+        requisicao_http.onload = this.onContentUploadSuccess_.bind(this);
+        requisicao_http.onerror = this.onContentUploadError_.bind(this);
+        requisicao_http.send(content);
     }
     /**
     * Query para o estado do arquivo para retomada.
@@ -147,24 +99,24 @@ class MediaUploader {
     * @private
     */
     resume_() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('PUT', this.url, true);
-        xhr.setRequestHeader('Content-Range', "bytes */" + this.file.size);
-        xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
-        if (xhr.upload) {
-            xhr.upload.addEventListener('progress', this.onProgress);
+        var requisicao_http = new XMLHttpRequest();
+        requisicao_http.open('PUT', this.url, true);
+        requisicao_http.setRequestHeader('Content-Range', "bytes */" + this.file.size);
+        requisicao_http.setRequestHeader('X-Upload-Content-Type', this.file.type);
+        if (requisicao_http.upload) {
+            requisicao_http.upload.addEventListener('progress', this.onProgress);
         }
-        xhr.onload = this.onContentUploadSuccess_.bind(this);
-        xhr.onerror = this.onContentUploadError_.bind(this);
-        xhr.send();
+        requisicao_http.onload = this.onContentUploadSuccess_.bind(this);
+        requisicao_http.onerror = this.onContentUploadError_.bind(this);
+        requisicao_http.send();
     }
     /**
     * Extraia o último intervalo salvo, se disponível na solicitação.
     *
-    * @param {XMLHttpRequest} xhr Request object
+    * @param {XMLHttpRequest} requisicao_http Request object
     */
-    extractRange_(xhr) {
-        var range = xhr.getResponseHeader('Range');
+    extractRange_(requisicao_http) {
+        var range = requisicao_http.getResponseHeader('Range');
         if (range) {
             this.offset = parseInt(range.match(/\d+/g).pop(), 10) + 1;
         }
@@ -175,7 +127,7 @@ class MediaUploader {
     * invoca o callback do chamador.
     *
     * @private
-    * @param {object} e XHR event
+    * @param {object} e requisicao_http event
     */
     onContentUploadSuccess_(e) {
         if (e.target.status == 200 || e.target.status == 201) {
@@ -184,7 +136,7 @@ class MediaUploader {
         else if (e.target.status == 308) {
             this.extractRange_(e.target);
             this.tentativaDeUpoload.reset();
-            this.sendFile_();
+            this.enviaArquivo();
         }
     }
     /**
@@ -192,7 +144,7 @@ class MediaUploader {
     * no erro.
     *
     * @private
-    * @param {object} e XHR event
+    * @param {object} e requisicao_http event
     */
     onContentUploadError_(e) {
         if (e.target.status && e.target.status < 500) {
@@ -206,9 +158,9 @@ class MediaUploader {
     * Lida com erros para a solicitação inicial.
     *
     * @private
-    * @param {object} e XHR event
+    * @param {object} e requisicao_http event
     */
-    onUploadError_(e) {
+   erroNoUpload(e) {
         this.onError(e.target.response); // TODO - Retries for initial upload
     }
     /**
