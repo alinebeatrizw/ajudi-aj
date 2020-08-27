@@ -6,7 +6,7 @@ var FOLDER_ID = "root"; //pasta padrão para o inicio
 var FOLDER_PERMISSION = true;
 var FOLDER_LEVEL = 0;
 var NO_OF_FILES = 1000;
-var DRIVE_FILES = []; //array para os arquivos
+var ARQUIVOS_DRIVE = []; //array para os arquivos
 var FILE_COUNTER = 0;
 var FOLDER_ARRAY = [];
 
@@ -197,7 +197,7 @@ function getFiles(){
 
     request.execute(function (resp) {
        if (!resp.error) {
-            DRIVE_FILES = resp.items;
+		ARQUIVOS_DRIVE = resp.items;
             ConstroiPagArquivos();
        }else{
             MensagemErro("Erro: " + resp.error.message);
@@ -206,88 +206,88 @@ function getFiles(){
 }
 // thumbnailLink = miniatura do preview
 function ConstroiPagArquivos(){
-	var fText = "";
-	//se o tamanho do array de arquivos for > 0 constroi a pagina com os respectivos
-    if (DRIVE_FILES.length > 0) {
-        for (var arquivo = 0; arquivo < DRIVE_FILES.length; arquivo++) {
-			DRIVE_FILES[arquivo].textContentURL = "";
-			DRIVE_FILES[arquivo].level = (parseInt(FOLDER_LEVEL) + 1).toString();
-			DRIVE_FILES[arquivo].parentID = (DRIVE_FILES[arquivo].parents.length > 0) ? DRIVE_FILES[arquivo].parents[0].id : "";
-			DRIVE_FILES[arquivo].thumbnailLink = DRIVE_FILES[arquivo].thumbnailLink || '';
-			DRIVE_FILES[arquivo].fileType =  (DRIVE_FILES[arquivo].fileExtension == null) ? "folder" : "file";
-			DRIVE_FILES[arquivo].permissionRole = DRIVE_FILES[arquivo].userPermission.role;
-			DRIVE_FILES[arquivo].hasPermission = (DRIVE_FILES[arquivo].permissionRole == "owner" || DRIVE_FILES[arquivo].permissionRole == "writer");
+	var bloco_arquivo = "";
+	//se o tamanho do array de arquivos for > 0 constroi a pagina dos arquivos que tem pra mostrar
+    if (ARQUIVOS_DRIVE.length > 0) {
+        for (var arquivo = 0; arquivo < ARQUIVOS_DRIVE.length; arquivo++) {
+			ARQUIVOS_DRIVE[arquivo].textContentURL = "";
+			ARQUIVOS_DRIVE[arquivo].level = (parseInt(FOLDER_LEVEL) + 1).toString();
+			ARQUIVOS_DRIVE[arquivo].parentID = (ARQUIVOS_DRIVE[arquivo].parents.length > 0) ? ARQUIVOS_DRIVE[arquivo].parents[0].id : "";
+			ARQUIVOS_DRIVE[arquivo].thumbnailLink = ARQUIVOS_DRIVE[arquivo].thumbnailLink || '';
+			ARQUIVOS_DRIVE[arquivo].fileType =  (ARQUIVOS_DRIVE[arquivo].fileExtension == null) ? "folder" : "file";
+			ARQUIVOS_DRIVE[arquivo].permissionRole = ARQUIVOS_DRIVE[arquivo].userPermission.role;
+			ARQUIVOS_DRIVE[arquivo].hasPermission = (ARQUIVOS_DRIVE[arquivo].permissionRole == "owner" || ARQUIVOS_DRIVE[arquivo].permissionRole == "writer");
 			var textContentURL = '';
 
-			if(DRIVE_FILES[arquivo]['exportLinks'] != null){
-				DRIVE_FILES[arquivo].fileType = "file";
-				DRIVE_FILES[arquivo].textContentURL = DRIVE_FILES[arquivo]['exportLinks']['text/plain'];
+			if(ARQUIVOS_DRIVE[arquivo]['exportLinks'] != null){
+				ARQUIVOS_DRIVE[arquivo].fileType = "file";
+				ARQUIVOS_DRIVE[arquivo].textContentURL = ARQUIVOS_DRIVE[arquivo]['exportLinks']['text/plain'];
 			}
 
 			//titulo do arquivo
-			var nome_arquivo = (DRIVE_FILES[arquivo].fileType != "file") ? "Browse " 
-			+ DRIVE_FILES[arquivo].title : DRIVE_FILES[arquivo].title;
+			var nome_arquivo = (ARQUIVOS_DRIVE[arquivo].fileType != "file") ? "Browse " 
+			+ ARQUIVOS_DRIVE[arquivo].title : ARQUIVOS_DRIVE[arquivo].title;
 
 			
-			fText += "<div class='" + DRIVE_FILES[arquivo].fileType + "-box'>";
+			bloco_arquivo += "<div class='" + ARQUIVOS_DRIVE[arquivo].fileType + "-box'>";
 			// se o drive file for diferente de um arquivo, é uma pasta, entao monta ela
-			if (DRIVE_FILES[arquivo].fileType != "file") {
-				fText += "<div class='folder-icon' data-level='" 
-				+ DRIVE_FILES[arquivo].level + "' data-parent='" 
-				+ DRIVE_FILES[arquivo].parentID + "' data-size='" 
-				+ DRIVE_FILES[arquivo].fileSize + "' data-id='" 
-				+ DRIVE_FILES[arquivo].id + "' title='" 
+			if (ARQUIVOS_DRIVE[arquivo].fileType != "file") {
+				bloco_arquivo += "<div class='folder-icon' data-level='" 
+				+ ARQUIVOS_DRIVE[arquivo].level + "' data-parent='" 
+				+ ARQUIVOS_DRIVE[arquivo].parentID + "' data-size='" 
+				+ ARQUIVOS_DRIVE[arquivo].fileSize + "' data-id='" 
+				+ ARQUIVOS_DRIVE[arquivo].id + "' title='" 
 				+ nome_arquivo + "' data-name='" 
-				+ DRIVE_FILES[arquivo].title + "' data-has-permission='" 
-				+DRIVE_FILES[arquivo].hasPermission 
+				+ ARQUIVOS_DRIVE[arquivo].title + "' data-has-permission='" 
+				+ARQUIVOS_DRIVE[arquivo].hasPermission 
 				+ "'><div class='image-preview'><img src='images/folder.png'/></div></div>";
 			
 			// se for um arquivo, pega o thumbnailLink dele e monta uma miniatura
 			} else {
-				if (DRIVE_FILES[arquivo].thumbnailLink) {
-					fText += "<div class='image-icon'><div class='image-preview'><a href='" 
-					+ DRIVE_FILES[arquivo].thumbnailLink.replace("s220", "s800") 
+				if (ARQUIVOS_DRIVE[arquivo].thumbnailLink) {
+					bloco_arquivo += "<div class='image-icon'><div class='image-preview'><a href='" 
+					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink.replace("s220", "s800") 
 					+ "' data-lightbox='image-" + arquivo + "'><img src='" 
-					+ DRIVE_FILES[arquivo].thumbnailLink + "'/></a></div></div>";
+					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink + "'/></a></div></div>";
 
 
 			//se nao tiver preview (thumbnailLink), pega nas imagens o nome da extenção 
 			//(fileExtension) + o nome "icon"
 				}else {
-					fText += "<div class='file-icon'><div class='image-preview'><img src='images/" 
-					+ DRIVE_FILES[arquivo].fileExtension + "-icon.png" + "'/></div></div>";
+					bloco_arquivo += "<div class='file-icon'><div class='image-preview'><img src='images/" 
+					+ ARQUIVOS_DRIVE[arquivo].fileExtension + "-icon.png" + "'/></div></div>";
 				}
 			}
-			fText += "<div class='item-title'>" + DRIVE_FILES[arquivo].title + "</div>";
+			bloco_arquivo += "<div class='item-title'>" + ARQUIVOS_DRIVE[arquivo].title + "</div>";
 
 			//botoes dentro da pagina de arquivos
-			fText += "<div class='button-box'>";
+			bloco_arquivo += "<div class='button-box'>";
 			//botao de download
 			//verifica se não é uma pasta, pois nao pode fazer downlaod de pasta
-				if (DRIVE_FILES[arquivo].fileType != "folder") {
-					fText += "<div class='button-download' title='Download' data-id='" 
-					+ DRIVE_FILES[arquivo].id + "' data-file-counter='" + arquivo + "'></div>";
+				if (ARQUIVOS_DRIVE[arquivo].fileType != "folder") {
+					bloco_arquivo += "<div class='button-download' title='Download' data-id='" 
+					+ ARQUIVOS_DRIVE[arquivo].id + "' data-file-counter='" + arquivo + "'></div>";
 				}
 				//botao de apagar, tanto pasta quanto arquivo
-				if (DRIVE_FILES[arquivo].hasPermission) {
-					if (DRIVE_FILES[arquivo].permissionRole == "owner") {
-						fText += "<div class='button-delete' title='Delete' data-id='" 
-						+ DRIVE_FILES[arquivo].id + "'></div>";
-					}else if(DRIVE_FILES[arquivo].fileType != "folder"){
-						fText += "<div class='button-delete' title='Delete' data-id='" 
-						+ DRIVE_FILES[arquivo].id + "'></div>";
+				if (ARQUIVOS_DRIVE[arquivo].hasPermission) {
+					if (ARQUIVOS_DRIVE[arquivo].permissionRole == "owner") {
+						bloco_arquivo += "<div class='button-delete' title='Delete' data-id='" 
+						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";
+					}else if(ARQUIVOS_DRIVE[arquivo].fileType != "folder"){
+						bloco_arquivo += "<div class='button-delete' title='Delete' data-id='" 
+						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";
 					}
 				}
 				
-			fText += "</div>";  
-			fText += "</div>";
+			bloco_arquivo += "</div>";  
+			bloco_arquivo += "</div>";
 		}
 	//se o tamanho do array de arquivos for < 0 mostra "nenhum arquivo encontrado"
     } else {
-        fText = 'Nenhum arquivo encontrado';
+        bloco_arquivo = 'Nenhum arquivo encontrado';
     }
     EscondeStatus();
-    $("#drive-content").html(fText);
+    $("#drive-content").html(bloco_arquivo);
     IniciaBotoes();
     EscondeGifCarregando();
 }
@@ -324,7 +324,7 @@ function IniciaBotoes(){
 		
         setTimeout(function () {
 
-			window.open(DRIVE_FILES[FILE_COUNTER].webContentLink); //webContentLink propriedade para fazer o download 
+			window.open(ARQUIVOS_DRIVE[FILE_COUNTER].webContentLink); //webContentLink propriedade para fazer o download 
 
 			EscondeGifCarregando();
 			EscondeStatus();
