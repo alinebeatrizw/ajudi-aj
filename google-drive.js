@@ -86,7 +86,7 @@ $(function(){
 		PorcentagemCarregamento(0);
 
 		try{
-			var uploader =new MediaUploader({
+			var uploader =new Uploader({
 				file: file,
 				token: gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token,
 				metadata: metadata,
@@ -110,7 +110,7 @@ $(function(){
 						getDriveFiles();
 					}
 				},
-				onProgress: function(event) {
+				progresso: function(event) {
 					PorcentagemCarregamento(Math.round(((event.loaded/event.total)*100), 0));
 				},
 				params: {
