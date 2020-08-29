@@ -1,8 +1,8 @@
 
 var SCOPES = ['https://www.googleapis.com/auth/drive','profile'];
 var CLIENT_ID = '200457364652-4a8r3irh3p4gktel1nhtubr59ngo9dak.apps.googleusercontent.com';
-var FOLDER_NAME = "";
-var FOLDER_ID = "root"; //pasta padrão para o inicio
+var NOME_PASTA = "";
+var ID_PASTA = "root"; //pasta padrão para o inicio
 var FOLDER_PERMISSION = true;
 var FOLDER_LEVEL = 0;
 var NO_OF_FILES = 1000;
@@ -73,7 +73,7 @@ $(function(){
 			'mimeType': file.type || 'application/octet-stream',
 			"parents": [{
 				"kind": "drive#file",
-				"id": FOLDER_ID
+				"id": ID_PASTA
 			}]
 		};
 		
@@ -154,7 +154,7 @@ $(function(){
 				   "mimeType" : "application/vnd.google-apps.folder",
 				   "parents": [{
 						"kind": "drive#file",
-						"id": FOLDER_ID
+						"id": ID_PASTA
 					}]
 			   }
 			});
@@ -189,7 +189,7 @@ function getDriveFiles(){
 function getFiles(){
 	var query = "";
 		$(".button-opt").show();
-		query = "trashed=false and '" + FOLDER_ID + "' in parents";
+		query = "trashed=false and '" + ID_PASTA + "' in parents";
     var request = gapi.client.drive.files.list({
         'maxResults': NO_OF_FILES,
         'q': query
@@ -349,14 +349,14 @@ function IniciaBotoes(){
 
 //browse folder
 function browseFolder(obj) {
-    FOLDER_ID = $(obj).attr("data-id");
-    FOLDER_NAME = $(obj).attr("data-name");
+    ID_PASTA = $(obj).attr("data-id");
+    NOME_PASTA = $(obj).attr("data-name");
     FOLDER_LEVEL = parseInt($(obj).attr("data-level"));
 	FOLDER_PERMISSION = $(obj).attr("data-has-permission");
 
-    if (typeof FOLDER_NAME === "undefined") {
-        FOLDER_NAME = "";
-        FOLDER_ID = "root";
+    if (typeof NOME_PASTA === "undefined") {
+        NOME_PASTA = "";
+        ID_PASTA = "root";
         FOLDER_LEVEL = 0;
 		FOLDER_PERMISSION = true;
         FOLDER_ARRAY = [];
@@ -373,8 +373,8 @@ function browseFolder(obj) {
             }
         } else {
             var fd = {
-                Name: FOLDER_NAME,
-                ID: FOLDER_ID,
+                Name: NOME_PASTA,
+                ID: ID_PASTA,
                 Level: FOLDER_LEVEL,
 				Permission: FOLDER_PERMISSION
             }

@@ -37,9 +37,8 @@ class Uploader {
         }
         this.httpMethod = options.fileId ? 'PUT' : 'POST';
     }
-    /**
-    * Inicia o upload.
-    */
+
+    //inicia o upload
     upload() {
         var requisicao_http = new XMLHttpRequest();
 
@@ -62,10 +61,8 @@ class Uploader {
         requisicao_http.onerror = this.erroNoUpload.bind(this);
         requisicao_http.send(JSON.stringify(this.metadata)); //converte para string para poder ser enviada para o servidor
     }
-    /**
-    * Envie o conteúdo do arquivo real.
-    *
-    */
+
+    //envia o conteúdo do arquivo real.
     enviaArquivo() {
         var conteudo_arquivo = this.file;
         var tamanho_arquivo = this.file.size;
@@ -88,10 +85,8 @@ class Uploader {
  
 
     /**
-    * Lide com respostas bem-sucedidas para uploads e 
-    * invoca o callback do chamador.
-    *
-    * @private
+    * Sucesso no upload e invoca o callback 
+    * 
     * @param {object} e requisicao_http event
     */
     sucessoNoUpload(e) {
@@ -100,8 +95,7 @@ class Uploader {
         }
     }
     /**
-    * Lida com erros de uploads. Ou tenta novamente ou aborta, dependendo
-    * no erro.
+    * Erros no upload. 
     *
     * @private
     * @param {object} e requisicao_http event
@@ -111,15 +105,7 @@ class Uploader {
             this.onError(e.target.response);
         }
     }
-    /**
-    * Lida com erros para a solicitação inicial.
-    *
-    * @private
-    * @param {object} e requisicao_http event
-    */
-    erroNoUpload(e) {
-        this.onError(e.target.response); // TODO - Retries for initial upload
-    }
+
     /**
     * Construir uma string de consulta (query) a partir de um hash / objeto
     *
@@ -137,14 +123,14 @@ class Uploader {
     * Crie o URL de upload do drive
     *
     * @private
-    * @param {string} [id] File ID if replacing
+    * @param {string} [id_arquivo] File ID if replacing
     * @param {object} [params] Query parameters
     * @return {string} URL
     */
-    buildUrl_(id, params, baseUrl) {
+    buildUrl_(id_arquivo, params, baseUrl) {
         var url = baseUrl || 'https://www.googleapis.com/upload/drive/v2/files/';
-        if (id) {
-            url += id;
+        if (id_arquivo) {
+            url += id_arquivo;
         }
         var query = this.buildQuery_(params);
         if (query) {
