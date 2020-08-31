@@ -3,20 +3,31 @@
 <head>
 <meta charset="utf-8">
 <title>Arquivos</title>
-<script src="https://apis.google.com/js/platform.js" async defer></script><!--este é para o botao personalizado para login com o google-->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link href="lightbox.css" rel="stylesheet" />
 <link href="google-drive.css" rel="stylesheet" type="text/css"/>
+
 
 </head>
 <body>
 
 <div id="transparent-wrapper"></div>
-<div id="login-box" class="hide">
-	<p>Entre com sua conta do Google!</p>
-    <div class="g-signin2" onclick="handleAuthClick()" data-onsuccess="onSignIn"></div>
+<div id="container-login" class="hide">
+    <div id="login-box">
+        <p>Entre com sua conta do Google!</p>
+        <div id="botao-login-google">
+            <span class="icon-google">
+                <img src="images/google.png">
+            </span>
+            <span class="texto-botao-google" onclick="handleAuthClick()" data-onsuccess="onSignIn">Google</span><!--class="g-signin2" botao estilizado do google dando conflito-->
+          </div>
+    </div>
 </div>
 
+
+
 <div id="drive-box" class="hide">
+        <a id="link-logout" class="logout-link" onclick="handleSignoutClick() ">Sair</a>
 	<div id="drive-breadcrumb">
         <span class='breadcrumb-arrow'></span> 
             <a data-id='root' data-level='0'>Início</a>

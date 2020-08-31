@@ -36,20 +36,42 @@ function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
 		$("#drive-box").show();
 		$("#drive-box").css("display","inline-block");
-        $("#login-box").hide();
+        $("#container-login").hide();
         MostraGifCarregando();
         getDriveFiles();
 	} else {
-		$("#login-box").show();
+		$("#container-login").show();
         $("#drive-box").hide();
 	}
 }
+
+
 
 function handleAuthClick(event) {
 	gapi.auth2.getAuthInstance().signIn();
 }
 
 
+
+
+
+function handleSignoutClick(event) {
+	if(confirm("Are you sure you want to logout?")){
+		var auth2 = gapi.auth2.getAuthInstance();
+		
+		$("#container-login").show();
+        $("#drive-box").hide();
+		auth2.disconnect();
+	}}
+		//auth2.disconnect();
+		//gapi.auth2.getAuthInstance().signOut();
+		
+		//location.href = 'https://accounts.google.com/Logout?&continue'; //esse location funcionou
+			//gambiarra para retornar ao box de login arrumar com sessoes
+			//se usar essa gambiarra, o botao de longin nao funciona, no caso do login box nao da hide()
+		
+	
+	
 /******************** PAGE LOAD ********************/
 $(function(){
 	$("#button-reload").click(function () {
