@@ -56,12 +56,12 @@ function handleAuthClick(event) {
 
 
 function handleSignoutClick(event) {
-	if(confirm("Are you sure you want to logout?")){
+	if(confirm("Tem certeza que deseja sair?")){
 		var auth2 = gapi.auth2.getAuthInstance();
 		
 		$("#container-login").show();
         $("#drive-box").hide();
-		auth2.disconnect();
+		auth2.disconnect();  //.disconnect funcionoouuuuu amem
 	}}
 		//auth2.disconnect();
 		//gapi.auth2.getAuthInstance().signOut();
@@ -269,7 +269,7 @@ function ConstroiPagArquivos(){
 				if (ARQUIVOS_DRIVE[arquivo].thumbnailLink) {
 					bloco_arquivo += "<div class='image-icon'><div class='image-preview'><a href='" 
 					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink.replace("s220", "s800") 
-					+ "' data-lightbox='image-" + arquivo + "'><img src='" 
+					+ "' data-lightbox='image-" + arquivo + "'><img src='"  //o data-lightbox ativa a biblioteca do lightbox para as imagens
 					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink + "'/></a></div></div>";
 
 
@@ -280,7 +280,8 @@ function ConstroiPagArquivos(){
 					+ ARQUIVOS_DRIVE[arquivo].fileExtension + "-icon.png" + "'/></div></div>";
 				}
 			}
-			bloco_arquivo += "<div class='item-title'>" + ARQUIVOS_DRIVE[arquivo].title + "</div>";
+			//titulo do arquivo
+			bloco_arquivo += "<div class='nome_arquivo '>" + ARQUIVOS_DRIVE[arquivo].title + "</div>";
 
 			//botoes dentro da pagina de arquivos
 			bloco_arquivo += "<div class='button-box'>";
@@ -290,24 +291,21 @@ function ConstroiPagArquivos(){
 					bloco_arquivo += "<div class='button-download' title='Download' data-id='" 
 					+ ARQUIVOS_DRIVE[arquivo].id + "' data-file-counter='" + arquivo + "'></div>";
 				}
-				//botao de apagar, tanto pasta quanto arquivo
+				//botao de apagar
 				if (ARQUIVOS_DRIVE[arquivo].hasPermission) {
 					if (ARQUIVOS_DRIVE[arquivo].permissionRole == "owner") {
-						bloco_arquivo += "<div class='button-delete' title='Delete' data-id='" 
-						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";
-					}else if(ARQUIVOS_DRIVE[arquivo].fileType != "folder"){
-						bloco_arquivo += "<div class='button-delete' title='Delete' data-id='" 
-						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";
+						bloco_arquivo += "<div class='button-delete' title='Apagar' data-id='" 
+						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";	
 					}
 				}
-				
 			bloco_arquivo += "</div>";  
 			bloco_arquivo += "</div>";
 		}
 	//se o tamanho do array de arquivos for < 0 mostra "nenhum arquivo encontrado"
     } else {
         bloco_arquivo = 'Nenhum arquivo encontrado';
-    }
+	}
+	
     EscondeStatus();
     $("#drive-content").html(bloco_arquivo);
     IniciaBotoes();

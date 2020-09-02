@@ -14,12 +14,12 @@
 <div id="transparent-wrapper"></div>
 <div id="container-login" class="hide">
     <div id="login-box">
-        <p>Entre com sua conta do Google!</p>
-        <div id="botao-login-google">
+        <p> Para acessar os arquivos, <br> Entre com sua conta do Google! <br></p>
+        <div id="botao-login-google" onclick="handleAuthClick()" data-onsuccess="onSignIn">
             <span class="icon-google">
-                <img src="images/google.png">
+                <img src="images/google.png" >
             </span>
-            <span class="texto-botao-google" onclick="handleAuthClick()" data-onsuccess="onSignIn">Google</span><!--class="g-signin2" botao estilizado do google dando conflito-->
+            <span class="texto-botao-google" >Google</span><!--class="g-signin2" botao estilizado do google dando conflito-->
           </div>
     </div>
 </div>
