@@ -3,11 +3,11 @@ var SCOPES = ['https://www.googleapis.com/auth/drive','profile'];
 var CLIENT_ID = '200457364652-4a8r3irh3p4gktel1nhtubr59ngo9dak.apps.googleusercontent.com';
 var NOME_PASTA = "";
 var ID_PASTA = "root"; //pasta padrão para o inicio
-var FOLDER_PERMISSION = true;
-var FOLDER_LEVEL = 0;
+var PERMISSAO_PASTA = true;
+var LEVEL_PASTA = 0;
 var NO_OF_FILES = 1000;
 var ARQUIVOS_DRIVE = []; //array para os arquivos
-var FILE_COUNTER = 0;
+var CONTADOR_ARQUIVO = 0;
 var FOLDER_ARRAY = [];
 
 
@@ -17,75 +17,74 @@ var FOLDER_ARRAY = [];
 	gapi.load('client:auth2', initClient);
 }
 
-//autorização
+//autorização para login
+//documentação https://developers.google.com/people/quickstart/js
  function initClient() {
 	gapi.client.init({
 		clientId: CLIENT_ID,
 		scope: SCOPES.join(' ')
 	}).then(function () {
-	  // Listen for sign-in state changes.
 	  gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-	  // Handle the initial sign-in state.
 	  updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 	});
 }
 
 
-//check the return authentication of the login is successful, we display the drive box and hide the login box.
+//se a autenticação der certo, mostra os arquivos e esconde o container de login
 function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
 		$("#drive-box").show();
 		$("#drive-box").css("display","inline-block");
         $("#container-login").hide();
         MostraGifCarregando();
-        getDriveFiles();
+		getDriveFiles();
+//senao, mostra o container de login e mantem escondido os arquivos
 	} else {
 		$("#container-login").show();
         $("#drive-box").hide();
 	}
 }
 
-
-
+//função chamada ao clicar no botao do google
 function handleAuthClick(event) {
 	gapi.auth2.getAuthInstance().signIn();
 }
 
 
 
-
-
+//função chamada ao clciar no botao de sair
 function handleSignoutClick(event) {
 	if(confirm("Tem certeza que deseja sair?")){
 		var auth2 = gapi.auth2.getAuthInstance();
 		
 		$("#container-login").show();
         $("#drive-box").hide();
-		auth2.disconnect();  //.disconnect funcionoouuuuu amem
+		auth2.disconnect();  //.disconnect sai mas depois nao entra mais --arrumar isso
 	}}
 		//auth2.disconnect();
 		//gapi.auth2.getAuthInstance().signOut();
 		
 		//location.href = 'https://accounts.google.com/Logout?&continue'; //esse location funcionou
 			//gambiarra para retornar ao box de login arrumar com sessoes
-			//se usar essa gambiarra, o botao de longin nao funciona, no caso do login box nao da hide()
+			//se usar essa gambiarra, o botao de longin nao funciona, no caso do login box nao esconde
 		
 	
 	
-/******************** PAGE LOAD ********************/
+
+//jquery usada pois essas funções so podem ser ativadas quando a dom estiver pronta
 $(function(){
-	$("#button-reload").click(function () {
+	$("#botao-atualizar").click(function () {
         MostraGifCarregando();
         MostraStatus("Carregando arquivos");
         getDriveFiles();
     });
 	
-	$("#button-upload").click(function () {
-        $("#fUpload").click();
+	$("#botao-upload").click(function () {
+        $("#input-upload-file").click();
     });
 	
-	 $("#fUpload").bind("change", function () {
-        var uploadObj = $("[id$=fUpload]");
+	/* $("#input-upload-file").bind("change", function () {
+        var uploadObj = $("[id$=input-upload-file]");
         MostraGifCarregando();
         MostraStatus("Fazendo upload");
         var file = uploadObj.prop("files")[0];
@@ -115,7 +114,7 @@ $(function(){
 				onError: function(response){
 					var errorResponse = JSON.parse(response);
 					MensagemErro("Erro: " + errorResponse.error.message);
-					$("#fUpload").val("");
+					$("#input-upload-file").val("");
 					$("#upload-percentage").hide(1000);
 					getDriveFiles();
 				},
@@ -125,7 +124,7 @@ $(function(){
 					var errorResponse = JSON.parse(response);
 					if(errorResponse.message != null){
 						MensagemErro("Erro: " + errorResponse.error.message);
-						$("#fUpload").val("");
+						$("#input-upload-file").val("");
 						getDriveFiles();
 					}else{
 						MostraStatus("Carregando arquivos");
@@ -143,24 +142,25 @@ $(function(){
 			uploader.upload();
 		}catch(exc){
 			MensagemErro("Erro: " + exc);
-			$("#fUpload").val("");
+			$("#input-upload-file").val("");
 			getDriveFiles();
 		}
-    });
+    });*/
 	
-	
-	$("#button-addfolder").click(function () {
-        $("#transparent-wrapper").show();
-        $("#float-box").show();
+	//link "criar pasta"
+	$("#botao-criar-pasta").click(function () {
+       // $("#fundo-transparente").show();
+        $("#box-input-criar-pasta").show();
         $("#nome_pasta").val("");
     });
 	
-	$("#btn_CriarPasta").click(function () {
+	//botao "criar" do form de criar pasta
+	$("#botao-criar").click(function () {
         if ($("#nome_pasta").val() == "") {
-            alert("Please enter the folder name");
+            alert("Digite o nome da pasta!");
         } else {
-            $("#transparent-wrapper").hide();
-            $("#float-box").hide();
+           // $("#fundo-transparente").hide();
+            $("#box-input-criar-pasta").hide();
             MostraGifCarregando();
             MostraStatus("Criando pasta");
 			var access_token =  gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
@@ -194,15 +194,15 @@ $(function(){
         }
     });
 	
-	$(".btn_fechar, .imgClose").click(function () {
-        $("#transparent-wrapper").hide();
-        $(".float-box").hide();
+	$(".botao-fechar").click(function () {
+        //$("#fundo-transparente").hide();
+        $(".box-input-criar-pasta").hide();
     });
 });
 
-/******************** END PAGE LOAD ********************/
 
-/******************** DRIVER API ********************/
+
+//gapi.client.load('drive', 'v2', callback)  callbak é a função getFiles;
 function getDriveFiles(){
 	MostraStatus("Carregando arquivos");
     gapi.client.load('drive', 'v2', getFiles);
@@ -210,8 +210,8 @@ function getDriveFiles(){
 
 function getFiles(){
 	var query = "";
-		$(".button-opt").show();
-		query = "trashed=false and '" + ID_PASTA + "' in parents";
+		//$(".button-opt").show();
+		query = "trashed=false and '" + ID_PASTA + "' in parents";//poe dentro das pastas, sem isso ele n monta pastas e deixa tudo solto
     var request = gapi.client.drive.files.list({
         'maxResults': NO_OF_FILES,
         'q': query
@@ -229,11 +229,15 @@ function getFiles(){
 // thumbnailLink = miniatura do preview
 function ConstroiPagArquivos(){
 	var bloco_arquivo = "";
+
+	//verifica se tem arquivos
 	//se o tamanho do array de arquivos for > 0 constroi a pagina dos arquivos que tem pra mostrar
     if (ARQUIVOS_DRIVE.length > 0) {
         for (var arquivo = 0; arquivo < ARQUIVOS_DRIVE.length; arquivo++) {
+			//percorre um for pra cada arquivo
+			//cada arquivo recebe seus dados (documentação google)
 			ARQUIVOS_DRIVE[arquivo].textContentURL = "";
-			ARQUIVOS_DRIVE[arquivo].level = (parseInt(FOLDER_LEVEL) + 1).toString();
+			ARQUIVOS_DRIVE[arquivo].level = (parseInt(LEVEL_PASTA) + 1).toString();
 			ARQUIVOS_DRIVE[arquivo].parentID = (ARQUIVOS_DRIVE[arquivo].parents.length > 0) ? ARQUIVOS_DRIVE[arquivo].parents[0].id : "";
 			ARQUIVOS_DRIVE[arquivo].thumbnailLink = ARQUIVOS_DRIVE[arquivo].thumbnailLink || '';
 			ARQUIVOS_DRIVE[arquivo].fileType =  (ARQUIVOS_DRIVE[arquivo].fileExtension == null) ? "folder" : "file";
@@ -241,9 +245,10 @@ function ConstroiPagArquivos(){
 			ARQUIVOS_DRIVE[arquivo].hasPermission = (ARQUIVOS_DRIVE[arquivo].permissionRole == "owner" || ARQUIVOS_DRIVE[arquivo].permissionRole == "writer");
 			var textContentURL = '';
 
-			if(ARQUIVOS_DRIVE[arquivo]['exportLinks'] != null){
+			//sem esse if os arquivos de texto se transformam em pastas
+			if(ARQUIVOS_DRIVE[arquivo]['exportLinks'] != null){//exportLinks são links para exportar google docs
 				ARQUIVOS_DRIVE[arquivo].fileType = "file";
-				ARQUIVOS_DRIVE[arquivo].textContentURL = ARQUIVOS_DRIVE[arquivo]['exportLinks']['text/plain'];
+				ARQUIVOS_DRIVE[arquivo].textContentURL = ARQUIVOS_DRIVE[arquivo]['exportLinks']['text/plain'];//text/plain são arquivos de texto
 			}
 
 			//titulo do arquivo
@@ -252,6 +257,8 @@ function ConstroiPagArquivos(){
 
 			
 			bloco_arquivo += "<div class='" + ARQUIVOS_DRIVE[arquivo].fileType + "-box'>";
+
+			
 			// se o drive file for diferente de um arquivo, é uma pasta, entao monta ela
 			if (ARQUIVOS_DRIVE[arquivo].fileType != "file") {
 				bloco_arquivo += "<div class='folder-icon' data-level='" 
@@ -262,14 +269,17 @@ function ConstroiPagArquivos(){
 				+ nome_arquivo + "' data-name='" 
 				+ ARQUIVOS_DRIVE[arquivo].title + "' data-has-permission='" 
 				+ARQUIVOS_DRIVE[arquivo].hasPermission 
-				+ "'><div class='image-preview'><img src='images/folder.png'/></div></div>";
+				//pega os dados e as permições (documentação)
+
+				//e depois coloca a imagem de pasta
+				+ "'><div class='image-preview'><img src='images/pasta.png'/></div></div>";
 			
-			// se for um arquivo, pega o thumbnailLink dele e monta uma miniatura
+			// se for um arquivo, pega a thumbnailLink dele e monta uma miniatura
 			} else {
 				if (ARQUIVOS_DRIVE[arquivo].thumbnailLink) {
 					bloco_arquivo += "<div class='image-icon'><div class='image-preview'><a href='" 
-					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink.replace("s220", "s800") 
-					+ "' data-lightbox='image-" + arquivo + "'><img src='"  //o data-lightbox ativa a biblioteca do lightbox para as imagens
+					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink.replace("s220", "s800") //aumenta o tamanho 
+					+ "' miniatura='image-" + arquivo + "'><img src='" 
 					+ ARQUIVOS_DRIVE[arquivo].thumbnailLink + "'/></a></div></div>";
 
 
@@ -284,17 +294,17 @@ function ConstroiPagArquivos(){
 			bloco_arquivo += "<div class='nome_arquivo '>" + ARQUIVOS_DRIVE[arquivo].title + "</div>";
 
 			//botoes dentro da pagina de arquivos
-			bloco_arquivo += "<div class='button-box'>";
+			bloco_arquivo += "<div class='botoes-arquivo'>";
 			//botao de download
 			//verifica se não é uma pasta, pois nao pode fazer downlaod de pasta
 				if (ARQUIVOS_DRIVE[arquivo].fileType != "folder") {
-					bloco_arquivo += "<div class='button-download' title='Download' data-id='" 
+					bloco_arquivo += "<div class='botao-download' title='Download' data-id='" 
 					+ ARQUIVOS_DRIVE[arquivo].id + "' data-file-counter='" + arquivo + "'></div>";
 				}
 				//botao de apagar
 				if (ARQUIVOS_DRIVE[arquivo].hasPermission) {
 					if (ARQUIVOS_DRIVE[arquivo].permissionRole == "owner") {
-						bloco_arquivo += "<div class='button-delete' title='Apagar' data-id='" 
+						bloco_arquivo += "<div class='botao-apagar' title='Apagar' data-id='" 
 						+ ARQUIVOS_DRIVE[arquivo].id + "'></div>";	
 					}
 				}
@@ -307,17 +317,16 @@ function ConstroiPagArquivos(){
 	}
 	
     EscondeStatus();
-    $("#drive-content").html(bloco_arquivo);
-    IniciaBotoes();
+    $("#drive-conteudo").html(bloco_arquivo);
+    botoes();
     EscondeGifCarregando();
 }
 
 //inicia botoes de delete, download, clicar em uma pasta e navegação no breadcrumb
-function IniciaBotoes(){
+function botoes(){
 	//botao de delete
 	//documentação do delete https://developers.google.com/drive/api/v2/reference/files/delete#javascript
-	$(".button-delete").unbind("click");
-    $(".button-delete").click(function () {
+    $(".botao-apagar").click(function () {
         var confirma = confirm("Tem certeza que deseja excluir?");
         if (confirma) {
             MostraGifCarregando();
@@ -336,67 +345,64 @@ function IniciaBotoes(){
     });
 	
 	//botao de downlaod
-	$(".button-download").unbind("click");
-    $(".button-download").click(function () {
+	
+    $(".botao-download").click(function () {
         MostraGifCarregando();
         MostraStatus("Baixando arquivo");
-		FILE_COUNTER = $(this).attr("data-file-counter");
+		CONTADOR_ARQUIVO = $(this).attr("data-file-counter");
 		
         setTimeout(function () {
 
-			window.open(ARQUIVOS_DRIVE[FILE_COUNTER].webContentLink); //webContentLink propriedade para fazer o download 
+			window.open(ARQUIVOS_DRIVE[CONTADOR_ARQUIVO].webContentLink); //webContentLink propriedade para fazer o download 
 
 			EscondeGifCarregando();
 			EscondeStatus();
 		}, 1000);
     });
 
-
 	
 	//clicar em uma pasta
-	$(".folder-icon").unbind("click");
     $(".folder-icon").click(function () {
-        browseFolder($(this));
+        ProcuraPasta($(this));
     });
 
 	//navegação no breadcrumb
-    $("#drive-breadcrumb a").unbind("click");
     $("#drive-breadcrumb a").click(function () {
-        browseFolder($(this));
+        ProcuraPasta($(this));
     });
 }
 
 
-//browse folder
-function browseFolder(obj) {
+//procura pasta
+function ProcuraPasta(obj) {
     ID_PASTA = $(obj).attr("data-id");
     NOME_PASTA = $(obj).attr("data-name");
-    FOLDER_LEVEL = parseInt($(obj).attr("data-level"));
-	FOLDER_PERMISSION = $(obj).attr("data-has-permission");
+   LEVEL_PASTA = parseInt($(obj).attr("data-level"));
+	PERMISSAO_PASTA = $(obj).attr("data-has-permission");
 
     if (typeof NOME_PASTA === "undefined") {
         NOME_PASTA = "";
         ID_PASTA = "root";
-        FOLDER_LEVEL = 0;
-		FOLDER_PERMISSION = true;
+        LEVEL_PASTA = 0;
+		PERMISSAO_PASTA = true;
         FOLDER_ARRAY = [];
     } else {
-        if (FOLDER_LEVEL == FOLDER_ARRAY.length && FOLDER_LEVEL > 0) {
+        if (LEVEL_PASTA == FOLDER_ARRAY.length && LEVEL_PASTA > 0) {
             //do nothing
-        } else if (FOLDER_LEVEL < FOLDER_ARRAY.length) {
-            var tmpArray = cloneObject(FOLDER_ARRAY);
+        } else if (LEVEL_PASTA < FOLDER_ARRAY.length) {
+            var tmpArray = ClonaObj(FOLDER_ARRAY);
             FOLDER_ARRAY = [];
 
             for (var i = 0; i < tmpArray.length; i++) {
                 FOLDER_ARRAY.push(tmpArray[i]);
-                if (tmpArray[i].Level >= FOLDER_LEVEL) { break; }
+                if (tmpArray[i].Level >= LEVEL_PASTA) { break; }
             }
         } else {
             var fd = {
                 Name: NOME_PASTA,
                 ID: ID_PASTA,
-                Level: FOLDER_LEVEL,
-				Permission: FOLDER_PERMISSION
+                Level: LEVEL_PASTA,
+				Permission: PERMISSAO_PASTA
             }
             FOLDER_ARRAY.push(fd);
         }
@@ -404,10 +410,10 @@ function browseFolder(obj) {
 
 	//add a pasta no breadcrumb
     var sbNav = "";
-    for (var i = 0; i < FOLDER_ARRAY.length; i++) {
-        sbNav +="<span class='breadcrumb-arrow'></span>";
-        sbNav +="<span class='folder-name'><a data-id='" + FOLDER_ARRAY[i].ID + "' data-level='" + FOLDER_ARRAY[i].Level + "' data-name='" + FOLDER_ARRAY[i].Name + "' data-has-permission='" + FOLDER_PERMISSION + "'>" + FOLDER_ARRAY[i].Name + "</a></span>";
-    }
+    //for (var i = 0; i < FOLDER_ARRAY.length; i++) {
+        //sbNav +="<span class='breadcrumb-arrow'></span>";
+        //sbNav +="<span class='folder-name'><a data-id='" + FOLDER_ARRAY[i].ID + "' data-level='" + FOLDER_ARRAY[i].Level + "' data-name='" + FOLDER_ARRAY[i].Name + "' data-has-permission='" + PERMISSAO_PASTA + "'>" + FOLDER_ARRAY[i].Name + "</a></span>";
+    //}
     $("#span-navigation").html(sbNav.toString());
 
     MostraGifCarregando();
@@ -416,20 +422,20 @@ function browseFolder(obj) {
 }
 
 
-//function to clone an object
-function cloneObject(obj) {
+//função para clonar objeto
+function ClonaObj(obj) {
     if (obj === null || typeof obj !== 'object') {
         return obj;
     }
     var temp = obj.constructor(); 
     for (var key in obj) {
-        temp[key] = cloneObject(obj[key]);
+        temp[key] = ClonaObj(obj[key]);
     }
     return temp;
 }
 
 
-//funções de notificações 
+//funções de notificações com jQuery $('seletorHTML').acao();
 
 function MostraGifCarregando() {
     if ($("#drive-box-loading").length === 0) {
@@ -439,7 +445,7 @@ function MostraGifCarregando() {
 }
 
 function EscondeGifCarregando() {
-    $("#drive-box-loading").html("");
+    $("#drive-box-loading").html(""); 
 }
 
 function MostraStatus(text) {

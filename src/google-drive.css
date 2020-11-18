@@ -1,7 +1,3 @@
-body{
-	font-family:arial;
-	font-size:11px;
-}
 
 #link-logout{
 cursor: pointer;
@@ -83,7 +79,7 @@ cursor: pointer;
 /*************** END Google Drive Breadcrumb ***************/
 
 /*************** Google Drive Box ***************/
-#transparent-wrapper
+#fundo-transparente
 {
     display: none; 
     position: fixed;
@@ -109,7 +105,7 @@ cursor: pointer;
     margin-top:60px;
 }
 
-#drive-content{
+#drive-conteudo{
 	clear:both;
 }
 
@@ -148,8 +144,12 @@ cursor: pointer;
     font-size:11px;
 
 }
-
 #drive-menu{
+    float: right;
+    cursor: pointer;
+    display: block;
+}
+/*#drive-menu{
     float:right;
 }
 
@@ -158,7 +158,7 @@ cursor: pointer;
 	border:solid 1px #000;
 }
 
-#button-reload, #button-addfolder, #button-upload{
+#botao-atualizar, #botao-criar-pasta, #botao-upload{
     width:24px;
     height:24px;
     display:block;
@@ -169,24 +169,24 @@ cursor: pointer;
 	border-radius:5px;
 }
 
-#button-reload {
+#botao-atualizar{
     background:url(images/button_reload.png) no-repeat;
 }
 
-#button-addfolder {
+#botao-criar-pasta {
     background:url(images/button_addfolder.png) no-repeat;
 }
 
-#button-upload {
+#botao-upload {
     background:url(images/button_upload.png) no-repeat;
 }
-
-.button-box{
+*/
+.botoes-arquivo{
     padding-top:10px;
     display: inline-flex !important;
 }
 
-.button-delete, .button-download{
+.botao-apagar, .botao-download{
 	width:20px;
     height:20px;
     display:inline-block;
@@ -194,12 +194,12 @@ cursor: pointer;
     margin-right:5px;
 }
 
-.button-delete {
+.botao-apagar {
     background:url(images/button_delete.png) no-repeat;
 }
 
 
-.button-download {
+.botao-download{
     background:url(images/button_download.png) no-repeat;
 }
 
@@ -211,7 +211,7 @@ cursor: pointer;
 
 
 /************* FLOATING BOX *********************/
-.float-box{
+.box-input-criar-pasta{
     border-radius:0px;
     -webkit-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:7px 7px 5px rgba(50, 50, 50, 0.75);
@@ -310,7 +310,7 @@ cursor: pointer;
 /*************** END NOTIFICATION ******************/
 
 /***************** MISC ************************/
-.button {
+.botao {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
@@ -329,7 +329,7 @@ cursor: pointer;
   cursor:pointer;
 }
 
-.button:hover {
+.botao:hover {
   background: #3cb0fd;
   background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
   background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
