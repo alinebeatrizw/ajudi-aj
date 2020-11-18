@@ -3,45 +3,52 @@
 <head>
 <meta charset="utf-8">
 <title>Arquivos</title>
-
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+<link rel="stylesheet" href="./css/bootstrap.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link href="google-drive.css" rel="stylesheet" type="text/css"/>
 
-
+<style>
+    *, *::before, *::after {
+  box-sizing:content-box !important;
+  
+}
+a.logout-link {
+    color: black !important;
+    
+}
+</style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/" title="início">Ajudi - Assistente Juridico</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/clientes">Clientes</a>
-      </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" title="início">Ajudi - Assistente Juridico</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/documentos">Documentos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="http://localhost/Ajudi-tcc/src/google-drive.html">Documentos2</a>
-      </li>
-      <!-- 
-      <li class="nav-item">
-        <a class="nav-link " href="/usuarios/logout" tabindex="-1" >Sair</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="/usuarios/login" tabindex="-1" >Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="/usuarios/registro" tabindex="-1" >Registro</a>
-      </li>
-    </ul>
-  </div>-->
-</nav>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:8081/admin/clientes">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost/Ajudi-tcc/src/google-drive.html">Documentos</a>
+            </li>
+            <!-- 
+            <li class="nav-item">
+              <a class="nav-link " href="/usuarios/logout" tabindex="-1" >Sair</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/usuarios/login" tabindex="-1" >Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/usuarios/registro" tabindex="-1" >Registro</a>
+            </li>
+          </ul>
+        </div>-->
+      </nav>
 <!--<div id="fundo-transparente"></div>-->
 
 <div id="container-login" class="hide">
@@ -59,17 +66,17 @@
 
 
 <div id="drive-box" class="hide">
-        <a id="link-logout" class="logout-link" onclick="handleSignoutClick() ">Sair</a> <br> <br>
+        <a id="link-logout" class="logout-link btn btn-light" onclick="handleSignoutClick() " >Sair</a> <br> <br>
 	<div id="drive-breadcrumb">
         <!--<span class='breadcrumb-arrow'></span> -->
-            <a data-id='root' data-level='0'>Início</a>
+            <a data-id='root' data-level='0' class="btn btn-light">Início</a>
         <span id="span-navigation"></span>
     </div>
 	
 	<div id="drive-menu">
-        <div id="botao-atualizar" title="Atualizar">Atualizar</div><br>
-		<div id="botao-upload" title="Upload" >Enviar arquivo</div><br>
-		<div id="botao-criar-pasta" title="Criar pasta">Criar Pasta</div>
+        <div id="botao-atualizar" title="Atualizar" class="btn btn-light">Atualizar</div><br>
+		<div id="botao-upload" title="Upload" class="btn btn-light">Enviar arquivo</div><br>
+		<div id="botao-criar-pasta" title="Criar pasta" class="btn btn-light">Criar Pasta</div>
     </div>
 	<div id="drive-conteudo"></div>
 	<div id="error-message" class="flash hidden"></div>
@@ -85,15 +92,15 @@
         <div>
             <input type="text" id="nome_pasta" class="text-input" />
         </div>
-		<button id="botao-criar" value="Save" class="botao">Criar</button>
-		<button id="botao-fechar" value="Close" class="botao botao-fechar">Fechar</button>
+		<button id="botao-criar" value="Save" class="botao" class="btn btn-light">Criar</button>
+		<button id="botao-fechar" value="Close" class="botao botao-fechar" class="btn btn-light"> Fechar</button>
     </div>
 </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="google-drive.js"></script>
-
+<script src="./js/bootstrap.js"></script>
 <script async defer src="https://apis.google.com/js/api.js" 
       onload="this.onload=function(){};handleClientLoad()" 
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
