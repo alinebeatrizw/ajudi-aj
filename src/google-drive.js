@@ -83,7 +83,7 @@ $(function(){
         $("#input-upload-file").click();
     });
 	
-	/* $("#input-upload-file").bind("change", function () {
+	 $("#input-upload-file").bind("change", function () {
         var uploadObj = $("[id$=input-upload-file]");
         MostraGifCarregando();
         MostraStatus("Fazendo upload");
@@ -145,7 +145,7 @@ $(function(){
 			$("#input-upload-file").val("");
 			getDriveFiles();
 		}
-    });*/
+    });
 	
 	//link "criar pasta"
 	$("#botao-criar-pasta").click(function () {
