@@ -1,0 +1,71 @@
+
+
+<h2>Lista de clientes cadastrados</h2>
+
+<a href="/admin/clientes/add" class="btn btn-light">Cadastrar novo cliente</a>
+
+{{#each clientes}}
+<div class="card-group">
+
+<div class="card border-light mt-4" >
+  <div class="card-header">{{nome}} {{sobrenome}}</div>
+  <div class="card-body">
+    <h5 class="card-title mt-4">Dados Pessoais </h5>
+    <p class="card-text">
+        Telefone : {{telefone}}<br>
+        Nome da Mãe : {{nomeMae}}<br>
+        Estado Civil : {{selectEstadoCivil}}<br>
+        Data de Nacimento: {{dataNascimento}}<br>
+    </p>
+  </div>
+</div>
+
+<div class="card border-light mt-4" >
+  <div class="card-header" style="color: #f7f7f7;">{{nome}}</div>
+  <div class="card-body">
+    <h5 class="card-title mt-4">Dados de Localização</h5>
+    <p class="card-text">
+        Naturalidade : {{naturalidade}}<br>
+        Estado : {{selectEstado}}<br>
+        Cidade : {{cidade}}<br>
+        Endereço: {{endereco}}<br>
+        CEP: {{cep}}<br>
+    </p>
+  </div>
+</div>
+
+<div class="card border-light mt-4" >
+  <div class="card-header" style="color: #f7f7f7;">{{nome}}</div>
+  <div class="card-body">
+    <h5 class="card-title mt-4">Documentação</h5>
+    <p class="card-text">
+        RG : {{rg}}<br>
+        CPF : {{cpf}}<br>
+        CNH : {{cnh}}<br>
+        CTPS: {{ctps}}<br>
+        Processo(s):  <br>
+        {{processo}}<br>
+        {{processo2}}<br>
+        {{processo3}}<br>
+        {{processo4}}
+    </p>
+  </div>
+</div>
+</div>
+    <div class="botoes-edit-delete" style="display: flex;">
+        <a href="/admin/clientes/editar/{{_id}}">
+        <button class="btn btn-light mt-4">Editar</button>
+        </a>
+        <form action="/admin/clientes/deletar" method="POST">
+            <input type="hidden" name="id" value="{{_id}}">
+            <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
+        </form>
+    </div>
+{{else}}
+<h4 class="mt-4">Nenhum cliente cadastrado</h4>
+{{/each}}
+
+
+
+
+

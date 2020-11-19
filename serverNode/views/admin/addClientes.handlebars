@@ -1,0 +1,237 @@
+{{#each erros}}
+<div class="alert alert-danger">
+    {{texto}}
+</div>
+{{else}}
+{{/each}}
+
+
+
+<h3>Cadastrar Cliente</h3>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="card mt-4">
+            <div class="card-body">
+                <form action="/admin/clientes/novo" method="POST">
+                    <h4 class="mt-4">Dados Pessoais: </h4>
+                    <div class="row mt-4">
+                        <div class="col">   
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" required name="nome" id="nome">
+                        </div>
+                        <div class="col">
+                            <label for="sobrenome">Sobrenome: </label>
+                            <input type="text" class="form-control" required name="sobrenome">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="email">Email: </label>
+                            <input type="email" class="form-control" required name="email" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" class="form-control"  name="telefone" required>
+                        </div>
+                        <div class="col">
+                            <label for="nomeMae">Nome da mãe</label>
+                            <input type="text" class="form-control"  name="nomeMae" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="dataNascimento">Data de nascimento: </label>
+                            <input type="date" class="form-control"  name="dataNascimento" >
+                        </div>
+                        <div class="col">
+                            <label for="estadoCivil">Estado civil: </label>
+                            <select name="selectEstadoCivil"  class="form-control">
+                                <option value="selected">Estado civil</option>
+                                <option value="solteiro">Solteiro</option>
+                                <option value="casado">Casado</option>
+                                <option value="separado">Separado</option>
+                                <option value="divorciado">Divorciado</option>
+                                <option value="viuvo">Viúvo</option>
+                                <option value="amasiado">Amasiado</option>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="botoes-prev-next mt-4" style="text-align: center;">
+                <a  href="#carouselExampleControls" role="button" data-slide="next">
+                <span  aria-hidden="true"></span>
+                <button class="btn btn-light">Próximo</button>
+                </a>
+            </div>
+        </div>  
+    </div>
+
+    <div class="carousel-item">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="mt-4">Dados de localização: </h4>
+                <div class="row mt-4">
+                    <div class="col">   
+                        <label for="naturalidade">Naturalidade:</label>
+                        <input type="text" class="form-control" name="naturalidade">
+                    </div>
+                    <div class="col">
+                        <label for="nacionalidade">Nacionalidade: </label>
+                        <input type="text" class="form-control" name="nacionalidade">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">   
+                        <label for="endereco">Endereço: </label>
+                        <input type="text" class="form-control" required name="endereco" placeholder="Ex: Av. Brasil, N 20">
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" class="form-control"  name="cidade" required>
+                        </div>
+                        <div class="col">
+                            <label for="selectEstado">Estado</label>
+                            <select name="selectEstado" class="form-control">
+                                <option selected>Estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="cep">CEP:</label>
+                            <input type="text" class="form-control"  name="cep" required>
+                        </div>
+                    </div> 
+                    <div class="botoes-prev-next mt-4" style="text-align: center;">
+                        <a  href="#carouselExampleControls" role="button" data-slide="prev" >
+                        <span aria-hidden="true"></span>
+                        <button class="btn btn-light">Anterior</button>
+                        </a>
+                        <a  href="#carouselExampleControls" role="button" data-slide="next">
+                        <span  aria-hidden="true"></span>
+                        <button class="btn btn-light">Próximo</button>
+                        </a>
+                    </div>   
+                </div>
+            </div>  
+        </div>
+    <div class="carousel-item">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="mt-4">Documentação: </h4>
+                    <div class="row mt-4">
+                        <div class="col">   
+                            <label for="rg">RG:</label>
+                            <input type="text" class="form-control" required name="rg">
+                        </div>
+                    <div class="col">
+                        <label for="cpf">CPF: </label>
+                        <input type="text" class="form-control" required name="cpf">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">   
+                        <label for="cnh">CNH: </label>
+                        <input type="text" class="form-control" name="cnh" >
+                    </div>
+                <div class="col">   
+                    <label for="ctps">CTPS:</label>
+                    <input type="text" class="form-control"  name="ctps" required>
+                </div>  
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <label for="processo">Processo:</label>
+                            <input name="processo" class="form-control" type="text"/>
+                            <button onclick= addMais() id="botao1" class="btn btn-light">+</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div style="visibility: hidden;" id="div1">
+                            <label for="processo2">Processo:</label>
+                            <input name="processo2" class="form-control" type="text"/>
+                            <button onclick= addMais1() id="botao2" class="btn btn-light">+</button>
+                        </div>
+                    </div>  
+                    <div class="col">
+                        <div style="visibility: hidden;" id="div2">
+                            <label for="processo3">Processo:</label>
+                            <input name="processo3" class="form-control" type="text"/>
+                            <button onclick= addMais2() id="botao3" class="btn btn-light">+</button>
+                        </div>
+                    </div> 
+                    <div class="col">
+                        <div style="visibility: hidden;" id="div3">
+                            <label for="processo4">Processo:</label>
+                            <input name="processo4" class="form-control" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            <div class="botoes-prev-next mt-4" style="text-align: center;">
+                <a  href="#carouselExampleControls" role="button" data-slide="prev" >
+                <span aria-hidden="true"></span>
+                <button class="btn btn-light">Anterior</button>
+                </a>
+                <a  href="#carouselExampleControls" role="button" data-slide="next">
+                <span  aria-hidden="true"></span>
+                <button class="btn btn-light">Próximo</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+        <button type="submit" class="btn btn-dark mt-3">Salvar</button>
+        </form>
+        
+    </div>
+
+</div>
+</div>
+                <script>
+                    function addMais(){
+                        document.getElementById("div1").style.visibility = "visible";
+                        document.getElementById("botao1").style.visibility = "hidden";
+                    }
+                     function addMais1(){
+                        document.getElementById("div2").style.visibility = "visible";
+                        document.getElementById("botao2").style.visibility = "hidden";
+                    }
+                    function addMais2(){
+                        document.getElementById("div3").style.visibility = "visible";
+                        document.getElementById("botao3").style.visibility = "hidden";
+                    }
+                </script>
+

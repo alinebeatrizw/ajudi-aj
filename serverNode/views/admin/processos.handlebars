@@ -1,0 +1,50 @@
+
+
+<h2>Lista de processos cadastrados</h2>
+
+<a href="/admin/processos/add" class="btn btn-light">Cadastrar novo processo</a>
+
+{{#each processos}}
+<div class="card-group">
+
+<div class="card border-light mt-4" >
+  <div class="card-header">Dados Processuais</div>
+  <div class="card-body">
+    <h5 class="card-title mt-4">{{numeroProcesso}}</h5>
+    <p class="card-text">
+        Número do processo : {{numeroProcesso}}<br>
+        Comarca : {{comarca}}<br>
+        Vara : {{vara}}<br>
+        Data de propositura : {{dataPropositura}}<br>
+        Valor da causa: {{valorCausa}}<br>
+        Honorários: {{honorarios}}<br>
+        Cliente: {{cliente.nome}}<br>
+    </p>
+  </div>
+    <div class="card-body">
+    <h5 class="card-title mt-4"></h5>
+    <p class="card-text">
+        Descrição : {{descricao}}<br>
+    </p>
+  </div>
+</div>
+
+
+</div>
+    <div class="botoes-edit-delete" style="display: flex;">
+        <a href="/admin/clientes/editar/{{_id}}">
+        <button class="btn btn-light mt-4">Editar</button>
+        </a>
+        <form action="/admin/clientes/deletar" method="POST">
+            <input type="hidden" name="id" value="{{_id}}">
+            <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
+        </form>
+    </div>
+{{else}}
+<h4 class="mt-4">Nenhum processo cadastrado</h4>
+{{/each}}
+
+
+
+
+

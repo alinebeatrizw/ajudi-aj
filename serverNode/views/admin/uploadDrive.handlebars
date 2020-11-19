@@ -1,0 +1,28 @@
+<h4>Fazer Upload de um Arquivo</h4>
+<h5>Para sua conta do Google Drive!</h5>
+<div class="card mt-4">
+  <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="well">  
+            {{#if success}}
+            <div class="alert alert-success">{{success_msg}}Arquivo enviado</div>
+            {{/if}}       
+            <form action="/admin/upload" method="POST" enctype="multipart/form-data" >
+              <div class="form-group">
+                <input type="file"class="form-group"name="file"requiredid=""/><br>
+                <button class="btn btn-light ">
+                  Enviar arquivo
+                </button><br>
+                <a href="/admin/logout" class="btn btn-light mt-3">Sair</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+
+
+
+

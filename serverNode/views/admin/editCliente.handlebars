@@ -1,0 +1,230 @@
+
+{{#each erros}}
+<div class="alert alert-danger">
+    {{texto}}
+</div>
+{{else}}
+{{/each}}
+
+
+
+
+<h3>Editar Cliente: {{clientes.nome}} {{clientes.sobrenome}}</h3>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="card mt-4">
+            <div class="card-body">
+                <form action="/admin/clientes/editar" method="POST">
+                <input type="hidden" name="id" value="{{clientes._id}}">
+                    <h4 class="mt-4">Dados Pessoais: </h4>
+                    <div class="row mt-4">
+                        <div class="col">   
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" required name="nome" value="{{clientes.nome}}">
+                        </div>
+                        <div class="col">
+                            <label for="sobrenome">Sobrenome: </label>
+                            <input type="text" class="form-control" required name="sobrenome" value="{{clientes.sobrenome}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="email">Email: </label>
+                            <input type="email" class="form-control" required name="email" value="{{clientes.email}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" class="form-control"  name="telefone" required value="{{clientes.telefone}}">
+                        </div>
+                        <div class="col">
+                            <label for="nomeMae">Nome da mãe</label>
+                            <input type="text" class="form-control"  name="nomeMae" required value="{{clientes.nomeMae}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="dataNascimento">Data de nascimento: </label>
+                            <input type="date" class="form-control"  name="dataNascimento"value="{{clientes.dataNascimento}}" >
+                        </div>
+                        <div class="col">
+                            <label for="estadoCivil">Estado civil: </label>
+                            <select name="selectEstadoCivil"  class="form-control" value="{{clientes.selectEstadoCivil}}">
+                                <option value="selected">Estado civil</option>
+                                <option value="solteiro">Solteiro</option>
+                                <option value="casado">Casado</option>
+                                <option value="separado">Separado</option>
+                                <option value="divorciado">Divorciado</option>
+                                <option value="viuvo">Viúvo</option>
+                                <option value="amasiado">Amasiado</option>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="botoes-prev-next mt-4" style="text-align: center;">
+                <a  href="#carouselExampleControls" role="button" data-slide="next">
+                <span  aria-hidden="true"></span>
+                <button class="btn btn-light">Próximo</button>
+                </a>
+            </div>
+        </div>  
+    </div>
+
+    <div class="carousel-item">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="mt-4">Dados de localização: </h4>
+                <div class="row mt-4">
+                    <div class="col">   
+                        <label for="naturalidade">Naturalidade:</label>
+                        <input type="text" class="form-control" name="naturalidade"value="{{clientes.naturalidade}}">
+                    </div>
+                    <div class="col">
+                        <label for="nacionalidade">Nacionalidade: </label>
+                        <input type="text" class="form-control" name="nacionalidade" value="{{clientes.nacionalidade}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">   
+                        <label for="endereco">Endereço: </label>
+                        <input type="text" class="form-control" required name="endereco" placeholder="Ex: Av. Brasil, N 20" value="{{clientes.endereco}}">
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">   
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" class="form-control"  name="cidade" required value="{{clientes.cidade}}">
+                        </div>
+                        <div class="col">
+                            <label for="selectEstado">Estado</label>
+                            <select name="selectEstado" class="form-control" value="{{clientes.selectEstado}}">
+                                <option selected>Estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="cep">CEP:</label>
+                            <input type="text" class="form-control"  name="cep" required value="{{clientes.cep}}">
+                        </div>
+                    </div> 
+                    <div class="botoes-prev-next mt-4" style="text-align: center;">
+                        <a  href="#carouselExampleControls" role="button" data-slide="prev" >
+                        <span aria-hidden="true"></span>
+                        <button class="btn btn-light">Anterior</button>
+                        </a>
+                        <a  href="#carouselExampleControls" role="button" data-slide="next">
+                        <span  aria-hidden="true"></span>
+                        <button class="btn btn-light">Próximo</button>
+                        </a>
+                    </div>   
+                </div>
+            </div>  
+        </div>
+
+
+    <div class="carousel-item">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="mt-4">Documentação: </h4>
+                    <div class="row mt-4">
+                        <div class="col">   
+                            <label for="rg">RG:</label>
+                            <input type="text" class="form-control" required name="rg">
+                        </div>
+                    <div class="col">
+                        <label for="cpf">CPF: </label>
+                        <input type="text" class="form-control" required name="cpf">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">   
+                        <label for="cnh">CNH: </label>
+                        <input type="text" class="form-control" name="cnh" value="{{clientes.cnh}}" >
+                    </div>
+                <div class="col">   
+                    <label for="ctps">CTPS:</label>
+                    <input type="text" class="form-control"  name="ctps" required value="{{clientes.ctps}}">
+                </div>  
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <label for="processo">Processo:</label>
+                            <input name="processo" class="form-control" type="text" value="{{clientes.processo}}">
+                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label for="processo2">Processo:</label>
+                            <input name="processo2" class="form-control" type="text" value="{{clientes.processo2}}">
+                           
+                        </div>
+                    </div>  
+                    <div class="col">
+                        <div >
+                            <label for="processo3">Processo:</label>
+                            <input name="processo3" class="form-control" type="text" value="{{clientes.processo3}}">
+                            
+                        </div>
+                    </div> 
+                    <div class="col">
+                        <div >
+                            <label for="processo4">Processo:</label>
+                            <input name="processo4" class="form-control" type="text" value="{{clientes.processo4}}">
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            <div class="botoes-prev-next mt-4" style="text-align: center;">
+                <a  href="#carouselExampleControls" role="button" data-slide="prev" >
+                <span aria-hidden="true"></span>
+                <button class="btn btn-light">Anterior</button>
+                </a>
+                <a  href="#carouselExampleControls" role="button" data-slide="next">
+                <span  aria-hidden="true"></span>
+                <button class="btn btn-light">Próximo</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+        <button type="submit" class="btn btn-dark mt-3">Salvar</button>
+        </form>
+        
+    </div>
+
+</div>
+</div>
+
+               
