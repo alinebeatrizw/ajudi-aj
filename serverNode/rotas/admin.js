@@ -108,7 +108,7 @@ router.post("/processos/deletar",(req,res)=>{
 
 //edita o processo
 router.post("/processos/editar",(req, res)=>{
-  Cliente.findOne({_id: req.body.id}).then((clientes)=>{
+  Processo.findOne({_id: req.body.id}).then((processos)=>{
       processos.numeroProcesso= req.body.numeroProcesso,
       processos.comarca=req.body.comarca,
       processos.vara=req.body.vara,
@@ -116,7 +116,7 @@ router.post("/processos/editar",(req, res)=>{
       processos.valorCausa=req.body.valorCausa,
       processos.honorarios=req.body.honorarios,
       processos.descricao=req.body.descricao,
-      processos.cliente=req.body.cliente,
+      //processos.cliente=req.body.cliente,
 
 
       processos.save().then(()=>{

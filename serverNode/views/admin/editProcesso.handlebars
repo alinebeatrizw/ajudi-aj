@@ -11,7 +11,7 @@
 
 
         <form action="/admin/processos/editar" method="POST">
-                <input type="hidden" name="id" value="{{clientes._id}}">
+                <input type="hidden" name="id" value="{{processos._id}}">
             <div class="row mt-4">
                 <div class="col">   
                     <label for="numeroProcesso">Número do processo:</label>
@@ -48,7 +48,7 @@
                     <textarea name="descricao" class="form-control" >{{processos.descricao}}</textarea>   
                 </div>
             </div>
-            <div class="row mt-4">
+            <!--<div class="row mt-4">
                 <div class="col"> 
                     <label for="cliente">Cliente:</label>
                     <select name="cliente" class="form-control">
@@ -59,7 +59,7 @@
                         {{/each}}
                     </select>
                 </div>
-            </div>
+            </div>-->
             <button class="btn btn-dark mt-3" type="submit">Salvar</button>
         </form>
 
