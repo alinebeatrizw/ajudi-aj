@@ -18,24 +18,25 @@
         Data de propositura : {{dataPropositura}}<br>
         Valor da causa: {{valorCausa}}<br>
         Honorários: {{honorarios}}<br>
-        Cliente: {{cliente.nome}}<br>
-    </p>
-  </div>
-    <div class="card-body">
-    <h5 class="card-title mt-4"></h5>
-    <p class="card-text">
-        Descrição : {{descricao}}<br>
+        Cliente: {{cliente}}<br>
     </p>
   </div>
 </div>
-
-
+<div class="card border-light mt-4" >
+  <div class="card-header">Descrição</div>
+  <div class="card-body">
+    
+    <p class="card-text">
+        {{descricao}}
+    </p>
+  </div>
+</div>
 </div>
     <div class="botoes-edit-delete" style="display: flex;">
         <a href="/admin/clientes/editar/{{_id}}">
         <button class="btn btn-light mt-4">Editar</button>
         </a>
-        <form action="/admin/clientes/deletar" method="POST">
+        <form action="/admin/processos/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
             <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
         </form>

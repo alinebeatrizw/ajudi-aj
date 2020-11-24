@@ -95,7 +95,16 @@ router.post("/processos/novo", (req,res)=>{
       })
   
 })
-
+//apaga processo
+router.post("/processos/deletar",(req,res)=>{
+  Processo.remove({_id:req.body.id}).then(()=>{
+      req.flash("success_msg", "Processo apagado com sucesso")
+      res.redirect("/admin/processos")
+  }).catch((err)=>{
+      req.flash("error_msg", "Ocorreu um erro ao apagar")
+      res.redirect("/admin/processos")
+  })
+})
 
 
 

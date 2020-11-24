@@ -16,7 +16,7 @@ const Processo = new Schema({
         require:true
     },
     dataPropositura:{
-        type:String,
+        type:Date,
         require:true
     },
     cliente:{

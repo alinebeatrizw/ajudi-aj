@@ -4,40 +4,62 @@
 {{/each}}
 
 
-<div class="card">
-    <div class="card-body">
-        <h3>Novo Processo</h3>
+
+
+ <h3>Novo Processo</h3>
+
+
+
         <form action="/admin/processos/novo" method="POST">
-            <label for="numeroProcesso">Número do processo:</label>
-                <input type="text" name="numeroProcesso" class="form-control">
-
-            <label for="comarca">Comarca:</label>
-                <input type="text" name="comarca" class="form-control">
-
-            <label for="vara">Vara:</label>
-                <input type="text" name="vara" class="form-control">
-
-            <label for="dataPropositura">Data de propositura:</label>
-                <textarea name="dataPropositura" class="form-control"></textarea>
-
-            <label for="valorCausa">Valor da causa:</label>
-                <input type="text" name="valorCausa" class="form-control">
-
-            <label for="honorarios">Honorarios:</label>
-                <input type="text" name="honorarios" class="form-control">
-
-            <label for="descricao">Descrição:</label>
-                <textarea name="descricao" class="form-control"></textarea>    
-
-            <label for="cliente">Cliente:</label>
-                <select name="cliente" class="custom-select">
-                    {{#each clientes}}
-                        <option value="{{_id}}">{{nome}}</option>
-                    {{else}}
-                         <option value="0">Nenhum cliente cadastrado</option>
-                    {{/each}}
-                </select>
-            <button class="btn btn-success mt-4" type="submit">Salvar</button>
+            <div class="row mt-4">
+                <div class="col">   
+                    <label for="numeroProcesso">Número do processo:</label>
+                    <input type="text" name="numeroProcesso" class="form-control ">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">   
+                    <label for="comarca">Comarca:</label>
+                    <input type="text" name="comarca" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="vara">Vara:</label>
+                    <input type="text" name="vara" class="form-control">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col"> 
+                    <label for="dataPropositura">Data de propositura:</label>
+                    <input type="date" name="dataPropositura" class="form-control">
+                </div>
+                <div class="col"> 
+                    <label for="valorCausa">Valor da causa:</label>
+                    <input type="text" name="valorCausa" class="form-control">
+                </div>
+                <div class="col"> 
+                    <label for="honorarios">Honorarios:</label>
+                    <input type="text" name="honorarios" class="form-control">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col"> 
+                   <label for="descricao">Descrição:</label>
+                    <textarea name="descricao" class="form-control" ></textarea>   
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col"> 
+                    <label for="cliente">Cliente:</label>
+                    <select name="cliente" class="form-control">
+                        {{#each clientes}}
+                            <option value="{{_id}}">{{nome}} {{sobrenome}}</option>
+                        {{else}}
+                            <option value="0">Nenhum cliente cadastrado</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-dark mt-3" type="submit">Salvar</button>
         </form>
-    </div>
-</div>
+
+

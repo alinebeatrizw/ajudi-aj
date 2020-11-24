@@ -11,14 +11,12 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="card mt-4">
-            <div class="card-body">
-                <form action="/admin/clientes/novo" method="POST">
+    <form action="/admin/clientes/novo" method="POST">
                     <h4 class="mt-4">Dados Pessoais: </h4>
                     <div class="row mt-4">
                         <div class="col">   
                             <label for="nome">Nome:</label>
-                            <input type="text" class="form-control" required name="nome" id="nome">
+                            <input type="text" class="form-control " required name="nome" id="nome">
                         </div>
                         <div class="col">
                             <label for="sobrenome">Sobrenome: </label>
@@ -59,19 +57,20 @@
                             </select>
                         </div>
                     </div>
-            </div>
+            
+
             <div class="botoes-prev-next mt-4" style="text-align: center;">
                 <a  href="#carouselExampleControls" role="button" data-slide="next">
                 <span  aria-hidden="true"></span>
                 <button class="btn btn-light">Próximo</button>
                 </a>
             </div>
-        </div>  
+         
     </div>
 
     <div class="carousel-item">
-        <div class="card mt-4">
-            <div class="card-body">
+       
+          
                 <h4 class="mt-4">Dados de localização: </h4>
                 <div class="row mt-4">
                     <div class="col">   
@@ -142,12 +141,11 @@
                         <button class="btn btn-light">Próximo</button>
                         </a>
                     </div>   
-                </div>
-            </div>  
+             
+       
         </div>
     <div class="carousel-item">
-        <div class="card mt-4">
-            <div class="card-body">
+       
                 <h4 class="mt-4">Documentação: </h4>
                     <div class="row mt-4">
                         <div class="col">   
@@ -169,36 +167,7 @@
                     <input type="text" class="form-control"  name="ctps" required>
                 </div>  
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div>
-                            <label for="processo">Processo:</label>
-                            <input name="processo" class="form-control" type="text"/>
-                            <button onclick= addMais() id="botao1" class="btn btn-light">+</button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div style="visibility: hidden;" id="div1">
-                            <label for="processo2">Processo:</label>
-                            <input name="processo2" class="form-control" type="text"/>
-                            <button onclick= addMais1() id="botao2" class="btn btn-light">+</button>
-                        </div>
-                    </div>  
-                    <div class="col">
-                        <div style="visibility: hidden;" id="div2">
-                            <label for="processo3">Processo:</label>
-                            <input name="processo3" class="form-control" type="text"/>
-                            <button onclick= addMais2() id="botao3" class="btn btn-light">+</button>
-                        </div>
-                    </div> 
-                    <div class="col">
-                        <div style="visibility: hidden;" id="div3">
-                            <label for="processo4">Processo:</label>
-                            <input name="processo4" class="form-control" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                </div>
+              
 
             <div class="botoes-prev-next mt-4" style="text-align: center;">
                 <a  href="#carouselExampleControls" role="button" data-slide="prev" >
@@ -211,7 +180,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    
     </div>
         <button type="submit" class="btn btn-dark mt-3">Salvar</button>
         </form>
@@ -220,18 +189,4 @@
 
 </div>
 </div>
-                <script>
-                    function addMais(){
-                        document.getElementById("div1").style.visibility = "visible";
-                        document.getElementById("botao1").style.visibility = "hidden";
-                    }
-                     function addMais1(){
-                        document.getElementById("div2").style.visibility = "visible";
-                        document.getElementById("botao2").style.visibility = "hidden";
-                    }
-                    function addMais2(){
-                        document.getElementById("div3").style.visibility = "visible";
-                        document.getElementById("botao3").style.visibility = "hidden";
-                    }
-                </script>
-
+              
