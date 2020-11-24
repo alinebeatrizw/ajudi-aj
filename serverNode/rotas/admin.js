@@ -106,7 +106,38 @@ router.post("/processos/deletar",(req,res)=>{
   })
 })
 
+//edita o processo
+router.post("/processos/editar",(req, res)=>{
+  Cliente.findOne({_id: req.body.id}).then((clientes)=>{
+      processos.numeroProcesso= req.body.numeroProcesso,
+      processos.comarca=req.body.comarca,
+      processos.vara=req.body.vara,
+      processos.dataPropositura=req.body.dataPropositura,
+      processos.valorCausa=req.body.valorCausa,
+      processos.honorarios=req.body.honorarios,
+      processos.descricao=req.body.descricao,
+      processos.cliente=req.body.cliente,
 
+
+      processos.save().then(()=>{
+          req.flash("success_msg", "Processo editado com sucesso")
+          res.redirect("/admin/processos")
+          }).catch((err)=>{
+              req.flash("error_msg", "Ocorreu um erro interno ao salvar a edição")
+              res.redirect("/admin/processos")
+          })
+      }).catch((err)=>{
+          req.flash("error_msg", "Ocorreu um erro ao editar o processo")
+          res.redirect("/admin/processos")
+      })
+}) 
+  
+//rota para a pagina do formulario de edição
+router.get("/processos/editar/:id",(req,res)=>{
+  Processo.findOne({_id:req.params.id}).lean().then((processos)=>{
+      res.render("admin/editProcesso", {processos:processos})
+  })
+})
 
 //mostra os clientes
 router.get("/clientes",(req,res)=>{

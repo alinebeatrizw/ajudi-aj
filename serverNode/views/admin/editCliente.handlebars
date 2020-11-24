@@ -13,8 +13,8 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="card mt-4">
-            <div class="card-body">
+      
+            
                 <form action="/admin/clientes/editar" method="POST">
                 <input type="hidden" name="id" value="{{clientes._id}}">
                     <h4 class="mt-4">Dados Pessoais: </h4>
@@ -62,7 +62,7 @@
                             </select>
                         </div>
                     </div>
-            </div>
+            
 
             <div class="botoes-prev-next mt-4" style="text-align: center;">
                 <a  href="#carouselExampleControls" role="button" data-slide="next">
@@ -70,12 +70,11 @@
                 <button class="btn btn-light">Próximo</button>
                 </a>
             </div>
-        </div>  
+        
     </div>
 
     <div class="carousel-item">
-        <div class="card mt-4">
-            <div class="card-body">
+        
                 <h4 class="mt-4">Dados de localização: </h4>
                 <div class="row mt-4">
                     <div class="col">   
@@ -146,23 +145,23 @@
                         <button class="btn btn-light">Próximo</button>
                         </a>
                     </div>   
-                </div>
-            </div>  
+               
+           
         </div>
 
 
     <div class="carousel-item">
-        <div class="card mt-4">
-            <div class="card-body">
+        
+            
                 <h4 class="mt-4">Documentação: </h4>
                     <div class="row mt-4">
                         <div class="col">   
                             <label for="rg">RG:</label>
-                            <input type="text" class="form-control" required name="rg">
+                            <input type="text" class="form-control" required name="rg"  value="{{clientes.rg}}"> 
                         </div>
                     <div class="col">
                         <label for="cpf">CPF: </label>
-                        <input type="text" class="form-control" required name="cpf">
+                        <input type="text" class="form-control" required name="cpf"  value="{{clientes.cpf}}">
                     </div>
                 </div>
                 <div class="row">
@@ -175,7 +174,7 @@
                     <input type="text" class="form-control"  name="ctps" required value="{{clientes.ctps}}">
                 </div>  
                 </div>
-                </div>
+                
 
             <div class="botoes-prev-next mt-4" style="text-align: center;">
                 <a  href="#carouselExampleControls" role="button" data-slide="prev" >
@@ -187,7 +186,7 @@
                 <button class="btn btn-light">Próximo</button>
                 </a>
             </div>
-        </div>
+      
     </div>
     </div>
         <button type="submit" class="btn btn-dark mt-3">Salvar</button>
