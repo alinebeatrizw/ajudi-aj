@@ -64,7 +64,6 @@ router.get("/processos",(req,res)=>{
 })
 
 
-
 router.get("/processos/add", (req,res)=>{
   Cliente.find().lean().then((clientes)=>{
       res.render("admin/addProcessos",{clientes:clientes})
@@ -322,7 +321,9 @@ router.get("/documentos2", (req,res)=>{
   
 })
   
- 
+ router.get("/agenda", (req,res)=>{
+   res.render("admin/calendario")
+ })
 
 
 //exportando as rotas
