@@ -87,20 +87,12 @@ const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis
         console.log("erro ao se conectar " +err)
     })
 
-    //Initializing socket
-//var io = require('socket.io').listen(server);
 
     //public 
     app.use(express.static(path.join(__dirname, "public"))) //dizendo ao express que a pasta que guarda os arquivos estaticos é a public
 
     //rotas
-app.get("/", (req,res)=>{
-  fs.readFile('fullcalendar.html', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    res.end();
-  });
-})
+
 app.use("/admin", admin)//usando a rota admin
 //outros
 const PORT = 8081
