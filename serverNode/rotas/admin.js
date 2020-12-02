@@ -319,7 +319,7 @@ router.get("/google/callback", function (req, res) {
 
   
 router.get("/agenda", (req,res)=>{
-  res.redirect("./agenda/fullcalendar.html")
+  res.render("admin/agenda")
   
 })
 
