@@ -316,14 +316,12 @@ router.get("/google/callback", function (req, res) {
     }
   });
   
-router.get("/documentos2", (req,res)=>{
-  res.sendFile(__dirname + "/src/google-drive.html")
+
+  
+router.get("/agenda", (req,res)=>{
+  res.redirect("./agenda/fullcalendar.html")
   
 })
-  
- router.get("/agenda", (req,res)=>{
-   res.render("admin/calendario")
- })
 
 
 //exportando as rotas
