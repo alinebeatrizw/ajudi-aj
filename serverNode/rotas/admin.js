@@ -318,7 +318,7 @@ router.get("/google/callback", function (req, res) {
     }
   });
   
-
+//gambiarra para ir para pagina do calendario
 router.get("/agenda", (req,res)=>{
   fs.readFile('./fullcalendar.html', function(err, data) {
     res.writeHead(200, {'Content-Type': 'text/html'});
