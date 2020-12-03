@@ -14,8 +14,7 @@ const fs = require("fs");
 const CLIENT_ID = OAuth2Data.installed.client_id;
 const CLIENT_SECRET = OAuth2Data.installed.client_secret;
 const REDIRECT_URL = OAuth2Data.installed.redirect_uris[0];
-var EventModel = require('../models/event');
-//const { link } = require("fs/promises")
+
 
 
 var NOME_PASTA = "";
@@ -318,14 +317,8 @@ router.get("/google/callback", function (req, res) {
     }
   });
   
-//gambiarra para ir para pagina do calendario
-router.get("/agenda", (req,res)=>{
-  fs.readFile('./fullcalendar.html', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    res.end();
-  });
-})
+
+
 
 
 
