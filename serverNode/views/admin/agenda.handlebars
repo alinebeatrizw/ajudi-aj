@@ -1,61 +1,47 @@
-<!DOCTYPE html>
-<html>
 
-<head>
     <style>
-        
-        ul {
-            list-style-type: none;
-        }
-
-        
-
-        .wrapper {
-           
+        .calendario-todo {
             display: flex;
         }
 
-        .calendar {
+        .calendario {
             margin: auto;
             width: 600px;
             background-color: #fff;
             box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.2);
-       
         }
 
-        .month {
+        .mes{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
             padding: 40px 30px;
             text-align: center;
-            
             background-color: #dfe6e9;
             color: #fff;
         }
 
-        .weekdays {
+        .dias-semana {
             background-color: #b3b2b2;
             color: #fff;
             padding: 7px 0;
             display: flex;
         }
 
-        .days {
+        .dias {
             font-weight: 300;
             padding: 10px 0;
             display: flex;
             flex-wrap: wrap;
         }
 
-        .weekdays div,
-        .days div {
+        .dias-semana div,
+        .dias div {
             text-align: center;
             width: 14.28%;
         }
 
-        .days div {
+        .dias div {
             padding: 10px 0;
             margin-bottom: 10px;
             transition: all 0.4s;
@@ -65,12 +51,12 @@
             color: #999;
         }
 
-        .today {
+        .hoje {
             background-color: #b3b2b2;
             color: #fff;
         }
 
-        .days div:hover {
+        .dias div:hover {
             cursor: pointer;
             background-color: #dfe6e9
         }
@@ -94,7 +80,7 @@
             background-color: rgba(0, 0, 0, 0.2);
         }
 
-        #month {
+        #mes {
             font-size: 30px;
             font-weight: 500;
         }
@@ -102,14 +88,14 @@
 </head>
 
 <body onload="renderDate()">
-    <div class="wrapper">
-        <div class="calendar">
-            <div class="month">
+    <div class="calendario-todo">
+        <div class="calendario">
+            <div class="mes">
                 <div class="prev" onclick="moveDate('prev')">
                     <span>&#10094;</span>
                 </div>
                 <div>
-                    <h2 id="month"></h2>
+                    <h2 id="mes"></h2>
                     <p id="date_str"></p>
                     <p id="year"></p>
                 </div>
@@ -117,7 +103,7 @@
                     <span>&#10095;</span>
                 </div>
             </div>
-            <div class="weekdays">
+            <div class="dias-semana">
                 <div>Domingo</div>
                 <div>Segunda</div>
                 <div>Terça</div>
@@ -126,7 +112,7 @@
                 <div>Sexta</div>
                 <div>Sábado</div>
             </div>
-            <div class="days">
+            <div class="dias">
 
             </div>
         </div>
@@ -136,7 +122,7 @@
         function renderDate() {
             dt.setDate(1);
             var day = dt.getDay();
-            var today = new Date();
+            var hoje = new Date();
             var endDate = new Date(
                 dt.getFullYear(),
                 dt.getMonth() + 1,
@@ -148,7 +134,7 @@
                 dt.getMonth(),
                 0
             ).getDate();
-            var months = [
+            var meses = [
                 "Janeiro",
                 "Fevereiro",
                 "Março",
@@ -162,9 +148,9 @@
                 "Novembro",
                 "Dezembro"
             ]
-            document.getElementById("month").innerHTML = months[dt.getMonth()];
+            document.getElementById("mes").innerHTML = meses[dt.getMonth()];
             document.getElementById("date_str").innerHTML = dt.getFullYear();
-            //document.getElementById("year").innerHTML = year[dt.getFullYear()];
+            
 
 
             var cells = "";
@@ -173,11 +159,11 @@
             }
             console.log(day);
             for (i = 1; i <= endDate; i++) {
-                if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
+                if (i == hoje.getDate() && dt.getMonth() == hoje.getMonth()) cells += "<div class='hoje'>" + i + "</div>";
                 else
                     cells += "<div>" + i + "</div>";
             }
-            document.getElementsByClassName("days")[0].innerHTML = cells;
+            document.getElementsByClassName("dias")[0].innerHTML = cells;
 
         }
 
@@ -190,6 +176,3 @@
             renderDate();
         }
     </script>
-</body>
-
-</html>
