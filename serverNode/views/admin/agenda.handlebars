@@ -111,6 +111,7 @@
                 <div>
                     <h2 id="month"></h2>
                     <p id="date_str"></p>
+                    <p id="year"></p>
                 </div>
                 <div class="next" onclick="moveDate('next')">
                     <span>&#10095;</span>
@@ -162,7 +163,10 @@
                 "Dezembro"
             ]
             document.getElementById("month").innerHTML = months[dt.getMonth()];
-            document.getElementById("date_str").innerHTML = dt.toDateString();
+            document.getElementById("date_str").innerHTML = dt.getFullYear();
+            //document.getElementById("year").innerHTML = year[dt.getFullYear()];
+
+
             var cells = "";
             for (x = day; x > 0; x--) {
                 cells += "<div class='prev_date'>" + (prevDate - x + 1) + "</div>";
