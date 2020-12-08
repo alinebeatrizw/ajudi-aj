@@ -318,7 +318,9 @@ router.get("/google/callback", function (req, res) {
   });
   
 
-
+router.get("/agenda", (req,res)=>{
+  res.render("admin/agenda")
+})
 
 
 
