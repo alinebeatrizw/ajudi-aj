@@ -11,6 +11,8 @@ var name,pic
 const { google } = require("googleapis");
 var async = require("async");
 const fs = require("fs");
+
+/*
 const CLIENT_ID = OAuth2Data.installed.client_id;
 const CLIENT_SECRET = OAuth2Data.installed.client_secret;
 const REDIRECT_URL = OAuth2Data.installed.redirect_uris[0];
@@ -37,6 +39,7 @@ const oAuth2Client = new google.auth.OAuth2(
 var authed = false;
 
 const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile";
+*/
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
       callback(null, "./images");

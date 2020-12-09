@@ -23,7 +23,7 @@ const { google } = require("googleapis");
 var async = require("async");
 
 
-const CLIENT_ID = OAuth2Data.installed.client_id;
+/*const CLIENT_ID = OAuth2Data.installed.client_id;
 const CLIENT_SECRET = OAuth2Data.installed.client_secret;
 const REDIRECT_URL = OAuth2Data.installed.redirect_uris[0];
 
@@ -35,6 +35,10 @@ const oAuth2Client = new google.auth.OAuth2(
 var authed = false;
 
 const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile";
+
+*/
+
+
 //configurações
     //sessao
     app.use(session({
@@ -42,9 +46,14 @@ const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis
         resave:true,
         saveUninitialized:true
     }))
+    
     //passport
     app.use(passport.initialize())
     app.use(passport.session())
+
+
+
+    
     //flash
     app.use(flash())
     //middlewares 
