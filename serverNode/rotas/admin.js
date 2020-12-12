@@ -60,7 +60,7 @@ router.get("/", (req,res)=>{
 //mostra os processos
 router.get("/processos",(req,res)=>{
   Processo.find().lean().sort({data:"desc"}).then((processos)=>{
-      res.render("admin/processos", {processos:processos})
+      res.render("processo/processos", {processos:processos})
   }).catch((err)=>{
       req.flash("error_msg","Erro ao listar os processos")
       res.redirect("/admin")
@@ -70,7 +70,7 @@ router.get("/processos",(req,res)=>{
 
 router.get("/processos/add", (req,res)=>{
   Cliente.find().lean().then((clientes)=>{
-      res.render("admin/addProcessos",{clientes:clientes})
+      res.render("processo/addProcessos",{clientes:clientes})
   }).catch((err)=>{
       req.flash("error_msg", "Ocorreu um erro")
       res.redirect("/admin/processos")
@@ -145,7 +145,7 @@ router.get("/processos/editar/:id",(req,res)=>{
 //mostra os clientes
 router.get("/clientes",(req,res)=>{
     Cliente.find().lean().sort({data:"desc"}).then((clientes)=>{
-        res.render("admin/clientes", {clientes:clientes})
+        res.render("cliente/clientes", {clientes:clientes})
     }).catch((err)=>{
         req.flash("error_msg","Erro ao listar os clientes")
         res.redirect("/admin")
@@ -154,7 +154,7 @@ router.get("/clientes",(req,res)=>{
 
 //rota que da no formulario de cadastro de cliente
 router.get("/clientes/add", (req,res)=>{
-    res.render("admin/addClientes")
+    res.render("cliente/addClientes")
 })
 
 //cadastra no banco
@@ -185,10 +185,10 @@ router.get("/clientes/add", (req,res)=>{
         }
         new Cliente(novoCliente).save().then(()=>{
             req.flash("success_msg", "Cliente salvo com sucesso")
-            res.redirect("/admin/clientes")
+            res.redirect("/cliente/clientes")
         }).catch((err)=>{
             req.flash("error_msg", "Erro ao salvar cliente")
-            res.redirect("/admin/clientes")
+            res.redirect("/cliente/clientes")
         })
     })
 
@@ -232,21 +232,21 @@ router.post("/clientes/editar",(req, res)=>{
 
         clientes.save().then(()=>{
             req.flash("success_msg", "Cliente editado com sucesso")
-            res.redirect("/admin/clientes")
+            res.redirect("/cliente/clientes")
             }).catch((err)=>{
                 req.flash("error_msg", "Ocorreu um erro interno ao salvar a edição do cliente")
-                res.redirect("/admin/clientes")
+                res.redirect("/cliente/clientes")
             })
         }).catch((err)=>{
             req.flash("error_msg", "Ocorreu um erro ao editar o cliente")
-            res.redirect("/admin/clientes")
+            res.redirect("/cliente/clientes")
         })
 }) 
     
 //rota para a pagina do formulario de edição
 router.get("/clientes/editar/:id",(req,res)=>{
     Cliente.findOne({_id:req.params.id}).lean().then((clientes)=>{
-        res.render("admin/editCliente", {clientes:clientes})
+        res.render("cliente/editCliente", {clientes:clientes})
     })
 })
 
@@ -322,7 +322,7 @@ router.get("/google/callback", function (req, res) {
   
 
 router.get("/agenda", (req,res)=>{
-  res.render("admin/agenda")
+  res.render("agenda/agenda")
 })
 
 
