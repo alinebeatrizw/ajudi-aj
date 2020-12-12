@@ -12,6 +12,7 @@ const handlebars = require("express-handlebars")
 const bodyParser = require ("body-parser")
 
 const app = express()
+const cliente = require ("./rotas/cliente")
 const admin = require("./rotas/admin")//chamando a rota de admin
 const path = require("path")
 
@@ -102,6 +103,7 @@ const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis
 
     //rotas
 
+app.use("/cliente", cliente)
 app.use("/admin", admin)//usando a rota admin
 //outros
 const PORT = 8081

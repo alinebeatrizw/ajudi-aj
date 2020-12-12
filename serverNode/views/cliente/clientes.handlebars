@@ -2,7 +2,7 @@
 
 <h2>Lista de clientes cadastrados</h2>
 
-<a href="/admin/clientes/add" class="btn btn-light">Cadastrar novo cliente</a>
+<a href="/cliente/add" class="btn btn-light">Cadastrar novo cliente</a>
 
 {{#each clientes}}
 <div class="card-group">
@@ -48,10 +48,10 @@
 </div>
 </div>
     <div class="botoes-edit-delete" style="display: flex;">
-        <a href="/admin/clientes/editar/{{_id}}">
+        <a href="/cliente/editar/{{_id}}">
         <button class="btn btn-light mt-4">Editar</button>
         </a>
-        <form action="/admin/clientes/deletar" method="POST">
+        <form action="/cliente/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
             <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
         </form>
