@@ -12,6 +12,7 @@ const handlebars = require("express-handlebars")
 const bodyParser = require ("body-parser")
 
 const app = express()
+const processo = require("./rotas/processo")
 const cliente = require ("./rotas/cliente")
 const admin = require("./rotas/admin")//chamando a rota de admin
 const path = require("path")
@@ -102,7 +103,7 @@ const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis
     app.use(express.static(path.join(__dirname, "public"))) //dizendo ao express que a pasta que guarda os arquivos estaticos é a public
 
     //rotas
-
+app.use("/processo", processo)
 app.use("/cliente", cliente)
 app.use("/admin", admin)//usando a rota admin
 //outros

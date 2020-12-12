@@ -2,7 +2,7 @@
 
 <h2>Lista de processos cadastrados</h2>
 
-<a href="/admin/processos/add" class="btn btn-light">Cadastrar novo processo</a>
+<a href="/processo/add" class="btn btn-light">Cadastrar novo processo</a>
 
 {{#each processos}}
 <div class="card-group">
@@ -33,10 +33,10 @@
 </div>
 </div>
     <div class="botoes-edit-delete" style="display: flex;">
-        <a href="/admin/processos/editar/{{_id}}">
+        <a href="/processo/editar/{{_id}}">
         <button class="btn btn-light mt-4">Editar</button>
         </a>
-        <form action="/admin/processos/deletar" method="POST">
+        <form action="/processo/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
             <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
         </form>

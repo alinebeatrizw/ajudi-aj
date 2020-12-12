@@ -103,14 +103,14 @@ router.post("/editar",(req, res)=>{
 
         clientes.save().then(()=>{
             req.flash("success_msg", "Cliente editado com sucesso")
-            res.redirect("/cliente/clientes")
+            res.redirect("/cliente")
             }).catch((err)=>{
                 req.flash("error_msg", "Ocorreu um erro interno ao salvar a edição do cliente")
-                res.redirect("/cliente/clientes")
+                res.redirect("/cliente")
             })
         }).catch((err)=>{
             req.flash("error_msg", "Ocorreu um erro ao editar o cliente")
-            res.redirect("/cliente/clientes")
+            res.redirect("/cliente")
         })
 }) 
     
