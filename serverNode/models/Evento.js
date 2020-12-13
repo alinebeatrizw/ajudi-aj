@@ -8,19 +8,15 @@ const Evento = new Schema({
         required:true
     },
     dataInicio:{
-        type:Date,
-        require:true
-    },
-    dataFim:{
-        type:Date,
-        require:true
-    },
-    descricaoEvento:{
         type:String,
         require:true
     },
-    cor:{
-        type: String,
+    dataFim:{
+        type:String,
+        require:true
+    },
+    horaEvento:{
+        type:String,
         require:true
     }
     

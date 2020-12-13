@@ -33,9 +33,7 @@ router.post("/novo-evento", (req,res)=>{
   const novoEvento = {
       nomeEvento: req.body.nomeEvento,
       dataInicio:req.body.dataInicio,
-      dataFim:req.body.dataFim,
-      descricaoEvento:req.body.descricaoEvento,
-      cor:req.body.cor
+      horaEvento:req.body.horaEvento
   }
   new Evento(novoEvento).save().then(()=>{
       req.flash("success_msg", "Evento salvo com sucesso")

@@ -97,10 +97,14 @@
   
 
  {{#each eventos}}
-     <div id="draggable" class="draggable card bg-light mb-3">  
+     <div id="draggable" class="draggable card bg-light mb-3"> 
+        <form action="/agenda/deletar" method="POST">
+            <input type="hidden" name="id" value="{{_id}}">
+            <button type="submit" class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        </form>
         <div class="card-header">{{nomeEvento}}</div>   
         <div class="card-body">
-            Data de Início: {{dataInicio}}
+            Data de Início: {{dataInicio}}<br>
             Data de Término: {{dataFim}}
         </div>         
     </div> 
@@ -163,21 +167,13 @@
                     </div>
                     <div class="col-sm-10 mt-3">
                         <label for="dataInicio" class=" col-form-label col-form-label-sm">Data de Início:</label>
-                        <input type="date" class="form-control form-control-sm" id="dataInicio" name="dataInicio">
+                        <input type="text" class="form-control form-control-sm datepicker" id="dataInicio " name="dataInicio" >
                     </div>
                     <div class="col-sm-10 mt-3">
-                        <label for="dataFim" class=" col-form-label col-form-label-sm">Data de Término:</label>
-                        <input type="date" class="form-control form-control-sm" id="dataFim" name="dataFim">
+                        <label for="horaEvento" class=" col-form-label col-form-label-sm">Horário:</label>
+                        <input type="text" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker">
                     </div>
-                    <div class="col-sm-10">
-                        <label for="descricaoEvento" class=" col-form-label col-form-label-sm">Descrição do Evento:</label>
-                        <textarea class="form-control form-control-sm" id="descricaoEvento" name="descricaoEvento" >
-                        </textarea>
-                    </div>
-                    <div class="col-sm-10">
-                        <label for="cor" class=" col-form-label col-form-label-sm">Cor:</label>
-                        <input type="color" class="form-control form-control-sm" id="cor" name="cor">
-                    </div>
+                   
             </div>
             <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -198,7 +194,15 @@ function formAddEvento() {
   });
   
 }
- 
+ $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
+$( function() {
+    $('.timepicker').timepicker({});
+  } );
+
+
+
 $(function() {  
     $( ".draggable" ).draggable();  
     $(".draggable").resizable();
