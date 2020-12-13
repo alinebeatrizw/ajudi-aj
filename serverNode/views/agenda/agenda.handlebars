@@ -110,9 +110,11 @@
                 <div>Sexta</div>
                 <div>Sábado</div>
             </div>
-            <div class="dias" onclick="formAddEvento()">
             
+            <div class="dias" onclick="formAddEvento()">
+                
             </div>
+          
         </div>
     </div>
 
@@ -211,8 +213,7 @@ function formAddEvento() {
             document.getElementById("mes").innerHTML = meses[data.getMonth()];
             document.getElementById("date_str").innerHTML = data.getFullYear();
             
-
-
+            
             var blocoDia = "";
             for (x = dia; x > 0; x--) {
                 blocoDia += "<div class='prev_date'>" + (prevDate - x + 1) + "</div>";
@@ -224,7 +225,6 @@ function formAddEvento() {
                     blocoDia += "<div>" + i + "</div>";
             }
             document.getElementsByClassName("dias")[0].innerHTML = blocoDia;
-
         }
 
         function mudarMes(para) {
