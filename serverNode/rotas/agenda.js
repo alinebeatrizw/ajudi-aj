@@ -16,13 +16,19 @@ var async = require("async");
 const fs = require("fs");
 
 
-router.get("/", (req,res)=>{
-    res.render("agenda/agenda")
-  })
+
   
+//mostra os eventos
+router.get("/",(req,res)=>{
+  Evento.find().lean().then((eventos)=>{
+      res.render("agenda/agenda", {eventos:eventos})
+  }).catch((err)=>{
+      req.flash("error_msg","Erro ao listar os clientes")
+      res.redirect("/")
+  })
+})
 
 //cadastra no banco
-//falta conseguir pegar o valor do select do estado
 router.post("/novo-evento", (req,res)=>{
   const novoEvento = {
       nomeEvento: req.body.nomeEvento,
@@ -40,9 +46,18 @@ router.post("/novo-evento", (req,res)=>{
   })
 })
 
+//apaga evento
+router.post("/deletar",(req,res)=>{
+  Evento.remove({_id:req.body.id}).then(()=>{
+      req.flash("success_msg", "Evento apagado com sucesso")
+      res.redirect("/agenda")
+  }).catch((err)=>{
+      req.flash("error_msg", "Ocorreu um erro ao apagar o evento")
+      res.redirect("/agenda")
+  })
+})
 
 
-  
   
   //exportando as rotas
   module.exports = router
