@@ -1,6 +1,6 @@
 
   
-
+<!-- card que mostra os eventos-->
  {{#each eventos}}
      <div  class="draggable resizable card bg-light mb-3" >
        <div class="botoes-postit" style="background-color: #f0f1f2;">
@@ -8,22 +8,19 @@
                 <input type="hidden" name="id" value="{{_id}}">
                 <button type="submit" class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
             </form>  
-            
-            
             <a href="/agenda/editar/{{_id}}">
-<button  type="submit" class='fas fa-edit' style='color: #949495; border: none;'></button>
+                <button  type="submit" class='fas fa-edit' style='color: #949495; border: none;'></button>
             </a>
-
-       </div>
-                      
+       </div>           
         <div class="card-header">{{nomeEvento}}</div>   
         <div class="card-body">
             Data: {{dataInicio}}<br>
             Hora: {{horaEvento}}
         </div>   
     </div> 
-     
  {{/each}}
+
+
 
 <body onload="renderDate()">
     <div class="calendario-todo">
