@@ -11,10 +11,6 @@ const Evento = new Schema({
         type:String,
         require:true
     },
-    dataFim:{
-        type:String,
-        require:true
-    },
     horaEvento:{
         type:String,
         require:true

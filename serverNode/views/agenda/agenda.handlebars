@@ -97,15 +97,15 @@
   
 
  {{#each eventos}}
-     <div id="draggable" class="draggable card bg-light mb-3"> 
+     <div  class="draggable resizable card bg-light mb-3" > 
         <form action="/agenda/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
             <button type="submit" class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
         </form>
         <div class="card-header">{{nomeEvento}}</div>   
         <div class="card-body">
-            Data de Início: {{dataInicio}}<br>
-            Data de Término: {{dataFim}}
+            Data: {{dataInicio}}<br>
+            Hora: {{horaEvento}}
         </div>         
     </div> 
      
@@ -166,12 +166,12 @@
                         <input type="text" class="form-control form-control-sm" id="nomeEvento" name="nomeEvento">
                     </div>
                     <div class="col-sm-10 mt-3">
-                        <label for="dataInicio" class=" col-form-label col-form-label-sm">Data de Início:</label>
-                        <input type="text" class="form-control form-control-sm datepicker" id="dataInicio " name="dataInicio" >
+                        <label for="dataInicio" class=" col-form-label col-form-label-sm">Data:</label>
+                        <input type="text" class="form-control form-control-sm datepicker" id="dataInicio " name="dataInicio" value="00/00/0000" >
                     </div>
                     <div class="col-sm-10 mt-3">
-                        <label for="horaEvento" class=" col-form-label col-form-label-sm">Horário:</label>
-                        <input type="text" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker">
+                        <label for="horaEvento" class=" col-form-label col-form-label-sm">Hora:</label>
+                        <input type="time" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker">
                     </div>
                    
             </div>
@@ -205,7 +205,7 @@ $( function() {
 
 $(function() {  
     $( ".draggable" ).draggable();  
-    $(".draggable").resizable();
+    $("#resizable").resizable();
   });
 
         var data = new Date();
