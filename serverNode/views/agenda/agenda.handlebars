@@ -21,7 +21,7 @@
  {{/each}}
 
 
-
+<!-- calendario -->
 <body onload="renderDate()">
     <div class="calendario-todo">
         <div class="calendario">
@@ -46,17 +46,10 @@
                 <div>Sexta</div>
                 <div>Sábado</div>
             </div>
-            
             <div class="dias" onclick="formAddEvento()">
-                
             </div>
-          
         </div>
     </div>
-
-
-
-
 <div id="myModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -71,7 +64,6 @@
       <div class="modal-body">
         <form action="/agenda/novo-evento" method="POST">
             <div class="form-group row">
-               
                     <div class="col-sm-10">
                         <label for="nomeEvento" class=" col-form-label col-form-label-sm">Nome do Evento:</label>
                         <input type="text" class="form-control form-control-sm" id="nomeEvento" name="nomeEvento">
@@ -83,15 +75,13 @@
                     <div class="col-sm-10 mt-3">
                         <label for="horaEvento" class=" col-form-label col-form-label-sm">Hora:</label>
                         <input type="time" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker">
-                    </div>
-                   
+                    </div> 
             </div>
             <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
         </form>
       </div>
-      
     </div>
   </div>
 </div>
@@ -115,7 +105,6 @@
         <form action="/agenda/editar" method="POST"> 
          <input type="hidden" name="id" value="{{eventos._id}}">
             <div class="form-group row">
-               
                     <div class="col-sm-10">
                         <label for="nomeEvento" class=" col-form-label col-form-label-sm">Nome do Evento:</label>
                         <input type="text" class="form-control form-control-sm" id="nomeEvento" name="nomeEvento" value="{{eventos.nomeEvento}}">
@@ -128,14 +117,12 @@
                         <label for="horaEvento" class=" col-form-label col-form-label-sm">Hora:</label>
                         <input type="time" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker" value="{{horaEvento}}">
                     </div>
-                   
             </div>
             <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Editar</button>
-      </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+            </div>
         </form>
       </div>
-      
     </div>
   </div>
 </div>
