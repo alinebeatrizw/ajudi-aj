@@ -98,31 +98,8 @@
 
   
 
- {{#each eventos}}
-     <div  class="draggable resizable card bg-light mb-3" >
-       <div class="botoes-postit" style="background-color: #f0f1f2;">
-            <form action="/agenda/deletar" method="POST" style="background-color: #f0f1f2;">
-                <input type="hidden" name="id" value="{{_id}}">
-                <button type="submit" class="close" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-            </form>  
-            
-            
-            <a href="/agenda/editar/{{_id}}">
-<button  type="submit" class='fas fa-edit' style='color: #949495; border: none;'></button>
-            </a>
 
-       </div>
-                      
-        <div class="card-header">{{nomeEvento}}</div>   
-        <div class="card-body">
-            Data: {{dataInicio}}<br>
-            Hora: {{horaEvento}}
-        </div>   
-    </div> 
-     
- {{/each}}
-
-<body onload="renderDate()">
+<body onload="modalEditEvento(), renderDate()">
     <div class="calendario-todo">
         <div class="calendario">
             <div class="mes">
@@ -157,44 +134,6 @@
 
 
 
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">
-            Adicionar Evento
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/agenda/novo-evento" method="POST">
-            <div class="form-group row">
-               
-                    <div class="col-sm-10">
-                        <label for="nomeEvento" class=" col-form-label col-form-label-sm">Nome do Evento:</label>
-                        <input type="text" class="form-control form-control-sm" id="nomeEvento" name="nomeEvento">
-                    </div>
-                    <div class="col-sm-10 mt-3">
-                        <label for="dataInicio" class=" col-form-label col-form-label-sm">Data:</label>
-                        <input type="text" class="form-control form-control-sm datepicker" id="dataInicio " name="dataInicio" value="00/00/0000" >
-                    </div>
-                    <div class="col-sm-10 mt-3">
-                        <label for="horaEvento" class=" col-form-label col-form-label-sm">Hora:</label>
-                        <input type="time" class="form-control form-control-sm timepicker" id="timepicker" name="horaEvento" id="datepicker">
-                    </div>
-                   
-            </div>
-            <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
 
 
@@ -207,9 +146,12 @@
         <h5 class="modal-title">
             Editar Evento
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <a href="/agenda">
+             <button type="button" class="close" >
           <span aria-hidden="true">&times;</span>
         </button>
+        </a>
+       
       </div>
       <div class="modal-body">
         <form action="/agenda/editar" method="POST"> 
@@ -247,12 +189,7 @@
 
     <script>
 
-function formAddEvento() {
-  $("#myModal").modal({
-    show: true
-  });
-  
-}
+
 function modalEditEvento() {
   $("#modalEditEvento").modal({
     show: true
@@ -268,10 +205,6 @@ $( function() {
 
 
 
-$(function() {  
-    $( ".draggable" ).draggable();  
-    $("#resizable").resizable();
-  });
 
         var data = new Date();
         function renderDate() {

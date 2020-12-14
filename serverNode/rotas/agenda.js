@@ -55,7 +55,35 @@ router.post("/deletar",(req,res)=>{
   })
 })
 
+//edita o evento
+router.post("/editar",(req, res)=>{
+  Evento.findOne({_id: req.body.id}).then((eventos)=>{
+      eventos.nomeEvento= req.body.nomeEvento,
+      eventos.dataInicio=req.body.dataInicio,
+      eventos.horaEvento=req.body.horaEvento,
+      
 
+
+
+      eventos.save().then(()=>{
+          req.flash("success_msg", "Evento editado com sucesso")
+          res.redirect("/agenda")
+          }).catch((err)=>{
+              req.flash("error_msg", "Ocorreu um erro interno ao salvar a edição do evento")
+              res.redirect("/agenda")
+          })
+      }).catch((err)=>{
+          req.flash("error_msg", "Ocorreu um erro ao editar o evento")
+          res.redirect("/agenda")
+      })
+}) 
+  
+//rota para a pagina do formulario de edição
+router.get("/editar/:id",(req,res)=>{
+  Evento.findOne({_id:req.params.id}).lean().then((eventos)=>{
+      res.render("agenda/editAgenda", {eventos:eventos})
+  })
+})
   
   //exportando as rotas
   module.exports = router
