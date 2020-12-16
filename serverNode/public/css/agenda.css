@@ -62,6 +62,17 @@
     cursor: pointer;
     background-color: #dfe6e9;
 }
+.botao-relatorio:hover{
+    color: #b3b2b2;
+}
+.botao-relatorio{
+    background-color: #dfe6e9; 
+    border:none; 
+    color:#fff;
+    font-weight: 300;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .anterior,
 .proximo {

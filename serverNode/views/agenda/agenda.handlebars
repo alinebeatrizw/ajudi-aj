@@ -1,5 +1,8 @@
 
-  
+
+
+
+
 <!-- card que mostra os eventos-->
  {{#each eventos}}
      <div  class="draggable resizable card bg-light mb-3" >
@@ -25,10 +28,16 @@
 <body onload="renderDate()">
     <div class="calendario-todo">
         <div class="calendario">
+          <form action="/gerarPdf/gerar" method="POST" style="background-color: #dfe6e9;">
+              <button type="submit" class="botao-relatorio">
+                Gerar Relatório de Agendamentos
+              </button>
+            </form>
             <div class="mes">
                 <div class="anterior" onclick="mudarMes('anterior')">
                     <span>&#10094;</span>
                 </div>
+                
                 <div>
                     <h2 id="mes"></h2>
                     <p id="date_str"></p>

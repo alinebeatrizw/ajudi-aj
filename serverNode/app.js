@@ -15,6 +15,7 @@ const app = express()
 const agenda = require("./rotas/agenda")
 const processo = require("./rotas/processo")
 const cliente = require ("./rotas/cliente")
+const gerarPdf = require ("./rotas/gerarPdf")
 const admin = require("./rotas/admin")//chamando a rota de admin
 const path = require("path")
 
@@ -105,6 +106,7 @@ const SCOPES ="https://www.googleapis.com/auth/drive.file https://www.googleapis
 
     //rotas
 app.use("/processo", processo)
+app.use("/gerarPdf", gerarPdf)
 app.use("/cliente", cliente)
 app.use("/admin", admin)//usando a rota admin
 app.use("/agenda", agenda)
