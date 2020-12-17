@@ -22,29 +22,38 @@ const { options } = require('./agenda');
 
 
 router.post("/gerar", (req,res)=>{
-    var preview = req.query.preview;
-    jsreport.render({
-        template: {
-          content: `Teste PDF`,
-          engine: 'handlebars',
-          recipe: 'chrome-pdf'
-        }
-      }).then((out)  => {
-        out.stream.pipe(res);
+   
+    async function beforeRender(req, res) {
+        const conn = await MongoClient.connect('mongodb://localhost/ajudiTcc');
+        Object.assign(req.data, { 
+          eventos: await conn.db('ajudiTcc').collection('eventos').find().toArray()
+        });
+    }
 
-        //para fazer download
-        res.writeHead(200, 
-            {
-                'Content-Type': 'application/pdf',
-                'Content-Disposition':'attachment;filename="filename.pdf"'
-            });
+        jsreport.render({
+            template: {
+              content: `Teste PDF {{#each eventos}} {{nomeEvento}} {{/each}}`,
+              engine: 'handlebars',
+              recipe: 'chrome-pdf'
+            }
+          }).then((out)  => {
+            out.stream.pipe(res);
     
-            const download = Buffer.from(data.toString('utf-8'), 'base64');
-            res.end(download);
+            //para fazer download
+            res.writeHead(200, 
+                {
+                    'Content-Type': 'application/pdf',
+                    'Content-Disposition':'attachment;filename="relatorio-AJUDI.pdf"'
+                });
         
-      }).catch((e) => {
-        res.end(e.message);
-      });
-})
+                const download = Buffer.from(data.toString('utf-8'), 'base64');
+                res.end(download);
+            
+          }).catch((e) => {
+            res.end(e.message);
+          });
+    })
+
+
 
 module.exports = router;
