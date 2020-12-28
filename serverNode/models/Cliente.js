@@ -71,20 +71,7 @@ const Cliente = new Schema({
     ctps:{
         type: String,
         required: true
-    },
-    processo:{
-        type:String,
-    },
-    processo2:{
-        type:String,
-    },
-    processo3:{
-        type:String,
-    },
-    processo4:{
-        type:String,
     }
-
 
 })
 

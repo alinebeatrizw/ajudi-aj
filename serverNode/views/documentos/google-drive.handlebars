@@ -1,4 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Arquivos</title>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 
+
+<style>
+
+    *, *::before, *::after {
+  box-sizing:content-box !important;
+  
+}
+a.logout-link {
+    color: black !important;
+    
+}
+
+#link-logout{
+cursor: pointer;
+}
+
+/*************** Google Login Box ***************/
+#login-box{
+	border-radius:5px;
+	padding:10px;
+    background:#fff;
+    box-shadow: 7px 9px 5px -6px rgba(0,0,0,0.75);
+    border:solid 1px #edeae9;
+    text-align: center;
+    height: 315px;
+
+    
+}
+#container-login{
+    width: 100%;
+    height: 92vh;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}
+#botao-login-google {
+    margin-top: 75px;
+    display: inline-block;
+    background: white;
+    color: #444;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .icon-google img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background:transparent 5px 50% no-repeat;
+    padding: 8px;
+  }
+  #login-box p{
+    margin-top: 90px;
+    font-size: 20px;
+    font-family: 'PT Serif', serif;
+    color: #444;
+  }
+  span.texto-botao-google{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 42px;
+    padding-right: 42px;
+    font-size: 17px;
+    font-family: 'PT Serif', serif;
+
+  }
+/*************** END Google Login Box ***************/
+
+/*************** Google Drive Breadcrumb ***************/
+#drive-breadcrumb{
+	font-size:11px;
+}
+
+#drive-breadcrumb a{
+	cursor:pointer;
+}
+
+.breadcrumb-arrow{
+    background:url(./images/arrow_right.png) no-repeat 0 3px;
+    display:inline-block;
+    height:16px;
+    width:11px;
+}
+/*************** END Google Drive Breadcrumb ***************/
+
+/*************** Google Drive Box ***************/
+#fundo-transparente
+{
+    display: none; 
+    position: fixed;
+    top: 0%; 
+    left: 0%; 
+    width: 100%; 
+    height: 100%; 
+    background-color: #000; 
+    z-index: 1001;
+    -moz-opacity: 0.35; 
+    opacity: .35; 
+    filter: alpha(opacity=35);
+}
+
+#drive-box{
+    padding:10px;
+    margin:10px;   
+    width:98%;
+    box-sizing: border-box;
+    display:none;
+    position:relative;
+    min-height:150px;
+    margin-top:60px;
+}
+
+#drive-conteudo{
+	clear:both;
+}
+
+.folder-box, .file-box {
+    float:left;
+    font-family:Arial;
+    width:150px;
+    height:150px;
+    text-align:center;
+    padding:10px;
+    margin:10px;
+    border:solid 1px #edeae9;
+    -webkit-box-shadow: 7px 9px 5px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 9px 5px -6px rgba(0,0,0,0.75);
+    box-shadow: 7px 9px 5px -6px rgba(0,0,0,0.75);
+    border-radius:5px;
+    
+}
+
+.image-preview{
+    text-align:center;
+    height:80px; 
+}
+
+.image-preview img{
+    max-width:45%;
+	height:70%;
+	cursor:pointer;
+}
+
+.nome_arquivo {
+    padding-top:10px;
+    word-wrap: break-word;
+    width:150px;
+    text-align:center;
+    font-size:11px;
+
+}
+#drive-menu{
+    float: right;
+    cursor: pointer;
+    display: block;
+}
+/*#drive-menu{
+    float:right;
+}
+
+#drive-menu div:hover{
+	background-color:#fafccc;
+	border:solid 1px #000;
+}
+
+#botao-atualizar, #botao-criar-pasta, #botao-upload{
+    width:24px;
+    height:24px;
+    display:block;
+    cursor:pointer;
+    margin-right:5px;
+	float:left;
+	border:Solid 1px #fae8e4;
+	border-radius:5px;
+}
+
+#botao-atualizar{
+    background:url(./images/button_reload.png) no-repeat;
+}
+
+#botao-criar-pasta {
+    background:url(./images/button_addfolder.png) no-repeat;
+}
+
+#botao-upload {
+    background:url(./images/button_upload.png) no-repeat;
+}
+*/
+.botoes-arquivo{
+    padding-top:10px;
+    display: inline-flex !important;
+}
+
+.botao-apagar, .botao-download{
+	width:20px;
+    height:20px;
+    display:inline-block;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.botao-apagar {
+    background:url(./images/button_delete.png) no-repeat;
+}
+
+
+.botao-download{
+    background:url(./images/button_download.png) no-repeat;
+}
+
+
+
+/*************** END Google Drive Box ***************/
+
+
+
+
+/************* FLOATING BOX *********************/
+.box-input-criar-pasta{
+    border-radius:0px;
+    -webkit-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:7px 7px 5px rgba(50, 50, 50, 0.75);
+    box-shadow:7px 7px 5px rgba(50, 50, 50, 0.75);
+    width:400px;
+    padding:7px 15px;
+    border:solid 1px #ccc;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    top:35%;
+    z-index:1000000;
+    background-color:#fff;
+    display:none;
+}
+
+.close-x{
+    display:inline-block;
+	cursor:pointer;
+}
+
+
+.text-input{
+    width:90%;
+    padding:5px;
+    border-radius:5px;
+    margin-bottom:10px;
+}
+/************* END FLOATING BOX *********************/
+
+/*************** NOTIFICATION ******************/
+#loading-wrapper{
+    width:100%;
+    height:100%;
+    background:#000;
+    -moz-opacity: 0.25; 
+    opacity: .25; 
+    filter: alpha(opacity=25);
+    top:0;
+    left:0;
+    position:absolute;
+}
+
+#loading{
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-60px;
+    margin-top:-60px;
+    width:120px;
+}
+
+#status-message{
+    border:solid 1px #fbfbd4;
+    background:#fbfbd4;
+    border-radius:5px;
+    padding:5px;
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    z-index:9999999999;
+}
+
+#error-message{
+    border:solid 1px #f2fcb9;
+    background:#d83813;
+    border-radius:5px;
+    color:#fff;
+    padding:10px;
+    position:absolute;
+    left:10px;
+    bottom:10px;
+    z-index:9999999999;
+    max-width:400px;
+    border-radius:5px;
+    display:none;
+}
+
+#upload-percentage{
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-25px;
+    margin-top:-100px;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    background:#297ab8;
+    color:#fff;
+    text-align:center;
+    line-height:50px;
+    font-weight:bold;
+    font-size:15px;
+    display:none;
+}
+/*************** END NOTIFICATION ******************/
+
+/***************** MISC ************************/
+.botao {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border:none;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+.botao:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  border:none;
+}
+
+.hide{
+	display:none;
+}
+
+/***************** END MISC ************************/
+</style>
+</head>
+<script>
+  
 var SCOPES = ['https://www.googleapis.com/auth/drive','profile'];
 var CLIENT_ID = '200457364652-4a8r3irh3p4gktel1nhtubr59ngo9dak.apps.googleusercontent.com';
 var NOME_PASTA = "";
@@ -61,12 +430,7 @@ function handleSignoutClick(event) {
         $("#drive-box").hide();
 		auth2.disconnect();  //.disconnect sai mas depois nao entra mais --arrumar isso
 	}}
-		//auth2.disconnect();
-		//gapi.auth2.getAuthInstance().signOut();
 		
-		//location.href = 'https://accounts.google.com/Logout?&continue'; //esse location funcionou
-			//gambiarra para retornar ao box de login arrumar com sessoes
-			//se usar essa gambiarra, o botao de longin nao funciona, no caso do login box nao esconde
 		
 	
 	
@@ -272,7 +636,7 @@ function ConstroiPagArquivos(){
 				//pega os dados e as permições (documentação)
 
 				//e depois coloca a imagem de pasta
-				+ "'><div class='image-preview'><img src='images/pasta.png'/></div></div>";
+				+ "'><div class='image-preview'><img src='./images/pasta.png'/></div></div>";
 			
 			// se for um arquivo, pega a thumbnailLink dele e monta uma miniatura
 			} else {
@@ -286,7 +650,7 @@ function ConstroiPagArquivos(){
 			//se nao tiver preview (thumbnailLink), pega nas imagens o nome da extenção 
 			//(fileExtension) + o nome "icon"
 				}else {
-					bloco_arquivo += "<div class='file-icon'><div class='image-preview'><img src='images/" 
+					bloco_arquivo += "<div class='file-icon'><div class='image-preview'><img src='./images/" 
 					+ ARQUIVOS_DRIVE[arquivo].fileExtension + "-icon.png" + "'/></div></div>";
 				}
 			}
@@ -441,7 +805,7 @@ function MostraGifCarregando() {
     if ($("#drive-box-loading").length === 0) {
         $("#drive-box").prepend("<div id='drive-box-loading'></div>");
     }
-    $("#drive-box-loading").html("<div id='loading-wrapper'><div id='loading'><img src='images/loading-bubble.gif'></div></div>");
+    $("#drive-box-loading").html("<div id='loading-wrapper'><div id='loading'><img src='./images/loading-bubble.gif'></div></div>");
 }
 
 function EscondeGifCarregando() {
@@ -476,3 +840,63 @@ function MensagemErro(errorMessage) {
     }, 3000);
 }
 
+
+</script>
+
+
+<!--<div id="fundo-transparente"></div>-->
+
+<div id="container-login" class="hide">
+    <div id="login-box">
+        <p> Para acessar os arquivos, <br> Entre com sua conta do Google! <br></p>
+        <div id="botao-login-google" onclick="handleAuthClick()" data-onsuccess="onSignIn">
+            <span class="icon-google">
+                <img src="./images/google.png" >
+            </span>
+            <span class="texto-botao-google" >Google</span>
+          </div>
+    </div>
+</div>
+
+
+
+<div id="drive-box" class="hide">
+        <a id="link-logout" class="logout-link btn btn-light" onclick="handleSignoutClick() " >Sair</a> <br> <br>
+	<div id="drive-breadcrumb">
+        <!--<span class='breadcrumb-arrow'></span> -->
+            <a data-id='root' data-level='0' class="btn btn-light">Início</a>
+        <span id="span-navigation"></span>
+    </div>
+	
+	<div id="drive-menu">
+        <div id="botao-atualizar" title="Atualizar" class="btn btn-light">Atualizar</div><br>
+		<div id="botao-upload" title="Upload" class="btn btn-light">Enviar arquivo</div><br>
+		<div id="botao-criar-pasta" title="Criar pasta" class="btn btn-light">Criar Pasta</div>
+    </div>
+	<div id="drive-conteudo"></div>
+	<div id="error-message" class="flash hidden"></div>
+	<div id="status-message" class="flash hidden"></div>
+</div>
+
+<input type="file" id="input-upload-file" class="hide"/>
+
+<div class="box-input-criar-pasta" id="box-input-criar-pasta">
+    <!--form pra criar pasta-->
+    <div class="forumulario-pasta">
+        <h3 class="clear">Criar nova pasta</h3>
+        <div>
+            <input type="text" id="nome_pasta" class="text-input" />
+        </div>
+		<button id="botao-criar" value="Save" class="botao" class="btn btn-light">Criar</button>
+		<button id="botao-fechar" value="Close" class="botao botao-fechar" class="btn btn-light"> Fechar</button>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="google-drive.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>

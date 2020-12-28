@@ -1,3 +1,11 @@
+    *, *::before, *::after {
+  box-sizing:content-box !important;
+  
+}
+a.logout-link {
+    color: black !important;
+    
+}
 
 #link-logout{
 cursor: pointer;
@@ -71,7 +79,7 @@ cursor: pointer;
 }
 
 .breadcrumb-arrow{
-    background:url(images/arrow_right.png) no-repeat 0 3px;
+    background:url(./images/arrow_right.png) no-repeat 0 3px;
     display:inline-block;
     height:16px;
     width:11px;
@@ -170,15 +178,15 @@ cursor: pointer;
 }
 
 #botao-atualizar{
-    background:url(images/button_reload.png) no-repeat;
+    background:url(./images/button_reload.png) no-repeat;
 }
 
 #botao-criar-pasta {
-    background:url(images/button_addfolder.png) no-repeat;
+    background:url(./images/button_addfolder.png) no-repeat;
 }
 
 #botao-upload {
-    background:url(images/button_upload.png) no-repeat;
+    background:url(./images/button_upload.png) no-repeat;
 }
 */
 .botoes-arquivo{
@@ -195,12 +203,12 @@ cursor: pointer;
 }
 
 .botao-apagar {
-    background:url(images/button_delete.png) no-repeat;
+    background:url(./images/button_delete.png) no-repeat;
 }
 
 
 .botao-download{
-    background:url(images/button_download.png) no-repeat;
+    background:url(./images/button_download.png) no-repeat;
 }
 
 
@@ -343,6 +351,3 @@ cursor: pointer;
 .hide{
 	display:none;
 }
-
-
-/***************** END MISC ************************/
