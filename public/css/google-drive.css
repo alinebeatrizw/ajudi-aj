@@ -79,7 +79,7 @@ cursor: pointer;
 }
 
 .breadcrumb-arrow{
-    background:url(./images/arrow_right.png) no-repeat 0 3px;
+    background:url(../imagens/arrow_right.png) no-repeat 0 3px;
     display:inline-block;
     height:16px;
     width:11px;
@@ -203,12 +203,12 @@ cursor: pointer;
 }
 
 .botao-apagar {
-    background:url(./images/button_delete.png) no-repeat;
+    background:url(../imagens/button_delete.png) no-repeat;
 }
 
 
 .botao-download{
-    background:url(./images/button_download.png) no-repeat;
+    background:url(../imagens/button_download.png) no-repeat;
 }
 
 
