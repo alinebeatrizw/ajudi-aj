@@ -5,38 +5,33 @@
 </head>
 <body>
     <div id="conteudo-pdf">
-    
         {{#each eventos}}
-     <div  class="card bg-light mb-3" >  
-        <div class="card-header nome-evento">{{nomeEvento}}</div>   
-        <div class="card-body">
+            <div class="nomeEvento">{{nomeEvento}} </div> <br>
             Data: {{dataInicio}}<br>
-            Hora: {{horaEvento}}
-        </div>   
-    </div> 
+            Hora: {{horaEvento}}  
     <hr>
  {{/each}}
     </div>
-    <p>
-        <input type="button" value="Criar PDF" id="btnImprimir" onclick="CriaPDF()" />
-    </p>
+        <input type="button" value="Gerar PDF" class="btn btn-dark mt-3" id="btnImprimir" onclick="CriaPDF()"  />
 </body>
 <script>
+    
     function CriaPDF() {
+        
         var conteudoPdf = document.getElementById('conteudo-pdf').innerHTML;
+
         var style = "<style>";
-        style = style + ".nome-evento {font-size: 25px;}";
+        style = style + ".nomeEvento{font-size: 25px;}";
         style = style + ".tituloPdf {font-size: 35px;}";
-        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
-        style = style + "padding: 2px 3px;text-align: center;}";
         style = style + "</style>";
         
         var win = window.open('', '', 'height=700,width=700');
+        
         win.document.write(`
 
             <html>
                 <head>
-                    <title>oi</title>
+                    <title>Relatório de Agendamentos</title>
 
         `)   
         win.document.write(style);                                    
@@ -47,8 +42,11 @@
         win.document.write('<h2 class="tituloPdf"> Relatório de Agendamentos</h2>');
         win.document.write(conteudoPdf);                          
         win.document.write('</body></html>');
-        win.document.close(); 	                                         
-        win.print();                                                            
+        win.print();
+                                           
+                                                       
     }
+    
+    
 </script>
 </html>
