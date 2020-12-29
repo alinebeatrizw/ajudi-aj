@@ -28,6 +28,18 @@ router.get("/",(req,res)=>{
   })
 })
 
+
+router.post("/gerar", (req,res)=>{
+    Evento.find().lean().then((eventos)=>{
+        res.render("agenda/pdf", {eventos:eventos})
+    }).catch((err)=>{
+        req.flash("error_msg","Erro ao listar os clientes")
+        res.redirect("/")
+    })
+    
+
+    
+  }) 
 //cadastra no banco
 router.post("/novo-evento", (req,res)=>{
   const novoEvento = {

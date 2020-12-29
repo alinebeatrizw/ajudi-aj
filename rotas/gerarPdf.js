@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
-
+const puppeteer = require('puppeteer');
+const path = require("path");
+const handlebars = require("handlebars");
 const mongoose = require("mongoose");//mongoose
 const { readFile } = require('fs');
 require("../models/Cliente")//model de cliente
@@ -21,38 +22,80 @@ const { options } = require('./agenda');
 
 
 
-router.post("/gerar", (req,res)=>{
-   
-    async function beforeRender(req, res) {
-        const conn = await MongoClient.connect('mongodb://localhost/ajudiTcc');
-        Object.assign(req.data, { 
-          eventos: await conn.db('ajudiTcc').collection('eventos').find().toArray()
-        });
-    }
 
-        jsreport.render({
-            template: {
-              content: `Teste PDF {{#each eventos}} {{nomeEvento}} {{/each}}`,
-              engine: 'handlebars',
-              recipe: 'chrome-pdf'
-            }
-          }).then((out)  => {
-            out.stream.pipe(res);
-    
-            //para fazer download
-            res.writeHead(200, 
-                {
-                    'Content-Type': 'application/pdf',
-                    'Content-Disposition':'attachment;filename="relatorio-AJUDI.pdf"'
-                });
-        
-                const download = Buffer.from(data.toString('utf-8'), 'base64');
-                res.end(download);
-            
-          }).catch((e) => {
-            res.end(e.message);
-          });
+
+router.post("/gerar", (req,res)=>{
+    Evento.find().lean().then((eventos)=>{
+        res.render("agenda/pdf", {eventos:eventos})
+    }).catch((err)=>{
+        req.flash("error_msg","Erro ao listar os clientes")
+        res.redirect("/")
     })
+    
+   
+/*** 
+    try {
+      (async () => {
+          var dataBinding = {
+              items: [{
+                  name: "item 1",
+                  price: 100
+              },
+              {
+                  name: "item 2",
+                  price: 200
+              },
+              {
+                  name: "item 3",
+                  price: 300
+              }
+              ],
+              total: 600,
+              isWatermark: true
+          }
+  
+          var templateHtml = fs.readFileSync(path.join(process.cwd(), './views/agenda/relatorio.handlebars'),  'utf8');
+          var template = handlebars.compile(templateHtml);
+          var finalHtml = encodeURIComponent(template(dataBinding));
+          var options = {
+              format: 'A4',
+              headerTemplate: "<p></p>",
+              footerTemplate: "<p></p>",
+              displayHeaderFooter: false,
+              margin: {
+                  top: "40px",
+                  bottom: "100px"
+              },
+              printBackground: true,
+              path: 'relatorios/Relatorio.pdf'
+          }
+  
+          const browser = await puppeteer.launch({
+              args: ['--no-sandbox'],
+              headless: true
+          });
+          const page = await browser.newPage();
+          await page.goto(`data:text/html;charset=UTF-8,${finalHtml}`, {
+              waitUntil: 'networkidle0'
+          });
+          await page.pdf(options);
+          await browser.close();
+  
+          res.type("pdf")
+          res.download("relatorios/Relatorio.pdf")
+           
+  
+      })();
+  } catch (err) {
+      console.log('ERROR:', err);
+  }
+ 
+
+    */   
+    
+  })   
+         
+    
 
 
 
