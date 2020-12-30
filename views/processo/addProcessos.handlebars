@@ -14,43 +14,43 @@
             <div class="row mt-4">
                 <div class="col">   
                     <label for="numeroProcesso">Número do processo:</label>
-                    <input type="text" name="numeroProcesso" class="form-control ">
+                    <input type="text" name="numeroProcesso" class="form-control form-control-sm">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col">   
                     <label for="comarca">Comarca:</label>
-                    <input type="text" name="comarca" class="form-control">
+                    <input type="text" name="comarca" class="form-control form-control-sm">
                 </div>
                 <div class="col">
                     <label for="vara">Vara:</label>
-                    <input type="text" name="vara" class="form-control">
+                    <input type="text" name="vara" class="form-control form-control-sm">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col"> 
                     <label for="dataPropositura">Data de propositura:</label>
-                    <input type="date" name="dataPropositura" class="form-control">
+                    <input type="date" name="dataPropositura" class="form-control form-control-sm">
                 </div>
                 <div class="col"> 
                     <label for="valorCausa">Valor da causa:</label>
-                    <input type="text" name="valorCausa" class="form-control">
+                    <input type="text" name="valorCausa" class="form-control form-control-sm">
                 </div>
                 <div class="col"> 
                     <label for="honorarios">Honorarios:</label>
-                    <input type="text" name="honorarios" class="form-control">
+                    <input type="text" name="honorarios" class="form-control form-control-sm">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col"> 
                    <label for="descricao">Descrição:</label>
-                    <textarea name="descricao" class="form-control" ></textarea>   
+                    <textarea name="descricao" class="form-control form-control-sm" ></textarea>   
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col"> 
                     <label for="cliente">Cliente:</label>
-                    <select name="cliente" class="form-control">
+                    <select name="cliente" class="form-control form-control-sm">
                         {{#each clientes}}
                             <option value="{{_id}}">{{nome}} {{sobrenome}}</option>
                         {{else}}

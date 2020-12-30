@@ -48,11 +48,7 @@ router.get("/add", (req,res)=>{
             rg:req.body.rg,
             cpf:req.body.cpf,
             cnh:req.body.cnh,
-            ctps:req.body.ctps,
-            processo:req.body.processo,
-            processo2:req.body.processo2,
-            processo3:req.body.processo3,
-            processo4:req.body.processo4
+            ctps:req.body.ctps
         }
         new Cliente(novoCliente).save().then(()=>{
             req.flash("success_msg", "Cliente salvo com sucesso")
@@ -61,6 +57,7 @@ router.get("/add", (req,res)=>{
             req.flash("error_msg", "Erro ao salvar cliente")
             res.redirect("/cliente")
         })
+       
     })
 
 //apaga cliente
@@ -94,12 +91,6 @@ router.post("/editar",(req, res)=>{
         clientes.cpf=req.body.cpf,
         clientes.cnh=req.body.cnh,
         clientes.ctps=req.body.ctps,
-        clientes.processo=req.body.processo,
-        clientes.processo2=req.body.processo2,
-        clientes.processo3=req.body.processo3,
-        clientes.processo4=req.body.processo4,
-
-
 
         clientes.save().then(()=>{
             req.flash("success_msg", "Cliente editado com sucesso")
