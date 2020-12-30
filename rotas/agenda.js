@@ -1,8 +1,6 @@
 const express = require("express")//express
 const router = express.Router()//colocando a função de rotas do express dentro da constante
 const mongoose = require("mongoose")//mongoose
-require("../models/Cliente")//model de cliente
-const Cliente = mongoose.model("clientes")//colocando o model dentro da costante
 require("../models/Processo")
 require("../models/Evento")
 const Evento = mongoose.model("eventos")//colocando o model dentro da costante
@@ -63,7 +61,7 @@ router.post("/editar",(req, res)=>{
       eventos.nomeEvento= req.body.nomeEvento,
       eventos.dataInicio=req.body.dataInicio,
       eventos.horaEvento=req.body.horaEvento,
-      
+
       eventos.save().then(()=>{
           req.flash("success_msg", "Evento editado com sucesso")
           res.redirect("/agenda")
@@ -85,4 +83,4 @@ router.get("/editar/:id",(req,res)=>{
 })
   
   //exportando as rotas
-  module.exports = router
+module.exports = router

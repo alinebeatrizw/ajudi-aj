@@ -5,12 +5,7 @@ require("../models/Cliente")//model de cliente
 const Cliente = mongoose.model("clientes")//colocando o model dentro da costante
 require("../models/Processo")
 const Processo = mongoose.model("processos")
-const multer = require("multer");
-const OAuth2Data = require("../credentials.json");
-var name,pic
-const { google } = require("googleapis");
-var async = require("async");
-const fs = require("fs");
+
 
 
 //mostra os processos
@@ -75,7 +70,7 @@ router.get("/",(req,res)=>{
         processos.valorCausa=req.body.valorCausa,
         processos.honorarios=req.body.honorarios,
         processos.descricao=req.body.descricao,
-        //processos.cliente=req.body.cliente,
+        
   
   
         processos.save().then(()=>{
