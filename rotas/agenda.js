@@ -7,16 +7,6 @@ require("../models/Processo")
 require("../models/Evento")
 const Evento = mongoose.model("eventos")//colocando o model dentro da costante
 
-const Processo = mongoose.model("processos")
-const multer = require("multer");
-const OAuth2Data = require("../credentials.json");
-var name,pic
-const { google } = require("googleapis");
-var async = require("async");
-const fs = require("fs");
-
-
-
   
 //mostra os eventos
 router.get("/",(req,res)=>{
@@ -29,6 +19,7 @@ router.get("/",(req,res)=>{
 })
 
 
+//gerar pdf
 router.post("/gerar", (req,res)=>{
     Evento.find().lean().then((eventos)=>{
         res.render("agenda/pdf", {eventos:eventos})
@@ -36,10 +27,9 @@ router.post("/gerar", (req,res)=>{
         req.flash("error_msg","Erro ao listar os clientes")
         res.redirect("/")
     })
-    
-
-    
   }) 
+
+
 //cadastra no banco
 router.post("/novo-evento", (req,res)=>{
   const novoEvento = {
@@ -74,9 +64,6 @@ router.post("/editar",(req, res)=>{
       eventos.dataInicio=req.body.dataInicio,
       eventos.horaEvento=req.body.horaEvento,
       
-
-
-
       eventos.save().then(()=>{
           req.flash("success_msg", "Evento editado com sucesso")
           res.redirect("/agenda")
