@@ -5,6 +5,7 @@
 <a href="/cliente/add" class="btn btn-light">Cadastrar novo cliente</a>
 
 {{#each clientes}}
+<div class="tdo">
 <div class="card-group">
 
 <div class="card border-light mt-4" >
@@ -47,7 +48,7 @@
   </div>
 </div>
 </div>
-    <div class="botoes-edit-delete" style="display: flex;">
+    <div class="botoes-edit-delete" style="display: inline-flex;">
         <a href="/cliente/editar/{{_id}}">
         <button class="btn btn-light mt-4">Editar</button>
         </a>
@@ -56,9 +57,12 @@
             <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
         </form>
     </div>
+  
+</div>
 {{else}}
 <h4 class="mt-4">Nenhum cliente cadastrado</h4>
 {{/each}}
+
 
 
 
