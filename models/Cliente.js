@@ -25,7 +25,7 @@ const Cliente = new Schema({
         required: true
     },
     dataNascimento:{
-        type: Date,
+        type: String,
         required: true
     },
     selectEstadoCivil:{
