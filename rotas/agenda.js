@@ -8,7 +8,7 @@ const Evento = mongoose.model("eventos")//colocando o model dentro da costante
   
 //mostra os eventos
 router.get("/",(req,res)=>{
-  Evento.find().lean().then((eventos)=>{
+  Evento.find().lean().sort({data:"desc"}).then((eventos)=>{
       res.render("agenda/agenda", {eventos:eventos})
   }).catch((err)=>{
       req.flash("error_msg","Erro ao listar os clientes")

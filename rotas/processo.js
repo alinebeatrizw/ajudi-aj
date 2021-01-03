@@ -7,10 +7,9 @@ require("../models/Processo")
 const Processo = mongoose.model("processos")
 
 
-
 //mostra os processos
 router.get("/",(req,res)=>{
-    Processo.find().lean().sort({data:"desc"}).then((processos)=>{
+    Processo.find().lean().populate("cliente").sort({data:"desc"}).then((processos)=>{
         res.render("processo/processos", {processos:processos})
     }).catch((err)=>{
         req.flash("error_msg","Erro ao listar os processos")
