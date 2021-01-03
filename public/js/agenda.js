@@ -9,13 +9,7 @@ function modalEditEvento() {
       show: true
     });}
 
-$( function() {
-      $( ".datepicker" ).datepicker();
-      $('.timepicker').timepicker({});
-      $( ".draggable" ).draggable();  
-      $("#resizable").resizable();
-});
-  
+
   
 var data = new Date();
 
