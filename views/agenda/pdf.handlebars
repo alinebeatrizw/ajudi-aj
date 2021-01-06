@@ -13,7 +13,15 @@
             Data: {{dataInicio}}<br>
             Hora: {{horaEvento}}  
     <hr>
- {{/each}}
+   
+    {{else}}
+    <style >
+        .ct-footer{
+            position: absolute !important;
+        }
+    </style>
+    <h3>Nenhum Evento Cadastrado</h3>
+    {{/each}}
     </div>
         <input type="button" value="Imprimir" class="btn btn-dark mt-3" id="btnImprimir" onclick="CriaPDF()"  />
 </body>

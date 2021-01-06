@@ -2,9 +2,9 @@
 
 .ct-footer {
     background-color: #343a40;
-    
+    bottom:0;
+    width:100%;
     margin-top: 20px;
-    position: relative;
 }
 
 .ct-footer-pre {
