@@ -8,13 +8,14 @@
     <div id="conteudo-pdf">
         
         {{#each eventos}}
+        
             <div class="nomeEvento">{{nomeEvento}} </div> <br>
             Data: {{dataInicio}}<br>
             Hora: {{horaEvento}}  
     <hr>
  {{/each}}
     </div>
-        <input type="button" value="Gerar PDF" class="btn btn-dark mt-3" id="btnImprimir" onclick="CriaPDF()"  />
+        <input type="button" value="Imprimir" class="btn btn-dark mt-3" id="btnImprimir" onclick="CriaPDF()"  />
 </body>
 <script>
     
@@ -46,11 +47,12 @@
         win.document.write('<h2 class="tituloPdf"> Relatório de Agendamentos</h2>');
         win.document.write(conteudoPdf);                          
         win.document.write('</body></html>');
-        win.print();
-                                           
+        win.print()
+        
+                                          
                                                        
     }
-    
+  
     
 </script>
 </html>

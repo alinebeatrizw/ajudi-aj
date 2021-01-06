@@ -28,10 +28,23 @@
 <body onload="renderDate()">
     <div class="calendario-todo">
         <div class="calendario">
-          <form action="/agenda/gerar" method="POST" style="background-color: #dfe6e9;">
-              <button type="submit" class="botao-relatorio">
-                Gerar Relatório de Agendamentos
+          <form action="/agenda/gerarTotal" method="POST" style="background-color: #dfe6e9;">
+             <div class="linha-gerar-relatorio">
+                <button type="submit" class="botao-relatorio" >
+                Gerar Relatório de Agendamentos Total
               </button>
+             </div>
+            </form>
+            <form action="/agenda/gerarPorAno" method="POST" style="background-color: #dfe6e9;">
+             <div class="linha-gerar-relatorio">
+                <button type="submit" class="botao-relatorio" >
+                Gerar Relatório de Agendamentos por Ano:
+              </button>
+               <select name="anoSelecionado" id="anoSelecionado" class="selectAno">
+                <option value="2021" >2021</option>
+                 <option value="2022">2022</option>
+              </select>
+             </div>
             </form>
             <div class="mes">
                 <div class="anterior" onclick="mudarMes('anterior')">
@@ -135,6 +148,7 @@
     </div>
   </div>
 </div>
+
 
 
 

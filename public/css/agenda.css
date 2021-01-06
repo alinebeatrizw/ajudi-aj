@@ -96,7 +96,20 @@
     font-size: 30px;
     font-weight: 500;
 } 
-.card{
-cursor: move;
+
+#draggable { float: left;
+}  
+.draggable{
+    cursor: move;
 }
-#draggable { float: left;}  
+.selectAno{
+    background-color: #dfe6e9;
+    color: #fff;
+    border: none;
+}
+.selectAno:hover{
+    color: #b3b2b2;
+}
+.linha-gerar-relatorio{
+    display: flex;
+}

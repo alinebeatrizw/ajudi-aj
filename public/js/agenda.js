@@ -9,6 +9,8 @@ function modalEditEvento() {
       show: true
     });}
 
+    
+
 $( function() {
       $( ".datepicker" ).datepicker();
       $('.timepicker').timepicker({});

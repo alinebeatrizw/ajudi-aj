@@ -17,9 +17,9 @@ router.get("/",(req,res)=>{
 })
 
 
-//gerar pdf
-router.post("/gerar", (req,res)=>{
-    Evento.find().lean().then((eventos)=>{
+//gerar pdf por ano
+router.post("/gerarPorAno", (req,res)=>{
+    Evento.find({'dataInicio': {'$regex': req.body.anoSelecionado}}).lean().then((eventos)=>{
         res.render("agenda/pdf", {eventos:eventos})
     }).catch((err)=>{
         req.flash("error_msg","Erro ao listar os clientes")
@@ -27,6 +27,15 @@ router.post("/gerar", (req,res)=>{
     })
   }) 
 
+//gerar pdf total
+router.post("/gerarTotal", (req,res)=>{
+    Evento.find().lean().then((eventos)=>{
+        res.render("agenda/pdf", {eventos:eventos})
+    }).catch((err)=>{
+        req.flash("error_msg","Erro ao listar os clientes")
+        res.redirect("/")
+    })
+  }) 
 
 //cadastra no banco
 router.post("/novo-evento", (req,res)=>{

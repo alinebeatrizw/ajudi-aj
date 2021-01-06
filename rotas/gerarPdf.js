@@ -8,7 +8,7 @@ router.post("/gerar", (req,res)=>{
     Evento.find().lean().sort({data:"desc"}).then((eventos)=>{
         res.render("agenda/pdf", {eventos:eventos})
     }).catch((err)=>{
-        req.flash("error_msg","Erro ao listar os clientes")
+        req.flash("error_msg","Erro ao listar os eventos")
         res.redirect("/")
     })   
   })
