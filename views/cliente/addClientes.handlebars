@@ -16,34 +16,34 @@
                     <h4 class="mt-4">Dados Pessoais: </h4>
                     <div class="row mt-4">
                         <div class="col">   
-                            <label for="nome">Nome:</label>
+                            <label for="nome">Nome: *</label>
                             <input type="text" class="form-control form-control-sm " required name="nome" id="nome">
                         </div>
                         <div class="col">
-                            <label for="sobrenome">Sobrenome: </label>
+                            <label for="sobrenome">Sobrenome: *</label>
                             <input type="text" class="form-control form-control-sm" required name="sobrenome">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">   
-                            <label for="email">Email: </label>
+                            <label for="email">Email: *</label>
                             <input type="email" class="form-control form-control-sm" required name="email" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">   
-                            <label for="telefone">Telefone:</label>
-                            <input type="text" class="form-control form-control-sm"  name="telefone" required>
+                            <label for="telefone">Telefone: *</label>
+                            <input type="text" class="form-control form-control-sm"  name="telefone" required oninput="mascaraTelefone(this)">
                         </div>
                         <div class="col">
-                            <label for="nomeMae">Nome da mãe</label>
+                            <label for="nomeMae">Nome da mãe: *</label>
                             <input type="text" class="form-control form-control-sm"  name="nomeMae" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">   
                             <label for="dataNascimento">Data de nascimento: </label>
-                            <input type="text" class="form-control form-control-sm datepicker"  name="dataNascimento" >
+                            <input type="text" class="form-control form-control-sm"  name="dataNascimento" oninput="mascaraDataNascimento(this)">
                         </div>
                         <div class="col">
                             <label for="estadoCivil">Estado civil: </label>
@@ -85,13 +85,13 @@
                 </div>
                 <div class="row">
                     <div class="col">   
-                        <label for="endereco">Endereço: </label>
+                        <label for="endereco">Endereço: *</label>
                         <input type="text" class="form-control form-control-sm" required name="endereco" placeholder="Ex: Av. Brasil, N 20">
                     </div>
                     </div>
                     <div class="row">
                         <div class="col">   
-                            <label for="cidade">Cidade:</label>
+                            <label for="cidade">Cidade: *</label>
                             <input type="text" class="form-control form-control-sm"  name="cidade" required>
                         </div>
                         <div class="col">
@@ -128,8 +128,8 @@
                             </select>
                         </div>
                         <div class="col">
-                            <label for="cep">CEP:</label>
-                            <input type="text" class="form-control form-control-sm"  name="cep" required>
+                            <label for="cep">CEP: *</label>
+                            <input type="text" class="form-control form-control-sm"  name="cep" required oninput="mascaraCEP(this)">
                         </div>
                     </div> 
                     <div class="botoes-prev-next mt-4" style="text-align: center;">
@@ -150,22 +150,23 @@
                 <h4 class="mt-4">Documentação: </h4>
                     <div class="row mt-4">
                         <div class="col">   
-                            <label for="rg">RG:</label>
-                            <input type="text" class="form-control form-control-sm" required name="rg">
+                            <label for="rg">RG: *</label>
+                            <input type="text" class="form-control form-control-sm" required name="rg" oninput="mascaraRG(this)">
                         </div>
                     <div class="col">
-                        <label for="cpf">CPF: </label>
-                        <input type="text" class="form-control form-control-sm" required name="cpf" >
+                        <label for="cpf">CPF: *</label>
+                        
+                        <input type="text" class="form-control form-control-sm " required name="cpf" oninput="mascaraCPF(this)">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">   
-                        <label for="cnh">CNH: </label>
-                        <input type="text" class="form-control form-control-sm" name="cnh" >
+                        <label for="cnh">CNH: *</label>
+                        <input type="text" class="form-control form-control-sm" name="cnh"  oninput="mascaraCNH(this)">
                     </div>
                 <div class="col">   
-                    <label for="ctps">CTPS:</label>
-                    <input type="text" class="form-control form-control-sm "  name="ctps" required>
+                    <label for="ctps">CTPS: *</label>
+                    <input type="text" class="form-control form-control-sm "  name="ctps" required oninput="mascaraCTPS(this)">
                 </div>  
                 </div>
               

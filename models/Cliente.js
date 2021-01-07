@@ -19,26 +19,23 @@ const Cliente = new Schema({
     },
     telefone:{
         type: String,
+        required: true
     },
     nomeMae:{
         type: String,
         required: true
     },
     dataNascimento:{
-        type: String,
-        required: true
+        type: String
     },
     selectEstadoCivil:{
-        type: String,
-        required: true
+        type: String
     },
     naturalidade:{
-        type: String,
-        required: true
+        type: String
     },
     nacionalidade:{
-        type: String,
-        required: true
+        type: String
     },
     endereco:{
         type: String,
@@ -49,8 +46,7 @@ const Cliente = new Schema({
         required: true
     },
     selectEstado:{
-        type: String,
-        required: true
+        type: String
     },
     cep:{
         type: String,
