@@ -11,10 +11,10 @@ function mascaraCPF(i){
     i.setAttribute("maxlength", "14");
     if (v.length == 3 || v.length == 7) i.value += ".";
     if (v.length == 11) i.value += "-";
- 
  }
 
- //mascara RG
+
+//mascara RG
 function mascaraRG(i){
    
     var v = i.value;
@@ -24,7 +24,8 @@ function mascaraRG(i){
        return;
     }
  }
-  //mascara CTPS
+
+//mascara CTPS
 function mascaraCTPS(i){
    
     var v = i.value;
@@ -35,13 +36,10 @@ function mascaraCTPS(i){
     }
     
     i.setAttribute("maxlength", "12");
-   
     if (v.length == 7) i.value += "-";
- 
  }
 
-
-  //mascara CNH
+//mascara CNH
 function mascaraCNH(i){
    
     var v = i.value;
@@ -54,11 +52,10 @@ function mascaraCNH(i){
     i.setAttribute("maxlength", "12");
    
     if (v.length == 9) i.value += "-";
- 
  }
 
  
-  //mascara CEP
+//mascara CEP
 function mascaraCEP(i){
    
     var v = i.value;
@@ -69,12 +66,10 @@ function mascaraCEP(i){
     }
     
     i.setAttribute("maxlength", "9");
-   
     if (v.length == 5) i.value += "-";
- 
  }
  
-   //mascara data nascimento
+//mascara data nascimento (usei em todos inputs de datas)
 function mascaraDataNascimento(i){
    
     var v = i.value;
@@ -85,12 +80,10 @@ function mascaraDataNascimento(i){
     }
     
     i.setAttribute("maxlength", "10");
-   
     if (v.length == 2 || v.length == 5) i.value += "/";
-    
  }
 
- //mascara CPF
+//mascara telefone
 function mascaraTelefone(i){
    
     var v = i.value;
@@ -103,11 +96,10 @@ function mascaraTelefone(i){
     i.setAttribute("maxlength", "14");
     if (v.length == 2 || v.length == 4) i.value += " ";
     if (v.length == 9) i.value += "-";
- 
  }
 
 
- //mascara CPF
+//mascara hora
 function mascaraHoraEvento(i){
    
     var v = i.value;
@@ -119,5 +111,4 @@ function mascaraHoraEvento(i){
     
     i.setAttribute("maxlength", "5");
     if (v.length == 2) i.value += ":";
- 
  }
