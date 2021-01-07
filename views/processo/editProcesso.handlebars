@@ -16,51 +16,40 @@
             <div class="row mt-4">
                 <div class="col">   
                     <label for="numeroProcesso">Número do processo:</label>
-                    <input type="text" name="numeroProcesso" class="form-control " value="{{processos.numeroProcesso}}">
+                    <input type="text" name="numeroProcesso" class="form-control form-control-sm" oninput="mascaraRG(this)" value="{{processos.numeroProcesso}}" oninput="mascaraRG(this)">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col">   
                     <label for="comarca">Comarca:</label>
-                    <input type="text" name="comarca" class="form-control" value="{{processos.comarca}}">
+                    <input type="text" name="comarca" class="form-control form-control-sm" value="{{processos.comarca}}">
                 </div>
                 <div class="col">
                     <label for="vara">Vara:</label>
-                    <input type="text" name="vara" class="form-control" value="{{processos.vara}}">
+                    <input type="text" name="vara" class="form-control form-control-sm" value="{{processos.vara}}">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col"> 
                     <label for="dataPropositura">Data de propositura:</label>
-                    <input type="date" name="dataPropositura" class="form-control" value="{{processos.dataPropositura}}">
+                    <input type="text" name="dataPropositura" class="form-control form-control-sm"  oninput="mascaraDataNascimento(this)" value="{{processos.dataPropositura}}" oninput="mascaraDataNascimento(this)">
                 </div>
                 <div class="col"> 
                     <label for="valorCausa">Valor da causa:</label>
-                    <input type="text" name="valorCausa" class="form-control" value="{{processos.valorCausa}}">
+                    <input type="text" name="valorCausa" class="form-control form-control-sm" value="{{processos.valorCausa}}">
                 </div>
                 <div class="col"> 
                     <label for="honorarios">Honorarios:</label>
-                    <input type="text" name="honorarios" class="form-control" value="{{processos.honorarios}}">
+                    <input type="text" name="honorarios" class="form-control form-control-sm" value="{{processos.honorarios}}">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col"> 
                    <label for="descricao">Descrição:</label>
-                    <textarea name="descricao" class="form-control" >{{processos.descricao}}</textarea>   
+                    <textarea name="descricao" class="form-control form-control-sm" >{{processos.descricao}}</textarea>   
                 </div>
             </div>
-            <!--<div class="row mt-4">
-                <div class="col"> 
-                    <label for="cliente">Cliente:</label>
-                    <select name="cliente" class="form-control">
-                        {{#each clientes}}
-                            <option value="{{_id}}">{{nome}} {{sobrenome}}</option>
-                        {{else}}
-                            <option value="0">Nenhum cliente cadastrado</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>-->
+          
             <button class="btn btn-dark mt-3" type="submit">Salvar</button>
         </form>
 
