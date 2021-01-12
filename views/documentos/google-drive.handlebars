@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
- <title>AJUDI - Documentos</title>
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-</head>
+
+
 <script>
   
 var SCOPES = ['https://www.googleapis.com/auth/drive','profile'];
@@ -19,7 +13,7 @@ var ARQUIVOS_DRIVE = []; //array para os arquivos
 var CONTADOR_ARQUIVO = 0;
 var FOLDER_ARRAY = [];
 
-//jquery usada pois essas funções so podem ser ativadas quando a dom estiver pronta
+
 $(function(){
 	$("#botao-atualizar").click(function () {
         MostraGifCarregando();
@@ -30,244 +24,11 @@ $(function(){
 	$("#botao-upload").click(function () {
         $("#input-upload-file").click();
     });
-	
-	 $("#input-upload-file").bind("change", function () {
-        var uploadObj = $("[id$=input-upload-file]");
-        MostraGifCarregando();
-        MostraStatus("Fazendo upload");
-        var file = uploadObj.prop("files")[0];
-		var metadata = {
-			'title': file.name,
-			'description': "bytutorial.com File Upload",
-			'mimeType': file.type || 'application/octet-stream',
-			"parents": [{
-				"kind": "drive#file",
-				"id": ID_PASTA
-			}]
-		};
-		
-		//if user upload an empty content, create a temp blob with a space content on it.
-		if(file.size <= 0){
-			var emptyContent = " ";
-			file = new Blob([emptyContent], {type: file.type || 'application/octet-stream'});
-		}
-		
-		PorcentagemCarregamento(0);
-
-		try{
-			var uploader =new Uploader({
-				file: file,
-				token: gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token,
-				metadata: metadata,
-				onError: function(response){
-					var errorResponse = JSON.parse(response);
-					MensagemErro("Erro: " + errorResponse.error.message);
-					$("#input-upload-file").val("");
-					$("#upload-percentage").hide(1000);
-					getDriveFiles();
-				},
-				onComplete: function(response){
-					EscondeStatus();
-					$("#upload-percentage").hide(1000);
-					var errorResponse = JSON.parse(response);
-					if(errorResponse.message != null){
-						MensagemErro("Erro: " + errorResponse.error.message);
-						$("#input-upload-file").val("");
-						getDriveFiles();
-					}else{
-						MostraStatus("Carregando arquivos");
-						getDriveFiles();
-					}
-				},
-				progresso: function(event) {
-					PorcentagemCarregamento(Math.round(((event.loaded/event.total)*100), 0));
-				},
-				params: {
-					convert:false,
-					ocr: false
-				}
-			});
-			uploader.upload();
-		}catch(exc){
-			MensagemErro("Erro: " + exc);
-			$("#input-upload-file").val("");
-			getDriveFiles();
-		}
-    });
-	
-	//link "criar pasta"
-	$("#botao-criar-pasta").click(function () {
-       // $("#fundo-transparente").show();
-        $("#box-input-criar-pasta").show();
-        $("#nome_pasta").val("");
-    });
-	
-	//botao "criar" do form de criar pasta
-	$("#botao-criar").click(function () {
-        if ($("#nome_pasta").val() == "") {
-            alert("Digite o nome da pasta!");
-        } else {
-           // $("#fundo-transparente").hide();
-            $("#box-input-criar-pasta").hide();
-            MostraGifCarregando();
-            MostraStatus("Criando pasta");
-			var access_token =  gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-			var request = gapi.client.request({
-			   'path': '/drive/v2/files/',
-			   'method': 'POST',
-			   'headers': {
-				   'Content-Type': 'application/json',
-				   'Authorization': 'Bearer ' + access_token,             
-			   },
-			   'body':{
-				   "title" : $("#nome_pasta").val(),
-				   "mimeType" : "application/vnd.google-apps.folder",
-				   "parents": [{
-						"kind": "drive#file",
-						"id": ID_PASTA
-					}]
-			   }
-			});
-
-			request.execute(function(resp) { 
-			   if (!resp.error) {
-					MostraStatus("Carregando arquivos");
-					getDriveFiles();
-			   }else{
-					EscondeStatus();
-					EscondeGifCarregando();
-					MensagemErro("Erro: " + resp.error.message);
-			   }
-			});
-        }
-    });
-	
-	$(".botao-fechar").click(function () {
-        //$("#fundo-transparente").hide();
-        $(".box-input-criar-pasta").hide();
-    });
 });
-
-
-
-
-
-//inicia botoes de delete, download, clicar em uma pasta e navegação no breadcrumb
-function botoes(){
-	//botao de delete
-	//documentação do delete https://developers.google.com/drive/api/v2/reference/files/delete#javascript
-    $(".botao-apagar").click(function () {
-        var confirma = confirm("Tem certeza que deseja excluir?");
-        if (confirma) {
-            MostraGifCarregando();
-            MostraStatus("Excluindo");
-			var request = gapi.client.drive.files.delete({
-				'fileId': $(this).attr("data-id")
-			});
-			request.execute(function(resp) { 
-			   EscondeStatus();
-			   if (resp.error) {
-					MensagemErro("Erro: " + resp.error.message);
-			   }
-			   getDriveFiles();
-			});
-        }
-    });
-	
-	//botao de downlaod
-	
-    $(".botao-download").click(function () {
-        MostraGifCarregando();
-        MostraStatus("Baixando arquivo");
-		CONTADOR_ARQUIVO = $(this).attr("data-file-counter");
-		
-        setTimeout(function () {
-
-			window.open(ARQUIVOS_DRIVE[CONTADOR_ARQUIVO].webContentLink); //webContentLink propriedade para fazer o download 
-
-			EscondeGifCarregando();
-			EscondeStatus();
-		}, 1000);
-    });
-
-	
-	//clicar em uma pasta
-    $(".folder-icon").click(function () {
-        ProcuraPasta($(this));
-    });
-
-	//navegação no breadcrumb
-    $("#drive-breadcrumb a").click(function () {
-        ProcuraPasta($(this));
-    });
-}
-
-
-//procura pasta
-function ProcuraPasta(obj) {
-    ID_PASTA = $(obj).attr("data-id");
-    NOME_PASTA = $(obj).attr("data-name");
-   LEVEL_PASTA = parseInt($(obj).attr("data-level"));
-	PERMISSAO_PASTA = $(obj).attr("data-has-permission");
-
-    if (typeof NOME_PASTA === "undefined") {
-        NOME_PASTA = "";
-        ID_PASTA = "root";
-        LEVEL_PASTA = 0;
-		PERMISSAO_PASTA = true;
-        FOLDER_ARRAY = [];
-    } else {
-        if (LEVEL_PASTA == FOLDER_ARRAY.length && LEVEL_PASTA > 0) {
-            //do nothing
-        } else if (LEVEL_PASTA < FOLDER_ARRAY.length) {
-            var tmpArray = ClonaObj(FOLDER_ARRAY);
-            FOLDER_ARRAY = [];
-
-            for (var i = 0; i < tmpArray.length; i++) {
-                FOLDER_ARRAY.push(tmpArray[i]);
-                if (tmpArray[i].Level >= LEVEL_PASTA) { break; }
-            }
-        } else {
-            var fd = {
-                Name: NOME_PASTA,
-                ID: ID_PASTA,
-                Level: LEVEL_PASTA,
-				Permission: PERMISSAO_PASTA
-            }
-            FOLDER_ARRAY.push(fd);
-        }
-    }
-
-	//volta ao inicio ao clicar em inicio
-    var sbNav = "";
-    $("#span-navigation").html(sbNav.toString());
-
-    MostraGifCarregando();
-    MostraStatus("Carregando arquivos");
-    getDriveFiles();
-}
-
-
-//função para clonar objeto
-function ClonaObj(obj) {
-    if (obj === null || typeof obj !== 'object') {
-        return obj;
-    }
-    var temp = obj.constructor(); 
-    for (var key in obj) {
-        temp[key] = ClonaObj(obj[key]);
-    }
-    return temp;
-}
-
-
-
-
 
 </script>
 
 
-<!--<div id="fundo-transparente"></div>-->
 
 <div id="container-login" class="hide" >
     <div id="login-box">
@@ -286,7 +47,6 @@ function ClonaObj(obj) {
 <div id="drive-box" class="hide">
         <a id="link-logout" class="logout-link btn btn-light" onclick="handleSignoutClick() " >Sair</a> <br> <br>
 	<div id="drive-breadcrumb">
-        <!--<span class='breadcrumb-arrow'></span> -->
             <a data-id='root' data-level='0' class="btn btn-light">Início</a>
         <span id="span-navigation"></span>
     </div>
