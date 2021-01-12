@@ -14,20 +14,10 @@
     <link rel="stylesheet" href="/css/google-drive.css">
    
      
-    
     <link rel="icon" type="image/png" href="/imagens/ICONE.png" />
    
-
-    
-
-<script>
-        $(function() {  
-    $( ".draggable" ).draggable();  
-    $(".resizable").resizable();
-  });
-
-    </script>
 </head>
+
 <body>
     {{>_navbar}}<!--   > indica que esta dentro da pasta partials-->
     
@@ -50,8 +40,9 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="/js/bootstrap.js"></script>
-<script src="/js/agenda.js"></script>
-<script src="/js/upload.min.js"></script>
-<script src="/js/mascarasInput.js"></script>
+
+<script src="/controller/agenda.js"></script>
+<script src="/controller/upload.min.js"></script>
+<script src="/controller/mascarasInput.js"></script>
 
 </html>

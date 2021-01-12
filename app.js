@@ -58,7 +58,7 @@ const path = require("path")
 
 
     //public 
-    app.use(express.static(path.join(__dirname, "public"))) //dizendo ao express que a pasta que guarda os arquivos estaticos é a public
+   app.use(express.static(path.join(__dirname, "public"))) //dizendo ao express que a pasta que guarda os arquivos estaticos é a public
     
   
     //rotas

@@ -9,6 +9,10 @@ function modalEditEvento() {
       show: true
     });}
 
+    $(function() {  
+        $( ".draggable" ).draggable();  
+        $(".resizable").resizable();
+      });
     
 
 $( function() {
