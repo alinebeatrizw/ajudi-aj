@@ -12,26 +12,29 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
-    "googleapis": "^39.2.0",
-    "handlebars": "^4.5.3",
+    "googleapis": "^49.0.0",
+    "handlebars": "^4.6.0",
     "html-pdf": "^2.2.0",
     "jquery": "^3.5.1",
     "jsreport": "^2.11.0",
     "jsreport-client": "^1.2.0",
     "jsreport-contrib-mongodb": "^0.0.2",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.11",
+    "mongoose": "^5.11.7",
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pdfmake": "^0.1.68",
     "puppeteer": "^5.5.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "snyk": "^1.437.3"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -42,5 +45,6 @@
   "bugs": {
     "url": "https://github.com/alinebeatrizw/ajudi-aj/issues"
   },
-  "homepage": "https://github.com/alinebeatrizw/ajudi-aj#readme"
+  "homepage": "https://github.com/alinebeatrizw/ajudi-aj#readme",
+  "snyk": true
 }
