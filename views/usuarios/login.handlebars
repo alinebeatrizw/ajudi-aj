@@ -1,0 +1,21 @@
+ <title>AJUDI - Login</title>
+
+
+
+
+
+<div id="container-login" style="height: 68vh !important;" >
+    <div id="login-box" style="    padding: 31px !important; height: 280px !important;">
+         <p class="p-email" style="text-align: center; margin-top: 0px !important; font-size: 26px;"> Login </p>
+         <form action="/usuarios/login" method="post">
+         <p class="p-email" style="text-align: left; margin-top: 0px !important;"> Email: </p>
+                <input type="email" name="email" required class="form-control form-control-sm "  style="max-width: 11rem;    margin-block-start: -13px;">
+            <p class="p-senha" style="text-align: left; margin-top: 0px !important;">Senha:</p>
+                <input type="password" name="senha" required  class="form-control form-control-sm "  style="max-width: 11rem;    margin-block-start: -13px;">
+           <div style="text-align: center;     margin-block-start: 19px;">
+                <button type="submit"class="btn btn-dark mt-3">Entrar</button>
+                <a href="/usuarios/registro" class="btn btn-dark mt-3" style="    margin-left: 19px;">Cadastrar-se</a>
+           </div>
+        </form>
+    </div>
+</div>

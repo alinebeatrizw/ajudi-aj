@@ -11,7 +11,10 @@ const processo = require("./rotas/processo")
 const cliente = require ("./rotas/cliente")
 const gerarPdf = require ("./rotas/gerarPdf")
 const documentos = require ("./rotas/documentos")
+const usuarios = require("./rotas/usuario")
 const path = require("path")
+const passport = require("passport")
+require("./config/auth")(passport)
 
 
 
@@ -24,7 +27,9 @@ const path = require("path")
         resave:true,
         saveUninitialized:true
     }))
-    
+    //passport
+    app.use(passport.initialize())
+    app.use(passport.session())
     //flash
     app.use(flash())
 
@@ -33,6 +38,7 @@ const path = require("path")
         res.locals.success_msg = req.flash("success_msg")//locals é usado para guardar variaveis globais
         res.locals.error_msg = req.flash("error_msg")
         res.locals.error = req.flash("error")
+        res.locals.user = req.user || null //variavel para armazenar dados do usuario logado
         next()
     })
 
@@ -62,6 +68,12 @@ const path = require("path")
     
   
     //rotas
+
+app.get("/",(req,res)=>{
+    res.render("pagina-inicial/index")
+})
+
+app.use("/usuarios", usuarios)
 app.use("/processo", processo)
 app.use("/gerarPdf", gerarPdf)
 app.use("/cliente", cliente)
