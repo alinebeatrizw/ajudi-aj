@@ -1,0 +1,22 @@
+
+ <header>
+        <div class="navbarr">
+            <img src="/imagens/icone-titulo.png" class="logo" alt="logo">
+           <h3>AJUDI - Assistente Jurídico</h3>
+             {{#if user}} 
+           <div class="right-nav">
+                <a href="/cliente">Clientes</a>
+                <a href="/documentos">Documentos</a>
+                <a href="/processo">Processos</a>
+                <a href="/agenda">Agenda</a>
+                <a href="usuarios/logout">Sair</a>
+            </div>
+            </div>
+            {{else}}
+            <div class="right-nav">
+                <a href="usuarios/registro">Criar Conta</a>
+                <a href="usuarios/login">Login</a>
+            </div>
+             {{/if}}
+        </div> 
+    </header>

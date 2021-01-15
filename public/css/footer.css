@@ -1,7 +1,7 @@
 
 
 .ct-footer {
-    background-color: #343a40;
+    background-color:#181f2a;
     bottom:0;
     width:100%;
     margin-top: 20px;
@@ -53,7 +53,7 @@
 
 .ct-footer-pre .form-group input {
     border: 1px solid #00bff3;
-    background-color: #333;
+    background-color:#181f2a;
     color: rgba(255, 255, 255, 0.5);
     height: 50px;
     padding: 0 30px;
@@ -164,10 +164,6 @@
     text-decoration: underline
 }
 
-.ct-footer-post {
-    background: #343a40;
-    
-}
 
 .ct-footer-post .inner-left,
 .ct-footer-post .inner-right {
@@ -178,7 +174,7 @@
 .ct-footer-post ul {
     list-style: none;
     padding-left: 0;
-    margin: 0 -20px;
+   
 }
 
 .ct-footer-post ul li {

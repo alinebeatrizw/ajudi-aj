@@ -6,14 +6,25 @@
 {{else}}
 {{/each}}
 
+<style>
+    label{
+        color: #fff;
+    }
+    .botao-proximo{
+    padding:30px 30px;
+}
 
 
-<h3>Cadastrar Cliente</h3>
+
+
+</style>
+
+<h4 style="color: #fff; text-align:center">Cadastrar Cliente</h4>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
   <div class="carousel-inner">
     <div class="carousel-item active">
     <form action="/cliente/novo" method="POST">
-                    <h4 class="mt-4">Dados Pessoais: </h4>
+                    <h3 class="mt-4" style="color: #fff;">Dados Pessoais: </h3>
                     <div class="row mt-4">
                         <div class="col">   
                             <label for="nome">Nome: *</label>
@@ -61,9 +72,8 @@
             
 
             <div class="botoes-prev-next mt-4" style="text-align: center;">
-                <a  href="#carouselExampleControls" role="button" data-slide="next">
-                <span  aria-hidden="true"></span>
-                <button class="btn btn-light">Próximo</button>
+                <a  href="#carouselExampleControls" role="button" data-slide="next" class="botao-proximo">
+                Próximo
                 </a>
             </div>
          
@@ -72,7 +82,7 @@
     <div class="carousel-item">
        
           
-                <h4 class="mt-4">Dados de localização: </h4>
+                <h3 class="mt-4" style="color: #fff;">Dados de localização: </h3>
                 <div class="row mt-4">
                     <div class="col">   
                         <label for="naturalidade">Naturalidade:</label>
@@ -133,13 +143,12 @@
                         </div>
                     </div> 
                     <div class="botoes-prev-next mt-4" style="text-align: center;">
-                        <a  href="#carouselExampleControls" role="button" data-slide="prev" >
-                        <span aria-hidden="true"></span>
-                        <button class="btn btn-light">Anterior</button>
+                        <a  href="#carouselExampleControls" role="button" data-slide="prev" class="botao-proximo">
+                        
+                       Anterior
                         </a>
-                        <a  href="#carouselExampleControls" role="button" data-slide="next">
-                        <span  aria-hidden="true"></span>
-                        <button class="btn btn-light">Próximo</button>
+                        <a  href="#carouselExampleControls" role="button" data-slide="next" class="botao-proximo">
+                        Próximo
                         </a>
                     </div>   
              
@@ -147,7 +156,7 @@
         </div>
     <div class="carousel-item">
        
-                <h4 class="mt-4">Documentação: </h4>
+                <h3 class="mt-4" style="color: #fff;">Documentação: </h3>
                     <div class="row mt-4">
                         <div class="col">   
                             <label for="rg">RG: *</label>
@@ -172,16 +181,16 @@
               
 
             <div class="botoes-prev-next mt-4" style="text-align: center;">
-                <a  href="#carouselExampleControls" role="button" data-slide="prev" >
-                <span aria-hidden="true"></span>
-                <button class="btn btn-light">Anterior</button>
+                <a  href="#carouselExampleControls" role="button" data-slide="prev" class="botao-proximo">
+                
+               Anterior
                 </a>
-                <a  href="#carouselExampleControls" role="button" data-slide="next">
-                <span  aria-hidden="true"></span>
-                <button class="btn btn-light">Próximo</button>
+                <a  href="#carouselExampleControls" role="button" data-slide="next" class="botao-proximo">
+               
+                Próximo
                 </a>
             </div>
-            <button type="submit" class="btn btn-dark mt-3">Salvar</button>
+            <button type="submit" class="btn btn-dark mt-3" >Salvar</button>
         </div>
         
     

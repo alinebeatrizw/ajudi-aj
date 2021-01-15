@@ -45,16 +45,16 @@ $(function(){
 
 
 <div id="drive-box" class="hide">
-        <a id="link-logout" class="logout-link btn btn-light" onclick="handleSignoutClick() " >Sair</a> <br> <br>
+        <a id="link-logout" class="botao-proximo" onclick="handleSignoutClick() " >Sair</a> <br> <br>
 	<div id="drive-breadcrumb">
-            <a data-id='root' data-level='0' class="btn btn-light">Início</a>
+            <a data-id='root' data-level='0' class="botao-proximo">Início</a>
         <span id="span-navigation"></span>
     </div>
 	
 	<div id="drive-menu">
-        <div id="botao-atualizar" title="Atualizar" class="btn btn-light">Atualizar</div><br>
-		<div id="botao-upload" title="Upload" class="btn btn-light">Enviar arquivo</div><br>
-		<div id="botao-criar-pasta" title="Criar pasta" class="btn btn-light">Criar Pasta</div>
+        <div id="botao-atualizar" title="Atualizar" class="botao-proximo">Atualizar</div><br>
+		<div id="botao-upload" title="Upload" class="botao-proximo">Enviar arquivo</div><br>
+		<div id="botao-criar-pasta" title="Criar pasta" class="botao-proximo">Criar Pasta</div>
     </div>
 	<div id="drive-conteudo"></div>
 	<div id="error-message" class="flash hidden"></div>
@@ -70,8 +70,8 @@ $(function(){
         <div>
             <input type="text" id="nome_pasta" class="text-input" />
         </div>
-		<button id="botao-criar" value="Save" class="botao" class="btn btn-light">Criar</button>
-		<button id="botao-fechar" value="Close" class="botao botao-fechar" class="btn btn-light"> Fechar</button>
+		<button id="botao-criar" value="Save"  style="background-color:#262c38; border:none"  class="botao-proximo" >Criar</button>
+		<button id="botao-fechar" value="Close" style="background-color:#262c38; border:none" class="botao-fechar botao-proximo"> Fechar</button>
     </div>
 </div>
 

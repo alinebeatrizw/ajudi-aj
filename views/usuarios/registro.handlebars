@@ -8,34 +8,32 @@
 
 
 
-<h3>Crie sua conta</h3>
 
-    
-        <form action="" method="POST">
-            <div class="row mt-4">
-                 <div class="col">  
-                    <label for="nome">Nome: </label>
-                    <input type="text" name="nome" class="form-control form-control-sm " required>
-                 </div>
-            </div>
-             <div class="row mt-4">
-                 <div class="col">  
-                     <label for="email">Email: </label>
-                     <input type="email" name="email" class="form-control form-control-sm " required>
-             </div>
-            </div>
-            <div class="row mt-4">
-                 <div class="col">       
-                     <label for="senha">Senha: </label>
-                     <input type="password" name="senha" class="form-control form-control-sm " required>
-                </div>
-                <div class="col">
-                    <label for="senha2">Repita a senha: </label>
-                    <input type="password" name="senha2" class="form-control form-control-sm " required> 
-                </div>  
-            </div>  
-            <button type="submit"class="btn btn-dark mt-3">Criar conta</button> 
-            <a href="/usuarios/login"  class="btn btn-dark mt-3">Já possuo uma conta </a>
+ <title>AJUDI - Login</title>
+
+
+
+
+
+<div id="container-login" style="height: 106vh !important; background-color: #1c2330;     margin-top: -36px;" >
+    <div id="login-box" style="    padding: 31px !important; height: 414px !important;">
+         <p class="p-email" style="text-align: center; margin-top: 0px !important; font-size: 26px;"> Criar Conta </p>
+         <form action="" method="post">
+              <p class="p-email" style="text-align: left; margin-top: 0px !important;"> Nome: </p>
+                <input type="text" name="nome" required class="form-control form-control-sm "  style="max-width: 17rem;    margin-block-start: -13px;">
+         <p class="p-email" style="text-align: left; margin-top: 0px !important;"> Email: </p>
+                <input type="email" name="email" required class="form-control form-control-sm "  style="max-width: 17rem;    margin-block-start: -13px;">
+            <p class="p-senha" style="text-align: left; margin-top: 0px !important;">Senha:</p>
+                <input type="password" name="senha" required  class="form-control form-control-sm "  style="max-width: 17rem;    margin-block-start: -13px;">
+                
+             <p class="p-senha" style="text-align: left; margin-top: 0px !important;">Repita a senha:</p>
+                 <input type="password" name="senha2" required  class="form-control form-control-sm "  style="max-width: 17rem;    margin-block-start: -13px;">
+           <div style="text-align: center;     margin-block-start: 19px;">
+                <button type="submit"class="btn btn-dark mt-3">Cadastrar</button>
+                <a href="/usuarios/login"  class="btn btn-dark mt-3">Já possuo uma conta </a>
+           </div>
         </form>
+    </div>
+</div>
 
 

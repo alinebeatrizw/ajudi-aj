@@ -1,10 +1,16 @@
-
+<style>
+  .card{
+    background-color:#1b2230;
+    color: #fff;
+    border: none;
+  }
+</style>
  <title>AJUDI - Clientes</title>
 
 
 <h2>Lista de clientes cadastrados</h2>
 
-<a href="/cliente/add" class="btn btn-light">Cadastrar novo cliente</a>
+<a href="/cliente/add" class="botao-proximo">Cadastrar novo cliente</a>
 
 {{#each clientes}}
 <div class="tdo">
@@ -24,7 +30,7 @@
 </div>
 
 <div class="card border-light mt-4" >
-  <div class="card-header" style="color: #f7f7f7;">{{nome}}</div>
+  <div class="card-header" style="color: #1b2230">{{nome}}</div>
   <div class="card-body">
     <h5 class="card-title mt-4">Dados de Localização</h5>
     <p class="card-text">
@@ -38,7 +44,7 @@
 </div>
 
 <div class="card border-light mt-4" >
-  <div class="card-header" style="color: #f7f7f7;">{{nome}}</div>
+  <div class="card-header" style="color: #1b2230">{{nome}}</div>
   <div class="card-body">
     <h5 class="card-title mt-4">Documentação</h5>
     <p class="card-text">
@@ -52,11 +58,11 @@
 </div>
     <div class="botoes-edit-delete" style="display: inline-flex;">
         <a href="/cliente/editar/{{_id}}">
-        <button class="btn btn-light mt-4">Editar</button>
+        <button class="botao-proximo" style="background-color:#1a212e; border:none">Editar</button>
         </a>
         <form action="/cliente/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
-            <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
+            <button type="submit" class="botao-proximo" style="background-color:#1a212e; border:none">Apagar</button>
         </form>
     </div>
   
@@ -67,7 +73,7 @@
             position: absolute !important;
         }
     </style>
-<h4 class="mt-4">Nenhum cliente cadastrado</h4>
+<h4 class="mt-4" style="color:#fff">Nenhum cliente cadastrado</h4>
 {{/each}}
 
 

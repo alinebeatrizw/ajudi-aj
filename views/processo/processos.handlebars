@@ -1,14 +1,20 @@
-
+<style>
+  .card{
+    background-color:#1b2230;
+    color: #fff;
+    border: none;
+  }
+</style>
  <title>AJUDI - Processos</title>
 <h2>Lista de processos cadastrados</h2>
 
-<a href="/processo/add" class="btn btn-light">Cadastrar novo processo</a>
+<a href="/processo/add" class="botao-proximo">Cadastrar novo processo</a>
 
 {{#each processos }}
 <div class="card-group">
 
 <div class="card border-light mt-4" >
-  <div class="card-header">Dados Processuais</div>
+  <div class="card-header" >Dados Processuais</div>
   <div class="card-body">
     <h5 class="card-title mt-4">{{numeroProcesso}}</h5>
     <p class="card-text">
@@ -34,11 +40,11 @@
 </div>
     <div class="botoes-edit-delete" style="display: flex;">
         <a href="/processo/editar/{{_id}}">
-        <button class="btn btn-light mt-4">Editar</button>
+        <button class="botao-proximo" style="background-color:#1a212e; border:none">Editar</button>
         </a>
         <form action="/processo/deletar" method="POST">
             <input type="hidden" name="id" value="{{_id}}">
-            <button type="submit" class="btn btn-light mt-4" style="margin-left: 20px;">Apagar</button>
+            <button type="submit" class="botao-proximo" style="background-color:#1a212e; border:none">Apagar</button>
         </form>
     </div>
 {{else}}
@@ -47,7 +53,7 @@
             position: absolute !important;
         }
     </style>
-<h4 class="mt-4">Nenhum processo cadastrado</h4>
+<h4 class="mt-4" style="color:#fff">Nenhum processo cadastrado</h4>
 {{/each}}
 
 

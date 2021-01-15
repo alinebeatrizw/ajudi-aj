@@ -28,6 +28,7 @@
     color: #fff;
     padding: 7px 0;
     display: flex;
+    font-weight: bold;
 }
 
 .dias {
@@ -68,11 +69,12 @@
 .botao-relatorio{
     background-color: #dfe6e9; 
     border:none; 
-    color:#fff;
+    color:#b3b2b2;
     font-weight: 300;
     display: flex;
     flex-wrap: wrap;
 }
+
 
 .anterior,
 .proximo {
@@ -95,8 +97,11 @@
 #mes {
     font-size: 30px;
     font-weight: 500;
+    color: #b3b2b2;
 } 
-
+#date_str{
+    color: #b3b2b2;
+}
 #draggable { float: left;
 }  
 .draggable{
@@ -104,12 +109,16 @@
 }
 .selectAno{
     background-color: #dfe6e9;
-    color: #fff;
+    color:#b3b2b2;
     border: none;
+    cursor: pointer;
 }
 .selectAno:hover{
     color: #b3b2b2;
 }
 .linha-gerar-relatorio{
     display: flex;
+}
+#conteudo-pdf{
+    color: #fff;
 }
