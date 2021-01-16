@@ -8,9 +8,8 @@
 #login-box{
 	border-radius:5px;
 	padding:10px;
-    background:#fff;
+    background:#1c2330;
     box-shadow: 7px 9px 5px -6px rgba(0,0,0,0.75);
-    border:solid 1px #edeae9;
     text-align: center;
     height: 315px;
 
@@ -49,7 +48,6 @@
     margin-top: 90px;
     font-size: 20px;
     font-family: 'PT Serif', serif;
-    color: #444;
   }
   span.texto-botao-google{
     display: inline-block;
