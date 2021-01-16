@@ -6,6 +6,7 @@
   }
 </style>
  <title>AJUDI - Processos</title>
+ {{#if user}}
 <h2 style="color:#fff">Lista de processos cadastrados</h2>
 
 <a href="/processo/add" class="botao-proximo">Cadastrar novo processo</a>
@@ -57,6 +58,16 @@
 {{/each}}
 
 
-
+{{else}}
+ <style >
+        .ct-footer{
+            position: absolute !important;
+        }
+        html{
+          background-color: #19202c;
+        }
+    </style>
+<h4 class="mt-4" style="color:#fff">Você precisa estar logado para acessar!</h4>
+{{/if}}
 
 

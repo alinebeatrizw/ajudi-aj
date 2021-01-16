@@ -14,7 +14,7 @@
 
 </style>
 
-
+{{#if user}}
  <h3 style="text-align: center;">Editar Processo: {{processos.numeroProcesso}}</h3>
 
 
@@ -60,5 +60,15 @@
           
             <button class="btn btn-dark mt-3" type="submit">Salvar</button>
         </form>
-
+{{else}}
+ <style >
+        .ct-footer{
+            position: absolute !important;
+        }
+        html{
+          background-color: #19202c;
+        }
+    </style>
+<h4 class="mt-4" style="color:#fff">Você precisa estar logado para acessar!</h4>
+{{/if}}
 

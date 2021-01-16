@@ -16,7 +16,7 @@
 
 </style>
 
-
+{{#if user}}
 
 <h4 style="color: #fff; text-align:center">Editar Cliente: {{clientes.nome}} {{clientes.sobrenome}}</h4>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
@@ -203,4 +203,14 @@
 </div>
 </div>
 
-               
+ {{else}}
+ <style >
+        .ct-footer{
+            position: absolute !important;
+        }
+        html{
+          background-color: #19202c;
+        }
+    </style>
+<h4 class="mt-4" style="color:#fff">Você precisa estar logado para acessar!</h4>
+{{/if}}              

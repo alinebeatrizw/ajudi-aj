@@ -2,7 +2,7 @@
 
  <title>AJUDI - Agenda</title>
 
-
+{{#if user}}
 <!-- card que mostra os eventos-->
  {{#each eventos}}
      <div  class="draggable resizable card bg-light mb-3" >
@@ -129,7 +129,17 @@
 
 
 
-
+{{else}}
+ <style >
+        .ct-footer{
+            position: absolute !important;
+        }
+        html{
+          background-color: #19202c;
+        }
+    </style>
+<h4 class="mt-4" style="color:#fff">Você precisa estar logado para acessar!</h4>
+{{/if}}
 
 
 
