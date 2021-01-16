@@ -81,7 +81,7 @@ app.use("/agenda", agenda)
 app.use("/documentos", documentos)
 
 //abrir servidor
-const PORT = 8081
+const PORT =  process.env.PORT|| 8081
 app.listen(PORT,  ()=>{
     console.log("servidor rodando")
 })
