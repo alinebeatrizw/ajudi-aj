@@ -21,16 +21,13 @@ function botoes(){
     });
 	
 	//botao de downlaod
-	
     $(".botao-download").click(function () {
         MostraGifCarregando();
         MostraStatus("Baixando arquivo");
 		CONTADOR_ARQUIVO = $(this).attr("data-file-counter");
 		
         setTimeout(function () {
-
 			window.open(ARQUIVOS_DRIVE[CONTADOR_ARQUIVO].webContentLink); //webContentLink propriedade para fazer o download 
-
 			EscondeGifCarregando();
 			EscondeStatus();
 		}, 1000);

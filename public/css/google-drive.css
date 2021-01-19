@@ -1,10 +1,4 @@
-    *, *::before, *::after {
-  box-sizing:content-box !important;
-  
-}
 
-
-/*************** Google Login Box ***************/
 #login-box{
 	border-radius:5px;
 	padding:10px;
@@ -58,24 +52,14 @@
     font-family: 'PT Serif', serif;
 
   }
-/*************** END Google Login Box ***************/
 
-/*************** Google Drive Breadcrumb ***************/
 
 
 #drive-breadcrumb a{
 	cursor:pointer;
 }
 
-.breadcrumb-arrow{
-    background:url(../imagens/arrow_right.png) no-repeat 0 3px;
-    display:inline-block;
-    height:16px;
-    width:11px;
-}
-/*************** END Google Drive Breadcrumb ***************/
 
-/*************** Google Drive Box ***************/
 #fundo-transparente
 {
     display: none; 
@@ -148,38 +132,7 @@
     cursor: pointer;
     display: block;
 }
-/*#drive-menu{
-    float:right;
-}
 
-#drive-menu div:hover{
-	background-color:#fafccc;
-	border:solid 1px #000;
-}
-
-#botao-atualizar, #botao-criar-pasta, #botao-upload{
-    width:24px;
-    height:24px;
-    display:block;
-    cursor:pointer;
-    margin-right:5px;
-	float:left;
-	border:Solid 1px #fae8e4;
-	border-radius:5px;
-}
-
-#botao-atualizar{
-    background:url(./images/button_reload.png) no-repeat;
-}
-
-#botao-criar-pasta {
-    background:url(./images/button_addfolder.png) no-repeat;
-}
-
-#botao-upload {
-    background:url(./images/button_upload.png) no-repeat;
-}
-*/
 .botoes-arquivo{
     padding-top:10px;
     display: inline-flex !important;
@@ -204,12 +157,6 @@
 
 
 
-/*************** END Google Drive Box ***************/
-
-
-
-
-/************* FLOATING BOX *********************/
 .box-input-criar-pasta{
     border-radius:24px;
     -webkit-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
@@ -239,9 +186,8 @@
     border-radius:5px;
     margin-bottom:10px;
 }
-/************* END FLOATING BOX *********************/
 
-/*************** NOTIFICATION ******************/
+
 #loading-wrapper{
     width:100%;
     height:100%;
@@ -306,9 +252,7 @@
     font-size:15px;
     display:none;
 }
-/*************** END NOTIFICATION ******************/
 
-/***************** MISC ************************/
 .botao {
   background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);

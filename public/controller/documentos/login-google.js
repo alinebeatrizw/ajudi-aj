@@ -46,5 +46,5 @@ function handleSignoutClick(event) {
 		
 		$("#container-login").show();
         $("#drive-box").hide();
-		auth2.disconnect();  //.disconnect sai mas depois nao entra mais --arrumar isso
+		auth2.disconnect();  
 	}}

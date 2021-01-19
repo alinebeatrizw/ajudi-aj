@@ -27,6 +27,7 @@ require("./config/auth")(passport)
         resave:true,
         saveUninitialized:true
     }))
+    
     //passport
     app.use(passport.initialize())
     app.use(passport.session())

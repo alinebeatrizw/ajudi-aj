@@ -6,7 +6,6 @@ function getDriveFiles(){
 
 function getFiles(){
 	var query = "";
-		//$(".button-opt").show();
 		query = "trashed=false and '" + ID_PASTA + "' in parents";//poe dentro das pastas, sem isso ele n monta pastas e deixa tudo solto
     var request = gapi.client.drive.files.list({
         'maxResults': NO_OF_FILES,
