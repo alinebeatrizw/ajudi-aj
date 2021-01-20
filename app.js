@@ -23,7 +23,7 @@ require("./config/auth")(passport)
 
     //sessao
     app.use(session({
-        secret:"cursodenode",
+        secret:"ajuditcc",
         resave:true,
         saveUninitialized:true
     }))
@@ -69,20 +69,20 @@ require("./config/auth")(passport)
     
   
     //rotas
+    app.get("/",(req,res)=>{
+        res.render("pagina-inicial/index")
+    })
 
-app.get("/",(req,res)=>{
-    res.render("pagina-inicial/index")
-})
+    app.use("/usuarios", usuarios)
+    app.use("/processo", processo)
+    app.use("/gerarPdf", gerarPdf)
+    app.use("/cliente", cliente)
+    app.use("/agenda", agenda)
+    app.use("/documentos", documentos)
 
-app.use("/usuarios", usuarios)
-app.use("/processo", processo)
-app.use("/gerarPdf", gerarPdf)
-app.use("/cliente", cliente)
-app.use("/agenda", agenda)
-app.use("/documentos", documentos)
-
-//abrir servidor
-const PORT =  process.env.PORT|| 8081
-app.listen(PORT,  ()=>{
-    console.log("servidor rodando")
-})
+    //abrir servidor
+    //process.env.PORT usei para testar o heroku
+    const PORT =  process.env.PORT|| 8081
+    app.listen(PORT,  ()=>{
+        console.log("servidor rodando")
+    })
