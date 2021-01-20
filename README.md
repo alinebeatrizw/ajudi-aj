@@ -2,6 +2,12 @@
     <img  src="/public/imagens/ajudi-icon-preto.png" />
 </h1>
 
+## 💻 Sobre o projeto
+
+⚖️ AJUDI - Assistente Jurídico - é um sistema gerenciador jurídico que visa aprimorar a qualidade de gestão de escritórios de advocacia, com enfoque na otimização de tempo em relação a busca de dados e documentos pessoais de clientes, assim como, informações processuais.
+
+---
+
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
