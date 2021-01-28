@@ -75,3 +75,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Passport](http://www.passportjs.org/)
 - [Flash](https://www.npmjs.com/package/flash)
 - [Express](https://expressjs.com/pt-br/)
+
+### 🕹️ Resultados
+
+<h1 align="center">
+    <img  src="/public/imagens/gifResultado.gif" />
+</h1>
