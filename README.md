@@ -15,7 +15,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 ## 🗝️ Credenciais Google Drive API
-Para testar a funcionalidade de documentos, [crie uma credencial da API](https://www.iperiusbackup.net/pt-br/como-habilitar-a-api-do-google-drive-e-obter-credenciais-de-cliente/) e coloque na váriavel CLIENT_ID em public/controller/documentos/login-google.js
+Para testar a funcionalidade de documentos, [crie uma credencial da API](https://www.iperiusbackup.net/pt-br/como-habilitar-a-api-do-google-drive-e-obter-credenciais-de-cliente/) e coloque na váriavel CLIENT_ID em <i>public/controller/documentos/login-google.js</i>
 
 
 ## ⚙️ Funcionalidades
