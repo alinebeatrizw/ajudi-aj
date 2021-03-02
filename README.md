@@ -16,6 +16,8 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 ## 🗝️ Credenciais Google Drive API
 Para testar a funcionalidade de documentos, [crie uma credencial da API](https://www.iperiusbackup.net/pt-br/como-habilitar-a-api-do-google-drive-e-obter-credenciais-de-cliente/) e coloque na váriavel CLIENT_ID em <i>public/controller/documentos/login-google.js</i>
+###⚠️ Importante
+Lembre-se de adicionar as URIs de origem e redirecionamento adequadamente.
 
 
 ## ⚙️ Funcionalidades
