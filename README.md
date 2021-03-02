@@ -14,6 +14,9 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e [MongoDB](https://www.mongodb.com/). 
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
+## Para testar a funcionalidade de documentos, [crie uma credencial da API](https://www.iperiusbackup.net/pt-br/como-habilitar-a-api-do-google-drive-e-obter-credenciais-de-cliente/) e coloque na váriavel CLIENT_ID em public/controller/documentos/login-google.js
+
+
 ## ⚙️ Funcionalidades
 
 - [x] Registrar-se
