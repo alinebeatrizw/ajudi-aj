@@ -1,5 +1,5 @@
 var SCOPES = ['https://www.googleapis.com/auth/drive','profile'];
-var CLIENT_ID = '200457364652-4a8r3irh3p4gktel1nhtubr59ngo9dak.apps.googleusercontent.com';
+var CLIENT_ID = 'SEU_CLIENT_ID';
 var NOME_PASTA = "";
 var ID_PASTA = "root"; //pasta padrão para o inicio
 var PERMISSAO_PASTA = true;
