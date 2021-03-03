@@ -34,8 +34,8 @@ Lembre-se de adicionar as URIs de origem e redirecionamento adequadamente.
     -  Fazer Download de Documentos
   - [x] Cadastrar Processos
     -  Consultar dados do Processo
-  - [x] Apagar Registros
-  - [x] Editar Registros
+  - [x] Apagar Registros de Clientes e Processos (somente admins)
+  - [x] Editar Registros de Clientes e Processos
 
 
 ---
@@ -88,3 +88,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <h1 align="center">
     <img  src="/public/imagens/gifResultado.gif" />
 </h1>
+
+Após esta gravação, foi adicionado um checkbox de admin no formulário de registro.
