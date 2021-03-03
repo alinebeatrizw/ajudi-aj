@@ -40,6 +40,11 @@ router.post("/registro", (req, res)=>{
     }else{
         //verifica se o email ja existe
         Usuario.findOne({email: req.body.email}).lean().then((usuario)=>{
+            if(req.body.checkboxAdmin){
+                req.body.checkboxAdmin = 1
+            }else{
+                req.body.checkboxAdmin = 0 
+            }
             if(usuario){
                 req.flash("error_msg", "Email ja cadastrado")
                 res.redirect("/usuarios/registro")
@@ -47,7 +52,8 @@ router.post("/registro", (req, res)=>{
                 const novoUsuario = new Usuario({
                     nome:req.body.nome,
                     email:req.body.email,
-                    senha:req.body.senha
+                    senha:req.body.senha,
+                    eAdmin:  req.body.checkboxAdmin
                 })
                 
                 bcrypt.genSalt(10, (erro, salt)=>{

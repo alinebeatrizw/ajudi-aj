@@ -5,7 +5,8 @@ require("../models/Cliente")//model de cliente
 const Cliente = mongoose.model("clientes")//colocando o model dentro da costante
 require("../models/Processo")
 
-
+//para somente admins poderem apagar clientes
+const {eAdmin} = require("../helpers/eAdmin") //as chaves pegam somente a função eAdmin do helper e guarda na variavel de eAdmin
 
 //mostra os clientes
 router.get("/",(req,res)=>{
@@ -55,7 +56,7 @@ router.get("/add", (req,res)=>{
     })
 
 //apaga cliente
-router.post("/deletar",(req,res)=>{
+router.post("/deletar",eAdmin,(req,res)=>{
         Cliente.remove({_id:req.body.id}).then(()=>{
             req.flash("success_msg", "Cliente apagado com sucesso")
             res.redirect("/cliente")

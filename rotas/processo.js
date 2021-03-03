@@ -6,6 +6,8 @@ const Cliente = mongoose.model("clientes")//colocando o model dentro da costante
 require("../models/Processo")
 const Processo = mongoose.model("processos")
 
+//para somente admins poderem apagar processos
+const {eAdmin} = require("../helpers/eAdmin") //as chaves pegam somente a função eAdmin do helper e guarda na variavel de eAdmin
 
 //mostra os processos
 router.get("/",(req,res)=>{
@@ -49,7 +51,7 @@ router.get("/",(req,res)=>{
     
   })
   //apaga processo
-  router.post("/deletar",(req,res)=>{
+  router.post("/deletar",eAdmin,(req,res)=>{
     Processo.remove({_id:req.body.id}).then(()=>{
         req.flash("success_msg", "Processo apagado com sucesso")
         res.redirect("/processo")
